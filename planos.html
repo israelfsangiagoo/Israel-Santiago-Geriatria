@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Israel Santiago · Planos de Acompanhamento</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --verde: #0a4a38;
+  --verde-medio: #0f6e56;
+  --verde-claro: #1d9e75;
+  --verde-menta: #e1f5ee;
+  --creme: #faf8f4;
+  --creme-escuro: #f0ebe2;
+  --dourado: #c9a96e;
+  --dourado-claro: #e8d5b0;
+  --texto: #1a1a1a;
+  --texto-suave: #5a5a5a;
+  --borda: rgba(10,74,56,0.12);
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--creme);
+  color: var(--texto);
+  min-height: 100vh;
+}
+
+/* CAPA */
+.capa {
+  background: var(--verde);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.capa::before {
+  content: '';
+  position: absolute;
+  top: -150px; left: -150px;
+  width: 500px; height: 500px;
+  border: 1px solid rgba(201,169,110,0.1);
+  border-radius: 50%;
+}
+.capa::after {
+  content: '';
+  position: absolute;
+  bottom: -200px; right: -100px;
+  width: 600px; height: 600px;
+  border: 1px solid rgba(201,169,110,0.07);
+  border-radius: 50%;
+}
+.capa-linha {
+  width: 48px; height: 1px;
+  background: var(--dourado);
+  margin: 0 auto 1.8rem;
+}
+.capa-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(201,169,110,0.7);
+  margin-bottom: 1.5rem;
+}
+.capa-titulo {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+.capa-titulo em { font-style: italic; color: var(--dourado); }
+.capa-sub {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 2;
+}
+.capa-autor {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 2;
+}
+.capa-avatar {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,169,110,0.4);
+  background: rgba(201,169,110,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--dourado);
+}
+.capa-autor-info { text-align: left; }
+.capa-autor-nome {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+}
+.capa-autor-cargo {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 2px;
+}
+.capa-scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+.capa-scroll:hover { opacity: 1; }
+.capa-scroll span {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+.capa-scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, rgba(201,169,110,0.6), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.1); }
+}
+
+/* INTRO */
+.intro {
+  padding: 6rem 8%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  border-bottom: 1px solid var(--borda);
+}
+.intro-tag {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dourado);
+  margin-bottom: 1rem;
+}
+.intro-titulo {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 300;
+  color: var(--verde);
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
+}
+.intro-titulo em { font-style: italic; }
+.intro-texto {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--texto-suave);
+  line-height: 1.9;
+}
+.intro-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.intro-card {
+  background: var(--creme-escuro);
+  border: 1px solid var(--borda);
+  border-radius: 4px;
+  padding: 1.2rem 1.4rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.intro-card:hover {
+  background: var(--verde);
+  border-color: var(--verde);
+}
+.intro-card:hover .ic-num { color: var(--dourado); border-color: rgba(201,169,110,0.4); }
+.intro-card:hover .ic-nome { color: #fff; }
+.intro-card:hover .ic-preco { color: rgba(255,255,255,0.5); }
+.intro-card:hover .ic-arrow { color: var(--dourado); }
+.ic-num {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--verde);
+  border: 1px solid var(--borda);
+  border-radius: 50%;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.ic-info { flex: 1; }
+.ic-nome {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--texto);
+  transition: color 0.2s;
+}
+.ic-preco {
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+  margin-top: 2px;
+  transition: color 0.2s;
+}
+.ic-arrow {
+  color: var(--texto-suave);
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+/* PLANO SECTION */
+.plano-section {
+  padding: 6rem 8%;
+  border-bottom: 1px solid var(--borda);
+}
+.plano-section:nth-child(even) { background: var(--creme-escuro); }
+
+.plano-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: start;
+  margin-bottom: 3.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--borda);
+}
+.plano-num {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--dourado);
+  margin-bottom: 0.5rem;
+}
+.plano-nome {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 300;
+  color: var(--verde);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+.plano-nome em { font-style: italic; }
+.plano-tagline {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--texto-suave);
+}
+.plano-preco-box { text-align: right; }
+.plano-preco-val {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-weight: 300;
+  color: var(--verde);
+  line-height: 1;
+}
+.plano-preco-moeda {
+  font-size: 1.1rem;
+  color: var(--verde-medio);
+  vertical-align: super;
+  font-weight: 400;
+}
+.plano-preco-per {
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+  margin-top: 4px;
+}
+
+/* ENTREGÁVEIS GRID */
+.entregaveis-titulo {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dourado);
+  margin-bottom: 1.5rem;
+}
+.entregaveis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.entregavel-card {
+  background: #fff;
+  border: 1px solid var(--borda);
+  border-radius: 4px;
+  padding: 1.4rem;
+  position: relative;
+  overflow: hidden;
+}
+.plano-section:nth-child(even) .entregavel-card { background: var(--creme); }
+.entregavel-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--dourado);
+}
+.entregavel-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+}
+.entregavel-nome {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--texto);
+  margin-bottom: 0.4rem;
+}
+.entregavel-desc {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--texto-suave);
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+}
+.entregavel-freq {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  background: var(--verde-menta);
+  color: var(--verde-medio);
+  border-radius: 20px;
+}
+
+/* ROTINA */
+.rotina-titulo {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dourado);
+  margin-bottom: 1.5rem;
+}
+.rotina-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--borda);
+  border: 1px solid var(--borda);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+.rotina-col {
+  background: #fff;
+  padding: 1.2rem;
+}
+.plano-section:nth-child(even) .rotina-col { background: var(--creme); }
+.rotina-col-titulo {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--verde-medio);
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--borda);
+}
+.rotina-item {
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+.rotina-item::before {
+  content: '·';
+  color: var(--dourado);
+  font-size: 1rem;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+/* PROMESSA */
+.promessa-box {
+  background: var(--verde);
+  border-radius: 4px;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: center;
+}
+.promessa-texto {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.5;
+}
+.promessa-btn {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  background: var(--dourado);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.promessa-btn:hover { background: #b8924f; }
+
+/* COMPARATIVO */
+.comparativo {
+  padding: 6rem 8%;
+  background: var(--verde);
+}
+.comp-titulo {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.comp-titulo em { font-style: italic; color: var(--dourado); }
+.comp-sub {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 3rem;
+}
+.comp-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.comp-table th {
+  padding: 1rem 1.2rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5);
+}
+.comp-table th:first-child { color: rgba(255,255,255,0.3); width: 30%; }
+.comp-table th.destaque-col { color: var(--dourado); }
+.comp-table td {
+  padding: 0.9rem 1.2rem;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.6);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  vertical-align: middle;
+}
+.comp-table td:first-child { color: rgba(255,255,255,0.4); font-size: 0.78rem; }
+.comp-table td.destaque-col { color: rgba(255,255,255,0.9); }
+.check { color: var(--dourado); font-size: 1rem; }
+.dash { color: rgba(255,255,255,0.2); }
+.comp-table tr:last-child td { border-bottom: none; }
+
+/* ENCERRAMENTO */
+.encerramento {
+  padding: 7rem 8%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.enc-deco {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; height: 500px;
+  border: 1px solid var(--borda);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.enc-titulo {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 300;
+  color: var(--verde);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+.enc-titulo em { font-style: italic; color: var(--dourado); }
+.enc-sub {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--texto-suave);
+  max-width: 480px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.8;
+  position: relative;
+  z-index: 2;
+}
+.enc-btn {
+  display: inline-block;
+  padding: 1rem 2.4rem;
+  background: var(--verde);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  position: relative;
+  z-index: 2;
+  transition: background 0.2s;
+}
+.enc-btn:hover { background: var(--verde-medio); }
+.enc-nota {
+  margin-top: 1.2rem;
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+  position: relative;
+  z-index: 2;
+}
+
+/* FOOTER */
+footer {
+  background: var(--verde);
+  padding: 2rem 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.6);
+}
+.footer-logo em { font-style: italic; color: var(--dourado); }
+.footer-coren {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.7s ease both; }
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.45s; }
+.delay-4 { animation-delay: 0.6s; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .intro { grid-template-columns: 1fr; gap: 3rem; }
+  .plano-header { grid-template-columns: 1fr; }
+  .plano-preco-box { text-align: left; }
+  .rotina-grid { grid-template-columns: repeat(2, 1fr); }
+  .promessa-box { grid-template-columns: 1fr; text-align: center; }
+  .comp-table { font-size: 0.75rem; }
+}
+@media (max-width: 480px) {
+  .rotina-grid { grid-template-columns: 1fr; }
+}
+
+@media print {
+  .capa-scroll { display: none; }
+  .plano-section { page-break-before: always; }
+}
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<section class="capa" id="topo">
+  <div class="capa-linha"></div>
+  <p class="capa-eyebrow fade-up">Gestão de saúde geriátrica · 2025</p>
+  <h1 class="capa-titulo fade-up delay-1">O que você recebe<br>em <em>cada plano</em></h1>
+  <p class="capa-sub fade-up delay-2">Entregáveis, rotina e compromissos de cada nível de acompanhamento</p>
+  <div class="capa-autor fade-up delay-3">
+    <div class="capa-avatar">IS</div>
+    <div class="capa-autor-info">
+      <div class="capa-autor-nome">Israel Santiago</div>
+      <div class="capa-autor-cargo">Enfermeiro · Pós-graduado em Geriatria · COREN-RJ</div>
+    </div>
+  </div>
+  <div class="capa-scroll" onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'})">
+    <span>Ver planos</span>
+    <div class="capa-scroll-line"></div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro" id="intro">
+  <div>
+    <p class="intro-tag">Como funciona esta apresentação</p>
+    <h2 class="intro-titulo">Transparência total sobre o que você <em>contrata</em></h2>
+    <p class="intro-texto">
+      Cada plano tem entregáveis claros, frequência definida e um compromisso de tempo de resposta. Nada é genérico — tudo é personalizado ao histórico de saúde do seu familiar. Clique em qualquer plano abaixo para ir direto à seção.
+    </p>
+  </div>
+  <div class="intro-cards">
+    <a class="intro-card" href="#essencial">
+      <div class="ic-num">1</div>
+      <div class="ic-info">
+        <div class="ic-nome">Acompanhamento Essencial</div>
+        <div class="ic-preco">R$ 597 / mês</div>
+      </div>
+      <div class="ic-arrow">→</div>
+    </a>
+    <a class="intro-card" href="#supervisao">
+      <div class="ic-num">2</div>
+      <div class="ic-info">
+        <div class="ic-nome">Supervisão Ativa</div>
+        <div class="ic-preco">R$ 1.197 / mês</div>
+      </div>
+      <div class="ic-arrow">→</div>
+    </a>
+    <a class="intro-card" href="#gestao">
+      <div class="ic-num">3</div>
+      <div class="ic-info">
+        <div class="ic-nome">Gestão Integrada</div>
+        <div class="ic-preco">R$ 2.200 / mês</div>
+      </div>
+      <div class="ic-arrow">→</div>
+    </a>
+  </div>
+</section>
+
+<!-- PLANO 1 — ESSENCIAL -->
+<section class="plano-section" id="essencial">
+  <div class="plano-header">
+    <div>
+      <div class="plano-num">Plano 01</div>
+      <h2 class="plano-nome">Acompanhamento <em>Essencial</em></h2>
+      <p class="plano-tagline">O ponto de partida — rotina de cuidado com presença especializada semanal</p>
+    </div>
+    <div class="plano-preco-box">
+      <div class="plano-preco-val"><span class="plano-preco-moeda">R$</span> 597</div>
+      <div class="plano-preco-per">por mês · sem fidelidade</div>
+    </div>
+  </div>
+
+  <p class="entregaveis-titulo">O que você recebe</p>
+  <div class="entregaveis-grid">
+    <div class="entregavel-card">
+      <div class="entregavel-icon">📋</div>
+      <div class="entregavel-nome">Check-in semanal estruturado</div>
+      <div class="entregavel-desc">Toda semana você recebe um formulário clínico com perguntas direcionadas ao perfil do seu familiar. Resposta em minutos, análise especializada em até 24h.</div>
+      <span class="entregavel-freq">1× por semana</span>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">💬</div>
+      <div class="entregavel-nome">Retorno clínico por escrito</div>
+      <div class="entregavel-desc">Após cada check-in, você recebe um parecer em linguagem acessível: o que está bem, o que monitorar e se há algum sinal de alerta que exige atenção.</div>
+      <span class="entregavel-freq">1× por semana</span>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">🚨</div>
+      <div class="entregavel-nome">Canal de triagem para urgências</div>
+      <div class="entregavel-desc">"Preciso ir ao pronto-socorro?" Me acione pelo WhatsApp e receba uma orientação clínica fundamentada — não um "procure um médico". Resposta em até 24h.</div>
+      <span class="entregavel-freq">Quando necessário</span>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">💊</div>
+      <div class="entregavel-nome">Orientação sobre medicação</div>
+      <div class="entregavel-desc">Dúvidas sobre horários, interações, efeitos colaterais ou esquecimentos. Análise baseada no perfil completo do seu familiar — não no bula.</div>
+      <span class="entregavel-freq">Sob demanda</span>
+    </div>
+  </div>
+
+  <p class="rotina-titulo">Sua rotina com este plano</p>
+  <div class="rotina-grid">
+    <div class="rotina-col">
+      <div class="rotina-col-titulo">Segunda-feira</div>
+      <div class="rotina-item">Você recebe o check-in semanal</div>
+      <div class="rotina-item">Responde em até 10 minutos</div>
+    </div>
+    <div class="rotina-col">
+      <div class="rotina-col-titulo">Até 24h depois</div>
+      <div class="rotina-item">Recebe o retorno clínico completo</div>
+      <div class="rotina-item">Orientações práticas para a semana</div>
+    </div>
+    <div class="rotina-col">
+      <div class="rotina-col-titulo">Durante a semana</div>
+      <div class="rotina-item">Canal aberto para triagem de urgências</div>
+      <div class="rotina-item">Dúvidas sobre medicação</div>
+    </div>
+    <div class="rotina-col">
+      <div class="rotina-col-titulo">A qualquer momento</div>
+      <div class="rotina-item">Resposta garantida em até 24h</div>
+      <div class="rotina-item">Sempre fala comigo, nunca com atendente</div>
+    </div>
+  </div>
+
+  <div class="promessa-box">
+    <div class="promessa-texto">"Você nunca mais ficará sem uma resposta especializada quando seu familiar não estiver bem."</div>
+    <a href="https://wa.me/55219XXXXXXXX" class="promessa-btn">Quero este plano</a>
+  </div>
+</section>
+
+<!-- PLANO 2 — SUPERVISÃO ATIVA -->
+<section class="plano-section" id="supervisao">
+  <div class="plano-header">
+    <div>
+      <div class="plano-num">Plano 02 · Mais escolhido</div>
+      <h2 class="plano-nome">Supervisão <em>Ativa</em></h2>
+      <p class="plano-tagline">Acompanhamento próximo com visibilidade completa da evolução de saúde</p>
+    </div>
+    <div class="plano-preco-box">
+      <div class="plano-preco-val"><span class="plano-preco-moeda">R$</span> 1.197</div>
+      <div class="plano-preco-per">por mês · sem fidelidade</div>
+    </div>
+  </div>
+
+  <p class="entregaveis-titulo">O que você recebe</p>
+  <div class="entregaveis-grid">
+    <div class="entregavel-card">
+      <div class="entregavel-icon">📋</div>
+      <div class="entregavel-nome">Check-ins 2× por semana</div>
+      <div class="entregavel-desc">Segunda e quinta-feira. Ideal para idosos com comorbidades ativas, em ajuste de medicação ou que passaram por hospitalização recente.</div>
+      <span class="entregavel-freq">2× por semana</span>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">📹</div>
+      <div class="entregavel-nome">Videochamada mensal com a família</div>
+      <div class="entregavel-desc">30 minutos de conversa ao vivo. Apresento a evolução do mês, respondo dúvidas em tempo real e alinho expectativas. A família se sente parte ativa do cuidado.</div>
+      <span class="entregavel-freq">1× por mês</span>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">🔬</div>
+      <div class="entregavel-nome">Análise de exames</div>
+      <div class="entregavel-desc">Envie foto dos exames pelo WhatsApp. Analiso os resultados dentro do contexto clínico do seu familiar e explico em linguagem clara o que cada valor significa na prática.</div>
+      <span class="entregavel-freq">Sob demanda</span>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">📄</div>
+      <div class="entregavel-nome">Relatório mensal de evolução</div>
+      <div class="entregavel-desc">Documento com resumo do mês: tendências de saúde, intercorrências, adesão medicamentosa, pontos de atenção e recomendações para o próximo período.</div>
+      <span class="entregavel-freq">1× por mês</span>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">👩‍⚕️</div>
+      <div class="entregavel-nome">Orientação para cuidadores</div>
+      <div class="entregavel-desc">O cuidador contratado pela família passa a ter suporte técnico. Oriento sobre condutas, sinais de alerta e como registrar informações para o acompanhamento.</div>
+      <span class="entregavel-freq">Contínuo</span>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">⚡</div>
+      <div class="entregavel-nome">Prioridade de resposta</div>
+      <div class="entregavel-desc">Urgências e dúvidas respondidas em até 12 horas — não 24h. Para quem precisa de mais agilidade no dia a dia do cuidado.</div>
+      <span class="entregavel-freq">Resposta em 12h</span>
+    </div>
+  </div>
+
+  <p class="rotina-titulo">Sua rotina com este plano</p>
+  <div class="rotina-grid">
+    <div class="rotina-col">
+      <div class="rotina-col-titulo">Segundas-feiras</div>
+      <div class="rotina-item">Check-in semanal completo</div>
+      <div class="rotina-item">Retorno clínico em até 12h</div>
+    </div>
+    <div class="rotina-col">
+      <div class="rotina-col-titulo">Quintas-feiras</div>
+      <div class="rotina-item">Check-in intermediário</div>
+      <div class="rotina-item">Monitoramento de evolução</div>
+    </div>
+    <div class="rotina-col">
+      <div class="rotina-col-titulo">Durante o mês</div>
+      <div class="rotina-item">Análise de exames quando necessário</div>
+      <div class="rotina-item">Orientação para cuidador</div>
+      <div class="rotina-item">Triagem de urgências em 12h</div>
+    </div>
+    <div class="rotina-col">
+      <div class="rotina-col-titulo">Final do mês</div>
+      <div class="rotina-item">Relatório mensal de evolução</div>
+      <div class="rotina-item">Videochamada com a família</div>
+    </div>
+  </div>
+
+  <div class="promessa-box">
+    <div class="promessa-texto">"Você recebe dados reais de evolução todo mês — não achismos. E tem uma voz especializada em tempo real quando mais precisa."</div>
+    <a href="https://wa.me/55219XXXXXXXX" class="promessa-btn">Quero este plano</a>
+  </div>
+</section>
+
+<!-- PLANO 3 — GESTÃO INTEGRADA -->
+<section class="plano-section" id="gestao">
+  <div class="plano-header">
+    <div>
+      <div class="plano-num">Plano 03 · Máxima cobertura</div>
+      <h2 class="plano-nome">Gestão <em>Integrada</em></h2>
+      <p class="plano-tagline">Presença diária, coordenação total e um especialista dedicado ao seu familiar</p>
+    </div>
+    <div class="plano-preco-box">
+      <div class="plano-preco-val"><span class="plano-preco-moeda">R$</span> 2.200</div>
+      <div class="plano-preco-per">por mês · sem fidelidade</div>
+    </div>
+  </div>
+
+  <p class="entregaveis-titulo">O que você recebe</p>
+  <div class="entregaveis-grid">
+    <div class="entregavel-card">
+      <div class="entregavel-icon">📋</div>
+      <div class="entregavel-nome">Check-in diário (dias úteis)</div>
+      <div class="entregavel-desc">Toda manhã, um pulso rápido de saúde. Detectamos mudanças antes que se tornem crises. É o modelo de monitoramento mais próximo do presencial sem exigir presença física.</div>
+      <span class="entregavel-freq">5× por semana</span>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">📄</div>
+      <div class="entregavel-nome">Plano de cuidados personalizado</div>
+      <div class="entregavel-desc">Documento completo elaborado no início: rotina ideal, lista de medicamentos, sinais de alerta específicos, orientações para o cuidador e contatos de emergência.</div>
+      <span class="entregavel-freq">Entregue no início</span>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">📹</div>
+      <div class="entregavel-nome">2 videochamadas mensais</div>
+      <div class="entregavel-desc">Uma no início do mês para alinhamento e uma no final para avaliação. A família tem contato humano e direto comigo duas vezes por mês.</div>
+      <span class="entregavel-freq">2× por mês</span>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">🏥</div>
+      <div class="entregavel-nome">Coordenação com especialistas</div>
+      <div class="entregavel-desc">Levo dados consolidados às consultas médicas e faço a ponte entre o que foi prescrito e o que acontece em casa. O médico passa a ter informação real para decidir.</div>
+      <span class="entregavel-freq">Em cada consulta</span>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">👩‍⚕️</div>
+      <div class="entregavel-nome">Supervisão clínica do cuidador</div>
+      <div class="entregavel-desc">O cuidador passa a ter protocolo definido por mim. Condutas padronizadas, registro de ocorrências e orientação contínua. Você sabe exatamente o que está sendo feito.</div>
+      <span class="entregavel-freq">Contínuo</span>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">⚡</div>
+      <div class="entregavel-nome">Acesso prioritário — 4 horas</div>
+      <div class="entregavel-desc">Qualquer dúvida ou urgência em horário comercial respondida em até 4 horas. Para quem não pode esperar e precisa de agilidade máxima no cuidado.</div>
+      <span class="entregavel-freq">Resposta em 4h</span>
+    </div>
+  </div>
+
+  <p class="rotina-titulo">Sua rotina com este plano</p>
+  <div class="rotina-grid">
+    <div class="rotina-col">
+      <div class="rotina-col-titulo">Diariamente</div>
+      <div class="rotina-item">Check-in matinal rápido</div>
+      <div class="rotina-item">Retorno em até 4h se houver alerta</div>
+    </div>
+    <div class="rotina-col">
+      <div class="rotina-col-titulo">Semanalmente</div>
+      <div class="rotina-item">Análise de evolução da semana</div>
+      <div class="rotina-item">Orientação atualizada ao cuidador</div>
+    </div>
+    <div class="rotina-col">
+      <div class="rotina-col-titulo">Durante o mês</div>
+      <div class="rotina-item">Análise de exames</div>
+      <div class="rotina-item">Coordenação com médicos</div>
+      <div class="rotina-item">Ajustes no plano de cuidados</div>
+    </div>
+    <div class="rotina-col">
+      <div class="rotina-col-titulo">Mensalmente</div>
+      <div class="rotina-item">2 videochamadas com a família</div>
+      <div class="rotina-item">Relatório completo de evolução</div>
+    </div>
+  </div>
+
+  <div class="promessa-box">
+    <div class="promessa-texto">"Seu familiar terá um especialista dedicado conhecendo cada detalhe da sua saúde — todos os dias, sem exceção."</div>
+    <a href="https://wa.me/55219XXXXXXXX" class="promessa-btn">Quero este plano</a>
+  </div>
+</section>
+
+<!-- COMPARATIVO -->
+<section class="comparativo">
+  <h2 class="comp-titulo">Comparativo <em>completo</em></h2>
+  <p class="comp-sub">Todos os entregáveis lado a lado para facilitar sua decisão</p>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Entregável</th>
+        <th>Essencial<br><span style="color:rgba(255,255,255,0.3);font-weight:300;">R$ 597</span></th>
+        <th class="destaque-col">Supervisão Ativa<br><span style="color:rgba(201,169,110,0.6);font-weight:300;">R$ 1.197</span></th>
+        <th>Gestão Integrada<br><span style="color:rgba(255,255,255,0.3);font-weight:300;">R$ 2.200</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Check-in por WhatsApp</td>
+        <td><span class="check">✓</span> 1× semana</td>
+        <td class="destaque-col"><span class="check">✓</span> 2× semana</td>
+        <td><span class="check">✓</span> Diário</td>
+      </tr>
+      <tr>
+        <td>Retorno clínico escrito</td>
+        <td><span class="check">✓</span></td>
+        <td class="destaque-col"><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Triagem de urgências</td>
+        <td><span class="check">✓</span></td>
+        <td class="destaque-col"><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Orientação sobre medicação</td>
+        <td><span class="check">✓</span></td>
+        <td class="destaque-col"><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Análise de exames</td>
+        <td><span class="dash">—</span></td>
+        <td class="destaque-col"><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Relatório mensal</td>
+        <td><span class="dash">—</span></td>
+        <td class="destaque-col"><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Videochamada com família</td>
+        <td><span class="dash">—</span></td>
+        <td class="destaque-col"><span class="check">✓</span> 1× mês</td>
+        <td><span class="check">✓</span> 2× mês</td>
+      </tr>
+      <tr>
+        <td>Orientação para cuidador</td>
+        <td><span class="dash">—</span></td>
+        <td class="destaque-col"><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Plano de cuidados personalizado</td>
+        <td><span class="dash">—</span></td>
+        <td class="destaque-col"><span class="dash">—</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Supervisão clínica do cuidador</td>
+        <td><span class="dash">—</span></td>
+        <td class="destaque-col"><span class="dash">—</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Coordenação com médicos</td>
+        <td><span class="dash">—</span></td>
+        <td class="destaque-col"><span class="dash">—</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Tempo de resposta garantido</td>
+        <td>24 horas</td>
+        <td class="destaque-col">12 horas</td>
+        <td>4 horas</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ENCERRAMENTO -->
+<section class="encerramento">
+  <div class="enc-deco"></div>
+  <h2 class="enc-titulo">Pronto para começar?<br><em>Fale comigo hoje.</em></h2>
+  <p class="enc-sub">Sem burocracia. Me conta o histórico do seu familiar e eu indico o plano mais adequado para o momento dele — sem compromisso.</p>
+  <a href="https://wa.me/55219XXXXXXXX" class="enc-btn">Conversar pelo WhatsApp</a>
+  <p class="enc-nota">Sem fidelidade · Cancele quando quiser · Atendimento 100% personalizado</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Israel Santiago · <em>Geriatria</em></div>
+  <div class="footer-coren">COREN-RJ XXXXXX · Pós-graduado em Geriatria · Rio de Janeiro, RJ</div>
+</footer>
+
+</body>
+</html>
