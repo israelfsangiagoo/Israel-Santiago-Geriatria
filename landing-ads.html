@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="Atendimento Geriátrico Remoto Premium — Cuidado especializado para seu familiar idoso, de onde você estiver.">
+<title>Cuidado Geriátrico Remoto | Especialista em Saúde do Idoso</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ─── TOKENS ─────────────────────────────────────── */
+  :root {
+    --navy:      #0D1F2D;
+    --navy-mid:  #1A3247;
+    --gold:      #C49A3C;
+    --gold-lt:   #E8C87A;
+    --gold-pale: #F5ECD6;
+    --sage:      #5E8B7A;
+    --sage-lt:   #A8C5B8;
+    --cream:     #F9F6F1;
+    --cream-dk:  #EDE8DF;
+    --white:     #FFFFFF;
+    --text-dk:   #1A1A1A;
+    --text-md:   #4A4A4A;
+    --text-lt:   #7A7A7A;
+
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans:  'DM Sans', system-ui, sans-serif;
+
+    --r-sm: 8px;
+    --r-md: 16px;
+    --r-lg: 24px;
+    --r-xl: 32px;
+
+    --shadow-sm: 0 2px 12px rgba(13,31,45,.08);
+    --shadow-md: 0 8px 32px rgba(13,31,45,.14);
+    --shadow-lg: 0 20px 60px rgba(13,31,45,.20);
+
+    --transition: .35s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ─── RESET & BASE ───────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--cream);
+    color: var(--text-dk);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  img { display: block; max-width: 100%; }
+  a   { text-decoration: none; color: inherit; }
+
+  /* ─── UTILITY ────────────────────────────────────── */
+  .section      { padding: 72px 24px; }
+  .section--dark { background: var(--navy); color: var(--white); }
+  .section--mid  { background: var(--navy-mid); color: var(--white); }
+  .section--cream{ background: var(--cream); }
+  .section--white{ background: var(--white); }
+  .section--gold  { background: var(--gold-pale); }
+
+  .label {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .label--light { color: var(--gold-lt); }
+
+  h1,h2,h3 { font-family: var(--font-serif); font-weight: 400; line-height: 1.15; }
+
+  h1 { font-size: clamp(2.4rem, 8vw, 3.4rem); }
+  h2 { font-size: clamp(2rem, 6.5vw, 2.8rem); }
+  h3 { font-size: clamp(1.4rem, 5vw, 1.8rem); }
+
+  .accent { color: var(--gold); }
+  .accent--light { color: var(--gold-lt); }
+
+  .divider {
+    width: 48px; height: 2px;
+    background: var(--gold);
+    margin: 20px 0 32px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    padding: 18px 32px;
+    border-radius: 56px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    white-space: nowrap;
+  }
+  .btn--primary {
+    background: var(--gold);
+    color: var(--navy);
+    box-shadow: 0 4px 24px rgba(196,154,60,.35);
+  }
+  .btn--primary:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(196,154,60,.45); }
+  .btn--outline {
+    background: transparent;
+    color: var(--white);
+    border: 1.5px solid rgba(255,255,255,.35);
+  }
+  .btn--outline:hover { background: rgba(255,255,255,.08); border-color: var(--gold-lt); color: var(--gold-lt); }
+  .btn--full { width: 100%; justify-content: center; }
+
+  /* ─── HEADER / NAV ───────────────────────────────── */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(13,31,45,.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196,154,60,.15);
+  }
+  .nav__logo {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--white);
+    letter-spacing: .01em;
+    line-height: 1.2;
+  }
+  .nav__logo span { color: var(--gold); }
+  .nav__cta {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold);
+    background: rgba(196,154,60,.12);
+    border: 1px solid rgba(196,154,60,.3);
+    padding: 9px 18px;
+    border-radius: 40px;
+    letter-spacing: .03em;
+    transition: var(--transition);
+  }
+  .nav__cta:hover { background: rgba(196,154,60,.22); }
+
+  /* ─── HERO ───────────────────────────────────────── */
+  .hero {
+    min-height: 100svh;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(94,139,122,.18) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 90% 80%, rgba(196,154,60,.12) 0%, transparent 60%),
+      linear-gradient(180deg, #0D1F2D 0%, #0D1F2D 100%);
+  }
+
+  .hero__pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(196,154,60,.08) 1px, transparent 0);
+    background-size: 36px 36px;
+    opacity: .6;
+  }
+
+  /* abstract ornament */
+  .hero__ornament {
+    position: absolute;
+    top: 80px; right: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    border: 1px solid rgba(196,154,60,.12);
+    animation: pulse-ring 6s ease-in-out infinite;
+  }
+  .hero__ornament::after {
+    content:'';
+    position: absolute;
+    inset: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(196,154,60,.08);
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% { transform: scale(1); opacity: .6; }
+    50%       { transform: scale(1.06); opacity: 1; }
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    padding: 120px 28px 60px;
+  }
+
+  .hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .hero__eyebrow::before {
+    content:'';
+    width: 28px; height: 1.5px;
+    background: var(--gold);
+  }
+
+  .hero h1 {
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero__sub {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255,255,255,.72);
+    line-height: 1.7;
+    max-width: 400px;
+  }
+
+  .hero__badges {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 32px 0;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,.75);
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    padding: 7px 14px;
+    border-radius: 40px;
+    backdrop-filter: blur(6px);
+  }
+  .badge svg { color: var(--gold); flex-shrink: 0; }
+
+  .hero__ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 8px;
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: .4;
+    animation: bob 2s ease-in-out infinite;
+  }
+  .hero__scroll span { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--white); }
+  @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+  /* ─── TRUST BAR ──────────────────────────────────── */
+  .trust {
+    background: var(--gold);
+    padding: 20px 24px;
+    display: flex;
+    gap: 0;
+    overflow: hidden;
+  }
+  .trust__inner {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    animation: marquee 22s linear infinite;
+    white-space: nowrap;
+  }
+  .trust__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: .03em;
+    flex-shrink: 0;
+  }
+  .trust__dot { width: 4px; height: 4px; border-radius: 50%; background: var(--navy); opacity: .35; flex-shrink: 0; }
+  @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* ─── PAIN POINTS ────────────────────────────────── */
+  .pains__intro {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--text-md);
+    line-height: 1.75;
+    margin-bottom: 40px;
+  }
+  .pain-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    padding: 28px 24px;
+    margin-bottom: 16px;
+    border-left: 3px solid var(--gold);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    transition: var(--transition);
+  }
+  .pain-card:hover { transform: translateX(4px); box-shadow: var(--shadow-md); }
+  .pain-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--gold-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 22px;
+  }
+  .pain-card h3 {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dk);
+    margin-bottom: 6px;
+  }
+  .pain-card p {
+    font-size: 14px;
+    color: var(--text-lt);
+    line-height: 1.6;
+  }
+
+  .pains__bridge {
+    margin-top: 40px;
+    padding: 28px 24px;
+    background: var(--navy);
+    border-radius: var(--r-lg);
+    text-align: center;
+  }
+  .pains__bridge p {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--white);
+    line-height: 1.4;
+    font-style: italic;
+  }
+  .pains__bridge p em { color: var(--gold); font-style: normal; }
+
+  /* ─── HOW IT WORKS ───────────────────────────────── */
+  .steps { counter-reset: step; }
+  .step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    position: relative;
+  }
+  .step:last-child { border-bottom: none; }
+
+  .step__num {
+    counter-increment: step;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--gold);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .step__num::after {
+    content: '';
+    position: absolute;
+    top: 52px; left: 50%;
+    width: 1px; height: calc(100% + 28px);
+    background: rgba(196,154,60,.2);
+    transform: translateX(-50%);
+  }
+  .step:last-child .step__num::after { display: none; }
+
+  .step__content h3 {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .step__content p {
+    font-size: 14px;
+    color: rgba(255,255,255,.6);
+    line-height: 1.65;
+  }
+  .step__tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: var(--gold);
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+  }
+
+  /* ─── BENEFITS ───────────────────────────────────── */
+  .benefits__tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    background: var(--cream-dk);
+    padding: 4px;
+    border-radius: 40px;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 12px 0;
+    border: none;
+    border-radius: 36px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    background: transparent;
+    color: var(--text-lt);
+    letter-spacing: .02em;
+  }
+  .tab-btn.active {
+    background: var(--navy);
+    color: var(--white);
+    box-shadow: var(--shadow-sm);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .benefit-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--cream-dk);
+  }
+  .benefit-item:last-child { border-bottom: none; }
+  .benefit-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+  .benefit-item h3 {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dk);
+    margin-bottom: 5px;
+  }
+  .benefit-item p {
+    font-size: 13px;
+    color: var(--text-lt);
+    line-height: 1.6;
+  }
+
+  /* ─── DIFFERENTIALS ──────────────────────────────── */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .diff-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(196,154,60,.15);
+    border-radius: var(--r-lg);
+    padding: 24px 20px;
+    transition: var(--transition);
+  }
+  .diff-card:hover { background: rgba(255,255,255,.07); border-color: rgba(196,154,60,.35); }
+  .diff-card .icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+  }
+  .diff-card h3 {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .diff-card p {
+    font-size: 12px;
+    color: rgba(255,255,255,.5);
+    line-height: 1.6;
+  }
+  .diff-card--featured {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, rgba(196,154,60,.15) 0%, rgba(94,139,122,.1) 100%);
+    border-color: rgba(196,154,60,.35);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 28px 24px;
+  }
+  .diff-card--featured .icon { font-size: 36px; margin: 0; flex-shrink: 0; }
+  .diff-card--featured h3 { font-size: 16px; margin-bottom: 6px; }
+
+  /* ─── PROFESSIONAL ───────────────────────────────── */
+  .pro {
+    background: var(--white);
+  }
+  .pro__photo-wrap {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 24px;
+    position: relative;
+  }
+  .pro__photo-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--sage));
+    z-index: 0;
+  }
+  .pro__photo {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    overflow: hidden;
+  }
+  .pro__name {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .pro__title {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 28px;
+  }
+  .pro__bio {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-md);
+    line-height: 1.8;
+    margin-bottom: 28px;
+    font-style: italic;
+    border-left: 3px solid var(--gold);
+    padding-left: 20px;
+  }
+  .credentials {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .credential {
+    background: var(--cream);
+    border-radius: var(--r-md);
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .credential .num {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .credential .lbl {
+    font-size: 11px;
+    color: var(--text-lt);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* ─── TESTIMONIALS ───────────────────────────────── */
+  .testimonials { background: var(--cream); }
+  .testi-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    padding: 28px 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+  }
+  .testi-card::before {
+    content: '"';
+    position: absolute;
+    top: -10px; right: 16px;
+    font-family: var(--font-serif);
+    font-size: 8rem;
+    color: var(--gold-pale);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .testi-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 14px;
+  }
+  .star { color: var(--gold); font-size: 16px; }
+  .testi-card blockquote {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--text-dk);
+    line-height: 1.65;
+    margin-bottom: 18px;
+  }
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .testi-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .testi-author-info strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dk);
+  }
+  .testi-author-info span {
+    font-size: 12px;
+    color: var(--text-lt);
+  }
+
+  /* ─── FAQ ────────────────────────────────────────── */
+  .faq { background: var(--navy); }
+  .faq-item {
+    border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+  .faq-q {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 0;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: var(--transition);
+  }
+  .faq-q:hover { color: var(--gold-lt); }
+  .faq-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+    color: var(--gold);
+    transition: var(--transition);
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); border-color: var(--gold); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s cubic-bezier(.4,0,.2,1);
+  }
+  .faq-item.open .faq-a { max-height: 300px; }
+  .faq-a p {
+    padding: 0 0 24px;
+    font-size: 14px;
+    color: rgba(255,255,255,.6);
+    line-height: 1.75;
+  }
+
+  /* ─── CTA FINAL ──────────────────────────────────── */
+  .cta-final {
+    background: linear-gradient(160deg, #0D1F2D 0%, #1A3247 100%);
+    padding: 80px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-final::before {
+    content:'';
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,154,60,.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-final h2 {
+    color: var(--white);
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .cta-final p {
+    font-size: 16px;
+    color: rgba(255,255,255,.65);
+    margin-bottom: 36px;
+    line-height: 1.7;
+    position: relative;
+  }
+  .cta-final .btn--primary {
+    font-size: 16px;
+    padding: 20px 36px;
+    width: 100%;
+    position: relative;
+    margin-bottom: 14px;
+  }
+  .cta-note {
+    font-size: 12px;
+    color: rgba(255,255,255,.35);
+    letter-spacing: .03em;
+  }
+
+  /* ─── FOOTER ─────────────────────────────────────── */
+  footer {
+    background: #080F15;
+    padding: 40px 24px;
+    text-align: center;
+  }
+  footer .logo {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  footer .logo span { color: var(--gold); }
+  footer p {
+    font-size: 12px;
+    color: rgba(255,255,255,.25);
+    line-height: 1.8;
+    margin-bottom: 4px;
+  }
+  footer a { color: rgba(255,255,255,.4); }
+  footer a:hover { color: var(--gold); }
+
+  /* ─── WHATSAPP FLOAT ──────────────────────────────── */
+  .wa-float {
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .wa-label {
+    background: var(--white);
+    color: var(--text-dk);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 30px;
+    box-shadow: var(--shadow-md);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(8px);
+    transition: var(--transition);
+    pointer-events: none;
+  }
+  .wa-float:hover .wa-label { opacity: 1; transform: translateX(0); }
+  .wa-btn {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #25D366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,.45);
+    transition: var(--transition);
+    animation: wa-pulse 3s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  .wa-btn:hover { transform: scale(1.08); }
+  @keyframes wa-pulse {
+    0%,100%{ box-shadow: 0 4px 20px rgba(37,211,102,.45), 0 0 0 0 rgba(37,211,102,.3); }
+    50%     { box-shadow: 0 4px 20px rgba(37,211,102,.45), 0 0 0 12px rgba(37,211,102,0); }
+  }
+  .wa-btn svg { width: 28px; height: 28px; fill: white; }
+
+  /* ─── ANIMATIONS ─────────────────────────────────── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── SECTION HEADERS ────────────────────────────── */
+  .section-header { margin-bottom: 40px; }
+
+  /* ─── MEDIA ──────────────────────────────────────── */
+  @media (min-width: 480px) {
+    .diff-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* Hide scrollbar on trust bar */
+  .trust { overflow: hidden; }
+
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ════════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="nav__logo">Geri<span>Care</span> Remoto</div>
+  <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20vim%20pelo%20an%C3%BAncio%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento%20geri%C3%A1trico%20remoto." class="nav__cta">Falar Agora</a>
+</nav>
+
+<!-- ═══ HERO ════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__pattern"></div>
+  <div class="hero__ornament"></div>
+
+  <div class="hero__content">
+    <div class="hero__eyebrow">Atendimento Geriátrico Remoto</div>
+
+    <h1>
+      Seu familiar idoso
+      <em>merece cuidado<br>especializado</em>
+      todos os dias.
+    </h1>
+
+    <p class="hero__sub">
+      Acompanhamento geriátrico profissional, contínuo e personalizado — sem sair de casa. Para famílias que não abrem mão de qualidade e segurança.
+    </p>
+
+    <div class="hero__badges">
+      <span class="badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        Enfermeiro Especialista
+      </span>
+      <span class="badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        Disponível 7 dias/semana
+      </span>
+      <span class="badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        Atendimento 100% Seguro
+      </span>
+    </div>
+
+    <div class="hero__ctas">
+      <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20vim%20pelo%20an%C3%BAncio%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento%20geri%C3%A1trico%20remoto." class="btn btn--primary btn--full">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Quero Saber Mais pelo WhatsApp
+      </a>
+      <a href="#como-funciona" class="btn btn--outline btn--full">
+        Como funciona o atendimento?
+      </a>
+    </div>
+  </div>
+
+  <div class="hero__scroll">
+    <span>Saiba mais</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+  </div>
+</section>
+
+<!-- ═══ TRUST BAR ════════════════════════════════════════ -->
+<div class="trust" aria-hidden="true">
+  <div class="trust__inner">
+    <span class="trust__item">✦ Atendimento Especializado em Geriatria</span>
+    <span class="trust__dot"></span>
+    <span class="trust__item">✦ Monitoramento Contínuo de Saúde</span>
+    <span class="trust__dot"></span>
+    <span class="trust__item">✦ Relatórios Clínicos Personalizados</span>
+    <span class="trust__dot"></span>
+    <span class="trust__item">✦ Suporte Familiar Dedicado</span>
+    <span class="trust__dot"></span>
+    <span class="trust__item">✦ Sigilo e Ética Profissional</span>
+    <span class="trust__dot"></span>
+    <!-- duplicate for seamless loop -->
+    <span class="trust__item">✦ Atendimento Especializado em Geriatria</span>
+    <span class="trust__dot"></span>
+    <span class="trust__item">✦ Monitoramento Contínuo de Saúde</span>
+    <span class="trust__dot"></span>
+    <span class="trust__item">✦ Relatórios Clínicos Personalizados</span>
+    <span class="trust__dot"></span>
+    <span class="trust__item">✦ Suporte Familiar Dedicado</span>
+    <span class="trust__dot"></span>
+    <span class="trust__item">✦ Sigilo e Ética Profissional</span>
+    <span class="trust__dot"></span>
+  </div>
+</div>
+
+<!-- ═══ DORES ════════════════════════════════════════════ -->
+<section class="section section--cream fade-up">
+  <div class="section-header">
+    <span class="label">Você já se perguntou…</span>
+    <h2>O que passa pela cabeça de quem cuida de um idoso à distância</h2>
+    <div class="divider"></div>
+  </div>
+
+  <p class="pains__intro">
+    Ser filho ou familiar de um idoso é uma das responsabilidades mais delicadas da vida adulta. E a distância torna tudo ainda mais angustiante.
+  </p>
+
+  <div class="pains">
+    <div class="pain-card">
+      <div class="pain-icon">😟</div>
+      <div>
+        <h3>"Ele está tomando os remédios certos?"</h3>
+        <p>Polifarmácia é um dos maiores riscos para idosos. Sem acompanhamento especializado, erros de medicação são mais comuns do que se imagina.</p>
+      </div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon">📞</div>
+      <div>
+        <h3>"Se acontecer algo, vou saber logo?"</h3>
+        <p>A sensação de estar longe num momento crítico é paralisante. Famílias precisam de um profissional que monitore e avise antes que vire emergência.</p>
+      </div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon">🏥</div>
+      <div>
+        <h3>"Toda consulta é uma batalha logística."</h3>
+        <p>Transporte, filas, esperas longas — para um idoso frágil, cada saída de casa é um esforço. Há alternativas mais dignas e seguras.</p>
+      </div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon">🤷</div>
+      <div>
+        <h3>"Não sei se o que ele tem é grave."</h3>
+        <p>Sintomas que parecem menores podem ser sinais de algo importante. Sem um especialista, a família fica na incerteza — e o idoso fica sem suporte.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pains__bridge">
+    <p>Nenhuma família deveria viver com essa <em>ansiedade permanente.</em><br>Existe uma solução mais inteligente.</p>
+  </div>
+</section>
+
+<!-- ═══ COMO FUNCIONA ════════════════════════════════════ -->
+<section id="como-funciona" class="section section--dark fade-up">
+  <div class="section-header">
+    <span class="label label--light">Simples e eficaz</span>
+    <h2>Como funciona o atendimento remoto</h2>
+    <div class="divider"></div>
+    <p style="color:rgba(255,255,255,.6);font-size:15px;line-height:1.7;">Sem complicação, sem aparelhos difíceis. Tudo pensado para funcionar na realidade do idoso e da família.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step__num">1</div>
+      <div class="step__content">
+        <h3>Avaliação inicial gratuita</h3>
+        <p>Conversa detalhada com a família para entender o histórico clínico, rotina, medicações e necessidades específicas do seu familiar.</p>
+        <span class="step__tag">Via WhatsApp ou Videochamada</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step__num">2</div>
+      <div class="step__content">
+        <h3>Plano de cuidado personalizado</h3>
+        <p>Elaboramos um protocolo individual com rotina de monitoramento, alertas, orientações e metas de saúde adaptadas ao perfil do idoso.</p>
+        <span class="step__tag">Documento Entregue à Família</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step__num">3</div>
+      <div class="step__content">
+        <h3>Acompanhamento contínuo ativo</h3>
+        <p>Check-ins regulares, monitoramento de sinais vitais, revisão de medicamentos e relatórios periódicos — tudo de forma proativa, sem esperar algo acontecer.</p>
+        <span class="step__tag">7 dias por semana</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step__num">4</div>
+      <div class="step__content">
+        <h3>Suporte e acionamento rápido</h3>
+        <p>Em caso de qualquer alteração ou emergência, a família é comunicada imediatamente com orientações claras do que fazer — nunca estará sozinha.</p>
+        <span class="step__tag">Respostas em Minutos</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BENEFÍCIOS ══════════════════════════════════════ -->
+<section class="section section--white fade-up">
+  <div class="section-header">
+    <span class="label">Para todos</span>
+    <h2>O que muda na vida de quem contrata</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="benefits__tabs">
+    <button class="tab-btn active" data-tab="familia">Para a Família</button>
+    <button class="tab-btn" data-tab="idoso">Para o Idoso</button>
+  </div>
+
+  <div class="tab-panel active" id="tab-familia">
+    <div class="benefit-item">
+      <div class="benefit-icon">🧘</div>
+      <div>
+        <h3>Paz de espírito real</h3>
+        <p>Saber que um profissional qualificado acompanha seu familiar de perto elimina a ansiedade da distância.</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">📊</div>
+      <div>
+        <h3>Informação clara e acessível</h3>
+        <p>Relatórios simples e objetivos sobre a saúde do seu familiar — sem jargão médico desnecessário.</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">⚡</div>
+      <div>
+        <h3>Decisões mais seguras</h3>
+        <p>Quando surge uma dúvida ou situação inesperada, você tem um especialista ao seu lado para orientar.</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">💰</div>
+      <div>
+        <h3>Economia real a longo prazo</h3>
+        <p>Prevenção é sempre mais barata que internação. O acompanhamento especializado evita hospitalizações desnecessárias.</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">🤝</div>
+      <div>
+        <h3>Canal direto com o profissional</h3>
+        <p>Sem intermediários, sem recepcionistas, sem espera. Você fala diretamente com quem cuida do seu familiar.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-idoso">
+    <div class="benefit-item">
+      <div class="benefit-icon">🏠</div>
+      <div>
+        <h3>Cuidado com dignidade e conforto</h3>
+        <p>Ser acompanhado por um especialista sem precisar sair de casa preserva a autonomia e o bem-estar do idoso.</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">💊</div>
+      <div>
+        <h3>Medicamentos corretos, na dose certa</h3>
+        <p>Revisão contínua das prescrições, alertas de interações e orientações claras sobre como tomar cada remédio.</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">❤️</div>
+      <div>
+        <h3>Vínculo humano e acolhedor</h3>
+        <p>O atendimento remoto não é frio — é construído sobre confiança, escuta ativa e presença constante.</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">🛡️</div>
+      <div>
+        <h3>Detecção precoce de riscos</h3>
+        <p>Mudanças sutis que passariam despercebidas são identificadas e tratadas antes de virarem problemas sérios.</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">📱</div>
+      <div>
+        <h3>Tecnologia simples e acessível</h3>
+        <p>Apenas WhatsApp ou videochamada comum. Sem aplicativos difíceis, sem equipamentos especiais.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DIFERENCIAIS ════════════════════════════════════ -->
+<section class="section section--mid fade-up">
+  <div class="section-header">
+    <span class="label label--light">Por que somos diferentes</span>
+    <h2>O que você não encontra em outros serviços</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="diff-grid">
+    <div class="diff-card--featured diff-card">
+      <div class="icon">🎯</div>
+      <div>
+        <h3>Especialização exclusiva em geriatria</h3>
+        <p>Não atendemos adultos jovens, crianças ou outras especialidades. 100% do nosso conhecimento e protocolos são voltados para o cuidado de idosos.</p>
+      </div>
+    </div>
+    <div class="diff-card">
+      <div class="icon">👤</div>
+      <h3>Profissional único e dedicado</h3>
+      <p>Você não fala com equipes diferentes a cada contato. Um profissional acompanha seu familiar do início ao fim.</p>
+    </div>
+    <div class="diff-card">
+      <div class="icon">📋</div>
+      <h3>Protocolos clínicos atualizados</h3>
+      <p>Baseados nas diretrizes mais recentes de geriatria e gerontologia.</p>
+    </div>
+    <div class="diff-card">
+      <div class="icon">🔔</div>
+      <h3>Postura proativa, não reativa</h3>
+      <p>Não esperamos você ligar. Nós entramos em contato antes que algo piore.</p>
+    </div>
+    <div class="diff-card">
+      <div class="icon">📝</div>
+      <h3>Relatórios que você realmente entende</h3>
+      <p>Comunicação clara, objetiva e humana — sem tecnicismo desnecessário.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROFISSIONAL ════════════════════════════════════ -->
+<section class="section section--white pro fade-up">
+  <div class="section-header" style="text-align:center;">
+    <span class="label">Quem vai cuidar do seu familiar</span>
+  </div>
+
+  <div class="pro__photo-wrap">
+    <div class="pro__photo">👨‍⚕️</div>
+  </div>
+
+  <p class="pro__name">Enf. [Nome Completo]</p>
+  <p class="pro__title">Enfermeiro Especialista em Gerontologia</p>
+
+  <blockquote class="pro__bio">
+    "Acredito que cuidar de um idoso é muito mais do que tratar doenças. É preservar histórias, dignidade e o direito de envelhecer com qualidade — dentro de casa, perto de quem se ama."
+  </blockquote>
+
+  <div style="font-size:15px;color:var(--text-md);line-height:1.75;margin-bottom:28px;">
+    Com mais de <strong>[X] anos</strong> de experiência exclusiva em cuidados geriátricos, especialização em <strong>[área específica]</strong> e formação em <strong>[instituição]</strong>, ofereço um atendimento que combina rigor clínico com humanidade — porque acredito que famílias merecem muito mais do que respostas genéricas.
+  </div>
+
+  <div class="credentials">
+    <div class="credential">
+      <div class="num">[X]+</div>
+      <div class="lbl">anos de experiência em geriatria</div>
+    </div>
+    <div class="credential">
+      <div class="num">[X]+</div>
+      <div class="lbl">famílias acompanhadas</div>
+    </div>
+    <div class="credential">
+      <div class="num">COREN</div>
+      <div class="lbl">Registro ativo e regularizado</div>
+    </div>
+    <div class="credential">
+      <div class="num">100%</div>
+      <div class="lbl">dedicado à saúde do idoso</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DEPOIMENTOS ═════════════════════════════════════ -->
+<section class="section testimonials fade-up">
+  <div class="section-header">
+    <span class="label">O que dizem as famílias</span>
+    <h2>Histórias reais de quem encontrou tranquilidade</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="testi-card">
+    <div class="testi-stars">
+      <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+    </div>
+    <blockquote>
+      "Minha mãe tem 82 anos e eu moro em outra cidade. Desde que contratamos o acompanhamento, durmo mais tranquila. Já houve um episódio em que ele identificou um sinal de alerta antes mesmo de eu perceber. Simplesmente não abrimos mão mais."
+    </blockquote>
+    <div class="testi-author">
+      <div class="testi-avatar">👩</div>
+      <div class="testi-author-info">
+        <strong>Ana Paula M.</strong>
+        <span>Filha de paciente, São Paulo – SP</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="testi-card">
+    <div class="testi-stars">
+      <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+    </div>
+    <blockquote>
+      "Levávamos meu pai ao médico toda semana e ainda assim não tínhamos respostas claras. Com o acompanhamento remoto, finalmente entendemos o estado de saúde dele. A clareza e a atenção fazem toda a diferença."
+    </blockquote>
+    <div class="testi-author">
+      <div class="testi-avatar">👨</div>
+      <div class="testi-author-info">
+        <strong>Roberto S.</strong>
+        <span>Filho de paciente, Curitiba – PR</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="testi-card">
+    <div class="testi-stars">
+      <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+    </div>
+    <blockquote>
+      "Minha vó adora as consultas. Ela diz que é a única 'consulta' que não precisa se arrumar pra ir e ainda assim sente que está sendo bem cuidada. Para nós, família, é tranquilidade sem preço."
+    </blockquote>
+    <div class="testi-author">
+      <div class="testi-avatar">👩</div>
+      <div class="testi-author-info">
+        <strong>Fernanda C.</strong>
+        <span>Neta de paciente, Belo Horizonte – MG</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═════════════════════════════════════════════ -->
+<section class="section faq fade-up">
+  <div class="section-header">
+    <span class="label label--light">Tire suas dúvidas</span>
+    <h2>Perguntas frequentes</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" aria-expanded="false">
+      O atendimento remoto funciona mesmo? Não é inferior ao presencial?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-a">
+      <p>Para acompanhamento geriátrico contínuo, o remoto pode ser até mais eficaz que o presencial esporádico. O grande diferencial não é estar fisicamente presente uma vez por mês — é o monitoramento constante, diário, que permite identificar mudanças precocemente. Usamos videochamada, análise de sinais reportados, revisão de exames e check-ins estruturados para garantir um acompanhamento completo e rigoroso.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" aria-expanded="false">
+      O idoso precisa saber usar aplicativos complicados?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-a">
+      <p>Não. Utilizamos apenas WhatsApp e videochamada — ferramentas que a maioria dos idosos já conhece ou aprende rapidamente. Em muitos casos, o contato é mediado pela família, o que também é totalmente válido. Adaptamos o formato às possibilidades de cada paciente.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" aria-expanded="false">
+      Em caso de emergência, o que acontece?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-a">
+      <p>O atendimento remoto não substitui o SAMU ou pronto-socorro em emergências graves — e jamais diríamos isso. O que fazemos é orientar a família imediatamente, identificar a gravidade da situação, acionar os serviços adequados se necessário e acompanhar todo o processo de longe. Nossa função é ser o elo entre a família e o sistema de saúde, garantindo que as decisões sejam tomadas com clareza e rapidez.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" aria-expanded="false">
+      Qual é o valor do serviço? Como funciona o pagamento?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-a">
+      <p>O investimento é personalizado de acordo com o perfil e as necessidades do seu familiar. Após a avaliação inicial gratuita, apresentamos as opções de planos com transparência total. Entre em contato pelo WhatsApp para conversar sem compromisso — sem valores genéricos, sem surpresas.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" aria-expanded="false">
+      Preciso cancelar um plano de saúde para contratar?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-a">
+      <p>Não. O acompanhamento geriátrico remoto é complementar ao plano de saúde, não substituto. Na prática, ele ajuda a usar o plano de forma mais inteligente — consultas bem indicadas, exames solicitados com critério e menos idas desnecessárias ao pronto-socorro.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" aria-expanded="false">
+      Posso participar das consultas mesmo morando em outra cidade?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-a">
+      <p>Sim — e esta é uma das grandes vantagens do modelo remoto. Famílias que moram em cidades diferentes podem participar juntas de uma mesma videochamada, alinhar dúvidas e receber as orientações ao mesmo tempo. Distância não é mais barreira para cuidar bem.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA FINAL ════════════════════════════════════════ -->
+<section class="cta-final fade-up">
+  <span class="label label--light">Próximo passo</span>
+  <h2>Comece hoje a cuidar de quem você <span class="accent--light">mais ama.</span></h2>
+  <p>
+    A primeira conversa é gratuita, sem compromisso e pode ser agora. Em menos de 10 minutos você entende como o acompanhamento funciona e se faz sentido para o seu familiar.
+  </p>
+  <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20vim%20pelo%20an%C3%BAncio%20e%20gostaria%20de%20agendar%20a%20avalia%C3%A7%C3%A3o%20gratuita." class="btn btn--primary">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    Agendar Avaliação Gratuita
+  </a>
+  <p class="cta-note" style="margin-top:16px;">Sem compromisso · Resposta em até 30 minutos · 100% gratuito</p>
+</section>
+
+<!-- ═══ FOOTER ══════════════════════════════════════════ -->
+<footer>
+  <p class="logo">Geri<span>Care</span> Remoto</p>
+  <p>Atendimento Geriátrico Remoto Premium</p>
+  <p>COREN [Número] · [Cidade] – [Estado] · Brasil</p>
+  <p style="margin-top:16px;">
+    <a href="#">Política de Privacidade</a> &nbsp;·&nbsp;
+    <a href="#">Termos de Uso</a>
+  </p>
+  <p style="margin-top:12px;">© 2025 GeriCare Remoto. Todos os direitos reservados.</p>
+</footer>
+
+<!-- ═══ WHATSAPP FLOAT ══════════════════════════════════ -->
+<div class="wa-float">
+  <span class="wa-label">Fale agora →</span>
+  <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20vim%20pelo%20an%C3%BAncio%20e%20gostaria%20de%20saber%20mais." class="wa-btn" aria-label="Falar pelo WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+</div>
+
+<!-- ═══ JS ════════════════════════════════════════════════ -->
+<script>
+  /* ── Tabs ── */
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + target).classList.add('active');
+    });
+  });
+
+  /* ── FAQ ── */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+      btn.setAttribute('aria-expanded', !isOpen);
+    });
+  });
+
+  /* ── Scroll animations ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  /* ── Staggered pain cards ── */
+  const painCards = document.querySelectorAll('.pain-card');
+  painCards.forEach((card, i) => {
+    card.style.transitionDelay = (i * 0.08) + 's';
+    card.classList.add('fade-up');
+    observer.observe(card);
+  });
+
+  /* ── Staggered diff cards ── */
+  const diffCards = document.querySelectorAll('.diff-card');
+  diffCards.forEach((card, i) => {
+    card.style.transitionDelay = (i * 0.07) + 's';
+    card.classList.add('fade-up');
+    observer.observe(card);
+  });
+
+  /* ── WhatsApp label auto-show on first visit ── */
+  setTimeout(() => {
+    const label = document.querySelector('.wa-label');
+    if (label) {
+      label.style.opacity = '1';
+      label.style.transform = 'translateX(0)';
+      setTimeout(() => {
+        label.style.opacity = '';
+        label.style.transform = '';
+      }, 3500);
+    }
+  }, 4000);
+</script>
+
+</body>
+</html>
