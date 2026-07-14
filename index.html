@@ -21,7 +21,9 @@ src="https://www.facebook.com/tr?id=1493270402154950&ev=PageView&noscript=1"
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Israel Santiago | Geriatria </title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -36,8 +38,8 @@ src="https://www.facebook.com/tr?id=1493270402154950&ev=PageView&noscript=1"
     --texto: #1a1a1a;
     --texto-suave: #5a5a5a;
     --borda: rgba(10,74,56,0.12);
-    --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'DM Sans', sans-serif;
+    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   html { scroll-behavior: smooth; }
@@ -790,6 +792,77 @@ src="https://www.facebook.com/tr?id=1493270402154950&ev=PageView&noscript=1"
     .planos-grid, .dores-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
     .sobre-foto { display: none; }
+  }
+
+  /* ===================================================== */
+  /* MODERNIZAÇÃO — tipografia grotesca (Neue Haas / Inter) */
+  /* ===================================================== */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    line-height: 1.65;
+    letter-spacing: -0.006em;
+  }
+
+  /* Logos */
+  .nav-logo, .footer-logo { font-weight: 600; letter-spacing: -0.02em; }
+  .nav-logo span, .footer-logo span { font-style: normal; font-weight: 600; }
+
+  /* Títulos display — peso forte + tracking negativo (estilo suíço) */
+  .hero-title { font-weight: 600; letter-spacing: -0.03em; line-height: 1.06; }
+  .hero-title em { font-style: italic; font-weight: 600; }
+  .sobre-titulo,
+  .section-titulo,
+  .cta-final-titulo { font-weight: 600; letter-spacing: -0.028em; line-height: 1.12; }
+  .sobre-titulo em,
+  .section-titulo em,
+  .cta-final-titulo em { font-style: italic; font-weight: 600; }
+
+  /* Números, estatísticas e preços — numerais grandes e modernos */
+  .hero-stat-num,
+  .foto-badge-num,
+  .plano-valor { font-weight: 700; letter-spacing: -0.02em; }
+  .plano-nome { font-weight: 600; letter-spacing: -0.015em; }
+  .dor-num { font-weight: 700; letter-spacing: -0.02em; }
+  .cf-num { font-weight: 600; }
+  .plano-moeda { font-weight: 600; }
+
+  /* Depoimento como pull-quote grotesca */
+  .dep-texto { font-style: normal; font-weight: 400; letter-spacing: -0.015em; }
+  .dep-aspas { font-weight: 700; }
+
+  /* Eyebrows / tags — tracking um pouco mais aberto e limpo */
+  .eyebrow, .section-tag, .sobre-tag, .cred-label, .hero-card-label {
+    letter-spacing: 0.12em;
+  }
+
+  /* ===================== DETALHES MODERNOS ===================== */
+  /* Cantos mais suaves e profundidade sutil */
+  .plano-card, .dor-card, .hero-card { border-radius: 14px; }
+  .foto-placeholder, .cf-depoimento { border-radius: 16px; }
+  .btn-primary, .nav-cta, .plano-btn { border-radius: 10px; }
+
+  .dor-card {
+    box-shadow: 0 1px 2px rgba(10,74,56,0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .dor-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 34px rgba(10,74,56,0.10);
+  }
+
+  .plano-card { transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease; }
+  .plano-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 44px rgba(0,0,0,0.22);
+    border-color: rgba(201,169,110,0.45);
+  }
+
+  .btn-primary { transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; }
+  .btn-primary:hover, .nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(10,74,56,0.22);
   }
 </style>
 </head>
