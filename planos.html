@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Israel Santiago · Planos de Acompanhamento</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -20,8 +22,8 @@
   --texto: #1a1a1a;
   --texto-suave: #5a5a5a;
   --borda: rgba(10,74,56,0.12);
-  --font-display: 'Cormorant Garamond', serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 html { scroll-behavior: smooth; }
@@ -604,6 +606,36 @@ footer {
   .capa-scroll { display: none; }
   .plano-section { page-break-before: always; }
 }
+
+/* ===================================================== */
+/* MODERNIZAÇÃO — tipografia grotesca (Neue Haas / Inter) */
+/* ===================================================== */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  letter-spacing: -0.006em;
+}
+
+/* Títulos display — peso forte + tracking negativo */
+.capa-titulo,
+.intro-titulo,
+.promessa-texto,
+.comp-titulo,
+.enc-titulo { font-weight: 600; letter-spacing: -0.028em; line-height: 1.14; }
+.capa-titulo em,
+.intro-titulo em,
+.promessa-texto em,
+.comp-titulo em,
+.enc-titulo em { font-style: italic; font-weight: 600; }
+
+/* Números e preços — numerais modernos */
+.ic-num,
+.plano-num,
+.plano-preco-val { font-weight: 700; letter-spacing: -0.02em; }
+.plano-nome { font-weight: 600; letter-spacing: -0.015em; }
+.footer-logo { font-weight: 600; letter-spacing: -0.02em; }
+.footer-logo span, .capa-titulo span { font-style: normal; }
 </style>
 </head>
 <body>
