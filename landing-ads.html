@@ -8,7 +8,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 
 <style>
   /* ─── TOKENS ─────────────────────────────────────── */
@@ -27,8 +29,8 @@
     --text-md:   #4A4A4A;
     --text-lt:   #7A7A7A;
 
-    --font-serif: 'Cormorant Garamond', Georgia, serif;
-    --font-sans:  'DM Sans', system-ui, sans-serif;
+    --font-serif: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
     --r-sm: 8px;
     --r-md: 16px;
@@ -874,6 +876,41 @@
 
   /* Hide scrollbar on trust bar */
   .trust { overflow: hidden; }
+
+  /* ===================================================== */
+  /* MODERNIZAÇÃO — tipografia grotesca (Neue Haas / Inter) */
+  /* ===================================================== */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    letter-spacing: -0.006em;
+  }
+
+  /* Títulos — peso forte + tracking negativo (estilo suíço) */
+  h1, h2, h3 { font-weight: 600; letter-spacing: -0.028em; line-height: 1.12; }
+  h1 em, h2 em, h3 em { font-style: italic; font-weight: 600; }
+
+  /* Logos e nomes */
+  .nav__logo, footer .logo, .pro__name { font-weight: 600; letter-spacing: -0.02em; }
+
+  /* Números — numerais grandes e modernos */
+  .step__num, .credential .num { font-weight: 700; letter-spacing: -0.02em; }
+
+  /* Depoimento como pull-quote grotesca */
+  .testi-card blockquote { font-style: normal; font-weight: 400; letter-spacing: -0.015em; }
+  .testi-card::before { font-weight: 700; }
+
+  /* Parágrafo de destaque */
+  .pains__bridge p { font-weight: 500; letter-spacing: -0.012em; }
+
+  /* Correção: dar folga ao "Saiba mais" para não encostar no botão ao animar */
+  .hero__content { padding-bottom: 104px; }
+  .hero__scroll { bottom: 18px; }
+  @keyframes bob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(4px); }
+  }
 
 </style>
 </head>
