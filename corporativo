@@ -1,1 +1,1571 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Israel Santiago · Enfermeiro Executivo de Saúde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500&display=swap" rel="stylesheet">
 
+<style>
+  :root {
+    --verde: #0a4a38;
+    --verde-mid: #0d5c47;
+    --verde-light: #e8f0ed;
+    --ouro: #c9a96e;
+    --ouro-light: #e8d5b0;
+    --creme: #faf8f4;
+    --branco: #ffffff;
+    --cinza: #f2f0ec;
+    --texto: #1a1a18;
+    --texto-meio: #4a4a45;
+    --texto-leve: #8a8a82;
+    --linha: rgba(201,169,110,0.25);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--creme);
+    color: var(--texto);
+    overflow-x: hidden;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--creme); }
+  ::-webkit-scrollbar-thumb { background: var(--ouro); border-radius: 2px; }
+
+  /* ─── TIPOGRAFIA BASE ─── */
+  h1, h2, h3, h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  p { line-height: 1.75; font-weight: 300; }
+
+  /* ─── UTILITÁRIOS ─── */
+  .container {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ouro);
+  }
+
+  .linha-ouro {
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--ouro);
+    vertical-align: middle;
+    margin-right: 12px;
+  }
+
+  /* ─── ANIMAÇÕES ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes slideRight {
+    from { width: 0; }
+    to   { width: 100%; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── NAV ─── */
+  nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 22px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--creme);
+  transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+}
+
+  nav.scrolled {
+    background: rgba(250,248,244,0.96);
+    backdrop-filter: blur(12px);
+    padding: 16px 48px;
+    box-shadow: 0 1px 0 var(--linha);
+  }
+
+  .nav-logo {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--verde);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--texto-meio);
+    text-decoration: none;
+    transition: color 0.25s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--ouro);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--verde); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--creme) !important;
+    background: var(--verde);
+    padding: 10px 22px;
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s !important;
+  }
+
+  .nav-cta::after { display: none !important; }
+  .nav-cta:hover { background: var(--ouro) !important; color: var(--verde) !important; }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    background: var(--creme);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 50%;
+    height: 100%;
+    background: var(--verde);
+    z-index: 0;
+  }
+
+  .hero-left {
+    position: relative;
+    z-index: 1;
+    padding: 120px 64px 80px 48px;
+    animation: fadeUp 1s ease both;
+    animation-delay: 0.2s;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.1s;
+  }
+
+  .hero-name {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(3.2rem, 5vw, 5.5rem);
+    font-weight: 800;
+    color: var(--verde);
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    margin-bottom: 8px;
+  }
+
+  .hero-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ouro);
+    margin-bottom: 40px;
+    display: block;
+  }
+
+  .hero-divider {
+    width: 48px;
+    height: 1px;
+    background: var(--ouro);
+    margin-bottom: 32px;
+  }
+
+  .hero-headline {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--texto);
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    max-width: 480px;
+  }
+
+  .hero-sub {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--texto-meio);
+    line-height: 1.8;
+    max-width: 460px;
+    margin-bottom: 48px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--creme);
+    background: var(--verde);
+    padding: 14px 32px;
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s;
+    border: 1px solid var(--verde);
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: var(--ouro);
+    border-color: var(--ouro);
+    color: var(--verde);
+  }
+
+  .btn-secondary {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--verde);
+    background: transparent;
+    padding: 14px 32px;
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s;
+    border: 1px solid var(--verde);
+    display: inline-block;
+  }
+
+  .btn-secondary:hover {
+    background: var(--verde);
+    color: var(--creme);
+  }
+
+  .hero-right {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 120px 48px 0;
+    animation: fadeIn 1.2s ease both;
+    animation-delay: 0.4s;
+  }
+
+  .hero-photo-wrapper {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 3/4;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,169,110,0.3);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgba(201,169,110,0.5);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .hero-photo-placeholder svg {
+    opacity: 0.3;
+  }
+
+  /* Caso tenha foto real, use: */
+  .hero-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: grayscale(15%);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    padding: 32px 0;
+    border-top: 1px solid rgba(201,169,110,0.2);
+    width: 100%;
+    max-width: 400px;
+    margin-top: 0;
+  }
+
+  .hero-stat-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--ouro);
+    display: block;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-stat-label {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(201,169,110,0.7);
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* ─── SOBRE ─── */
+  #sobre {
+    background: var(--branco);
+    padding: 120px 0;
+  }
+
+  .sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 96px;
+    align-items: start;
+  }
+
+  .sobre-left {
+    position: sticky;
+    top: 120px;
+  }
+
+  .sobre-section-label {
+    margin-bottom: 32px;
+  }
+
+  .sobre-title {
+    font-size: clamp(2.8rem, 4vw, 4rem);
+    font-weight: 800;
+    color: var(--verde);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .sobre-accent-line {
+    width: 40px;
+    height: 2px;
+    background: var(--ouro);
+    margin: 28px 0;
+  }
+
+  .sobre-mini {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--texto-leve);
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+  }
+
+  .sobre-right p {
+    font-size: 1.08rem;
+    color: var(--texto-meio);
+    margin-bottom: 24px;
+    line-height: 1.85;
+  }
+
+  .sobre-right p:first-child {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.08rem;
+    font-weight: 300;
+    color: var(--texto-meio);
+    line-height: 1.85;
+    margin-bottom: 24px;
+  }
+
+  .sobre-destaque {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--verde);
+    padding: 28px 0 28px 28px;
+    border-left: 2px solid var(--ouro);
+    margin: 40px 0;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+  }
+
+  /* ─── ATUAÇÃO ─── */
+  #atuacao {
+    background: var(--cinza);
+    padding: 120px 0;
+  }
+
+  .atuacao-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 72px;
+  }
+
+  .atuacao-header h2 {
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    color: var(--verde);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 16px 0 20px;
+  }
+
+  .atuacao-header p {
+    font-size: 0.95rem;
+    color: var(--texto-meio);
+    line-height: 1.8;
+  }
+
+  .atuacao-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--linha);
+  }
+
+  .atuacao-card {
+    background: var(--branco);
+    padding: 40px 32px;
+    transition: background 0.3s ease, transform 0.3s ease;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .atuacao-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--ouro);
+    transition: width 0.4s ease;
+  }
+
+  .atuacao-card:hover::before { width: 100%; }
+
+  .atuacao-card:hover {
+    background: var(--verde);
+  }
+
+  .atuacao-card:hover .card-num { color: rgba(201,169,110,0.4); }
+  .atuacao-card:hover .card-title { color: var(--creme); }
+  .atuacao-card:hover .card-text { color: rgba(250,248,244,0.65); }
+
+  .card-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--ouro-light);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    transition: color 0.3s;
+  }
+
+  .card-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--verde);
+    margin-bottom: 14px;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    transition: color 0.3s;
+  }
+
+  .card-text {
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: var(--texto-meio);
+    line-height: 1.75;
+    transition: color 0.3s;
+  }
+
+  /* ─── MÉTODO ─── */
+  #metodo {
+    background: var(--verde);
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #metodo::before {
+    content: 'MÉTODO';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Inter', sans-serif;
+    font-size: 18vw;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: rgba(255,255,255,0.03);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .metodo-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .metodo-header .label { color: var(--ouro); }
+
+  .metodo-header h2 {
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    color: var(--creme);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 16px 0 16px;
+  }
+
+  .metodo-header p {
+    color: rgba(250,248,244,0.55);
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.01em;
+  }
+
+  .metodo-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    position: relative;
+    z-index: 1;
+  }
+
+  .metodo-step {
+    padding: 52px 36px;
+    background: var(--verde);
+    transition: background 0.3s;
+    position: relative;
+  }
+
+  .metodo-step:hover {
+    background: var(--verde-mid);
+  }
+
+  .step-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 3.4rem;
+    font-weight: 700;
+    color: rgba(201,169,110,0.2);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  .step-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ouro);
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .step-text {
+    font-size: 0.83rem;
+    font-weight: 300;
+    color: rgba(250,248,244,0.6);
+    line-height: 1.8;
+  }
+
+  /* ─── PARA QUEM ─── */
+  #para-quem {
+    background: var(--branco);
+    padding: 120px 0;
+  }
+
+  .paraquem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 96px;
+    align-items: center;
+  }
+
+  .paraquem-left h2 {
+    font-size: clamp(2.5rem, 3.5vw, 3.8rem);
+    color: var(--verde);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 16px 0 28px;
+    line-height: 1.1;
+  }
+
+  .paraquem-left p {
+    font-size: 0.95rem;
+    color: var(--texto-meio);
+    line-height: 1.85;
+    max-width: 420px;
+  }
+
+  .paraquem-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .paraquem-item {
+    padding: 26px 0;
+    border-bottom: 1px solid var(--cinza);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    transition: padding-left 0.3s ease;
+    cursor: default;
+  }
+
+  .paraquem-item:first-child { border-top: 1px solid var(--cinza); }
+
+  .paraquem-item:hover {
+    padding-left: 10px;
+  }
+
+  .paraquem-arrow {
+    color: var(--ouro);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+
+  .paraquem-item:hover .paraquem-arrow {
+    transform: translateX(4px);
+  }
+
+  .paraquem-item-content {}
+
+  .paraquem-item-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--verde);
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+
+  .paraquem-item-desc {
+    font-size: 0.8rem;
+    color: var(--texto-leve);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ─── AUTORIDADE ─── */
+  #autoridade {
+    background: var(--cinza);
+    padding: 120px 0;
+  }
+
+  .autoridade-header {
+    text-align: center;
+    margin-bottom: 72px;
+  }
+
+  .autoridade-header h2 {
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    color: var(--verde);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 16px 0;
+  }
+
+  .autoridade-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--linha);
+  }
+
+  .aut-col {
+    background: var(--branco);
+    padding: 48px 40px;
+  }
+
+  .aut-col-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--ouro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+    color: var(--ouro);
+  }
+
+  .aut-col-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    color: var(--verde);
+    margin-bottom: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .aut-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .aut-list li {
+    font-size: 0.83rem;
+    font-weight: 300;
+    color: var(--texto-meio);
+    line-height: 1.6;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .aut-list li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--ouro);
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .competencias-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--verde);
+    border: 1px solid rgba(10,74,56,0.2);
+    padding: 6px 12px;
+    background: transparent;
+    transition: background 0.2s, color 0.2s;
+    cursor: default;
+  }
+
+  .tag:hover {
+    background: var(--verde);
+    color: var(--creme);
+  }
+
+  /* ─── CONTATO ─── */
+  #contato {
+    background: var(--verde);
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #contato::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 320px; height: 320px;
+    border: 1px solid rgba(201,169,110,0.1);
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+  }
+
+  .contato-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 96px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contato-left h2 {
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    color: var(--creme);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 16px 0 24px;
+  }
+
+  .contato-left p {
+    color: rgba(250,248,244,0.65);
+    font-size: 0.92rem;
+    line-height: 1.85;
+    margin-bottom: 48px;
+    max-width: 400px;
+  }
+
+  .contato-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .contato-info-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .contato-info-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--ouro);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .contato-info-text {
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: rgba(250,248,244,0.65);
+    letter-spacing: 0.03em;
+  }
+
+  .contato-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(201,169,110,0.7);
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--creme);
+    padding: 14px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.25s, background 0.25s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: rgba(255,255,255,0.2);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--ouro);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .btn-form {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--verde);
+    background: var(--ouro);
+    border: none;
+    padding: 16px 36px;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s;
+    align-self: flex-start;
+    font-family: 'Inter', sans-serif;
+    margin-top: 8px;
+  }
+
+  .btn-form:hover {
+    background: var(--creme);
+    color: var(--verde);
+  }
+
+  .form-note {
+    font-size: 0.72rem;
+    color: rgba(250,248,244,0.35);
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #061f17;
+    padding: 40px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-left {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(250,248,244,0.4);
+    letter-spacing: -0.01em;
+  }
+
+  .footer-right {
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: rgba(250,248,244,0.25);
+    letter-spacing: 0.08em;
+    text-align: right;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(250,248,244,0.3);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+
+  .footer-links a:hover { color: var(--ouro); }
+
+  /* ─── MOBILE MENU ─── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--verde);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  /* ─── RESPONSIVO ─── */
+  @media (max-width: 1024px) {
+    .atuacao-grid { grid-template-columns: repeat(2, 1fr); }
+    .metodo-steps { grid-template-columns: repeat(2, 1fr); }
+    .autoridade-cols { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .container { padding: 0 24px; }
+    nav { padding: 18px 24px; }
+    nav.scrolled { padding: 14px 24px; }
+
+    .nav-links, .nav-cta-wrap { display: none; }
+    .hamburger { display: flex; }
+
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    #hero::before { display: none; }
+    .hero-left { padding: 100px 24px 40px; }
+    .hero-right { padding: 48px 24px 60px; background: var(--verde); }
+    .hero-photo-wrapper {
+      width: 110px;
+      height: 110px;
+      max-width: 110px;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      align-items: center;
+    }
+    .hero-photo-wrapper img {
+      border-radius: 50%;
+    }
+    .hero-stats { max-width: 100%; margin-top: 8px; }
+
+    .sobre-grid { grid-template-columns: 1fr; gap: 48px; }
+    .sobre-left { position: static; }
+
+    .atuacao-grid { grid-template-columns: 1fr; }
+    .metodo-steps { grid-template-columns: 1fr; }
+    .paraquem-grid { grid-template-columns: 1fr; gap: 48px; }
+    .contato-grid { grid-template-columns: 1fr; gap: 48px; }
+    .autoridade-cols { grid-template-columns: 1fr; }
+    .form-grid-2 { grid-template-columns: 1fr; }
+
+    footer { flex-direction: column; text-align: center; padding: 32px 24px; }
+    .footer-right { text-align: center; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ─── NAVEGAÇÃO ─── -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Israel Santiago</a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#atuacao">Atuação</a></li>
+    <li><a href="#metodo">Método</a></li>
+    <li><a href="#para-quem">Para quem</a></li>
+    <li><a href="#autoridade">Formação</a></li>
+  </ul>
+  <a href="#contato" class="nav-links nav-cta">Contato</a>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="linha-ouro"></span>
+      <span class="label">Enfermeiro Executivo de Saúde</span>
+    </div>
+    <h1 class="hero-name">Israel<br>Santiago</h1>
+    <span class="hero-title">Rio de Janeiro · Brasil</span>
+    <div class="hero-divider"></div>
+    <h2 class="hero-headline">Onde a inteligência clínica encontra a decisão institucional.</h2>
+    <p class="hero-sub">
+      Atuação na interface entre assistência, gestão e governança, estruturando processos, mitigando riscos e construindo soluções que respondem às demandas reais do sistema de saúde.
+    </p>
+    <div class="hero-ctas">
+      <a href="#atuacao" class="btn-primary">Conheça a atuação</a>
+      <a href="#contato" class="btn-secondary">Entre em contato</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+  <div class="hero-photo-wrapper">
+    <img src="foto2.png" alt="Israel Santiago">
+  </div>
+  <div class="hero-stats">
+      <div>
+        <span class="hero-stat-num">+4</span>
+        <span class="hero-stat-label">Anos de<br>atuação</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">8</span>
+        <span class="hero-stat-label">Áreas de<br>expertise</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">RJ</span>
+        <span class="hero-stat-label">Atendimento<br>também remoto</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SOBRE ─── -->
+<section id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-left reveal">
+        <div class="sobre-section-label">
+          <span class="linha-ouro"></span>
+          <span class="label">Sobre</span>
+        </div>
+        <h2 class="sobre-title">Israel<br>Santiago</h2>
+        <div class="sobre-accent-line"></div>
+        <p class="sobre-mini">
+          Enfermeiro com especialização em geriatria e trajetória construída na intersecção entre prática clínica, gestão e decisão institucional.
+        </p>
+      </div>
+
+      <div class="sobre-right reveal">
+        <p>
+          Com atuação executiva em saúde, desenvolvi uma trajetória que vai além da prática assistencial, construída na interseção entre cuidado clínico, estrutura organizacional e tomada de decisão.
+        </p>
+        <p>
+          Minha formação e experiência me permitiram transitar por ambientes que exigem, ao mesmo tempo, precisão técnica e visão estratégica: da supervisão clínica à interface com equipes jurídicas, da análise de indicadores à estruturação de fluxos assistenciais.
+        </p>
+
+        <blockquote class="sobre-destaque">
+          "Trabalho com organizações que precisam de um profissional capaz de organizar complexidade, transformando demandas clínicas em processos sustentáveis e mensuráveis."
+        </blockquote>
+
+        <p>
+          Atuo junto a operadoras de saúde, instituições, clínicas e empresas que demandam rigor técnico, raciocínio sistêmico e entrega com impacto real. Meu compromisso não é com a presença. É com o resultado.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ATUAÇÃO ─── -->
+<section id="atuacao">
+  <div class="container">
+    <div class="atuacao-header reveal">
+      <span class="linha-ouro"></span>
+      <span class="label">Expertise</span>
+      <h2>Atuação Estratégica</h2>
+      <p>Expertise técnica aplicada a contextos que exigem precisão, metodologia e impacto real.</p>
+    </div>
+
+    <div class="atuacao-grid">
+
+      <div class="atuacao-card reveal">
+        <div class="card-num">01</div>
+        <h3 class="card-title">Gestão de Linhas de Cuidado</h3>
+        <p class="card-text">Estruturação e revisão de protocolos assistenciais com foco em continuidade, eficiência e adequação às diretrizes clínicas vigentes. Da concepção ao monitoramento.</p>
+      </div>
+
+      <div class="atuacao-card reveal">
+        <div class="card-num">02</div>
+        <h3 class="card-title">Governança Clínica</h3>
+        <p class="card-text">Apoio à construção de estruturas de governança que garantam segurança assistencial, conformidade técnica e rastreabilidade das decisões clínicas.</p>
+      </div>
+
+      <div class="atuacao-card reveal">
+        <div class="card-num">03</div>
+        <h3 class="card-title">Gestão de Pacientes Crônicos</h3>
+        <p class="card-text">Estratégias de acompanhamento longitudinal para populações de alta complexidade, com foco em prevenção de agudizações e sustentabilidade do cuidado.</p>
+      </div>
+
+      <div class="atuacao-card reveal">
+        <div class="card-num">04</div>
+        <h3 class="card-title">Interface Jurídico-Técnica</h3>
+        <p class="card-text">Suporte técnico em processos envolvendo operadoras, perícias, contestações e análise de pertinência clínica. Linguagem clínica traduzida para contextos jurídicos.</p>
+      </div>
+
+      <div class="atuacao-card reveal">
+        <div class="card-num">05</div>
+        <h3 class="card-title">Análise de Pertinência Técnica</h3>
+        <p class="card-text">Avaliação criteriosa de solicitações e procedimentos à luz de protocolos clínicos, diretrizes baseadas em evidências e normas regulatórias.</p>
+      </div>
+
+      <div class="atuacao-card reveal">
+        <div class="card-num">06</div>
+        <h3 class="card-title">Elaboração de Relatórios Clínicos</h3>
+        <p class="card-text">Documentação técnica de alto padrão para suporte a decisões institucionais, processos judiciais, auditorias e comunicação com instâncias reguladoras.</p>
+      </div>
+
+      <div class="atuacao-card reveal">
+        <div class="card-num">07</div>
+        <h3 class="card-title">Estruturação de Fluxos Assistenciais</h3>
+        <p class="card-text">Mapeamento, redesenho e implementação de fluxos internos que reduzam falhas, aumentem a eficiência operacional e melhorem a experiência clínica.</p>
+      </div>
+
+      <div class="atuacao-card reveal">
+        <div class="card-num">08</div>
+        <h3 class="card-title">Indicadores e Sustentabilidade</h3>
+        <p class="card-text">Leitura crítica de indicadores de saúde para identificar ineficiências, risco clínico e oportunidades de melhoria com base em dados populacionais e operacionais.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── MÉTODO ─── -->
+<section id="metodo">
+  <div class="container">
+    <div class="metodo-header reveal">
+      <span class="linha-ouro"></span>
+      <span class="label" style="color:var(--ouro)">Processo</span>
+      <h2>Como Trabalho</h2>
+      <p>Cada demanda é tratada com metodologia, não com improviso.</p>
+    </div>
+
+    <div class="metodo-steps">
+
+      <div class="metodo-step reveal">
+        <span class="step-num">01</span>
+        <h3 class="step-title">Diagnóstico Técnico</h3>
+        <p class="step-text">Análise profunda do contexto institucional, do problema real e das variáveis clínicas, operacionais e regulatórias envolvidas. Antes de qualquer proposta, entendimento.</p>
+      </div>
+
+      <div class="metodo-step reveal">
+        <span class="step-num">02</span>
+        <h3 class="step-title">Estruturação da Solução</h3>
+        <p class="step-text">Elaboração de uma abordagem personalizada, com clareza sobre escopo, entregas, critérios técnicos e responsabilidades. Sem soluções genéricas para problemas específicos.</p>
+      </div>
+
+      <div class="metodo-step reveal">
+        <span class="step-num">03</span>
+        <h3 class="step-title">Execução com Rastreabilidade</h3>
+        <p class="step-text">Implementação orientada por evidências, com registro, monitoramento e comunicação contínua com os decisores envolvidos em cada etapa do processo.</p>
+      </div>
+
+      <div class="metodo-step reveal">
+        <span class="step-num">04</span>
+        <h3 class="step-title">Avaliação de Impacto</h3>
+        <p class="step-text">Mensuração de resultados com base em indicadores previamente acordados. Transparência sobre o que funcionou, o que precisa de ajuste e quais os próximos passos.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── PARA QUEM ─── -->
+<section id="para-quem">
+  <div class="container">
+    <div class="paraquem-grid">
+
+      <div class="paraquem-left reveal">
+        <span class="linha-ouro"></span>
+        <span class="label">Mercado</span>
+        <h2>Com quem<br>atuo</h2>
+        <p>
+          Meu trabalho é orientado a contextos que exigem rigor técnico, responsabilidade e capacidade real de gerar impacto. Atuo preferencialmente em parceria com organizações que enfrentam desafios clínicos e operacionais de alta complexidade.
+        </p>
+      </div>
+
+      <div class="paraquem-right reveal">
+        <ul class="paraquem-list">
+
+          <li class="paraquem-item">
+            <span class="paraquem-arrow">→</span>
+            <div class="paraquem-item-content">
+              <div class="paraquem-item-title">Operadoras de saúde suplementar</div>
+              <div class="paraquem-item-desc">Análise de pertinência, governança assistencial e gestão de populações crônicas.</div>
+            </div>
+          </li>
+
+          <li class="paraquem-item">
+            <span class="paraquem-arrow">→</span>
+            <div class="paraquem-item-content">
+              <div class="paraquem-item-title">Clínicas e centros de saúde</div>
+              <div class="paraquem-item-desc">Estruturação de fluxos, protocolos e indicadores de desempenho assistencial.</div>
+            </div>
+          </li>
+
+          <li class="paraquem-item">
+            <span class="paraquem-arrow">→</span>
+            <div class="paraquem-item-content">
+              <div class="paraquem-item-title">Empresas e departamentos jurídicos</div>
+              <div class="paraquem-item-desc">Suporte técnico especializado em demandas clínico-regulatórias e perícias.</div>
+            </div>
+          </li>
+
+          <li class="paraquem-item">
+            <span class="paraquem-arrow">→</span>
+            <div class="paraquem-item-content">
+              <div class="paraquem-item-title">Gestores e lideranças da saúde</div>
+              <div class="paraquem-item-desc">Parceria técnica na tomada de decisões de alta complexidade assistencial.</div>
+            </div>
+          </li>
+
+          <li class="paraquem-item">
+            <span class="paraquem-arrow">→</span>
+            <div class="paraquem-item-content">
+              <div class="paraquem-item-title">Instituições e organizações corporativas</div>
+              <div class="paraquem-item-desc">Consultoria em estruturação de programas de saúde e gestão de risco assistencial.</div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── AUTORIDADE ─── -->
+<section id="autoridade">
+  <div class="container">
+    <div class="autoridade-header reveal">
+      <span class="linha-ouro"></span>
+      <span class="label">Repertório</span>
+      <h2>Formação e Trajetória</h2>
+    </div>
+
+    <div class="autoridade-cols">
+
+      <div class="aut-col reveal">
+        <div class="aut-col-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <h3 class="aut-col-title">Formação Acadêmica</h3>
+        <ul class="aut-list">
+          <li>Graduação em Enfermagem</li>
+          <li>Especialização em Geriatria</li>
+          <li>MBA em Gestão e Inovações de Saúde</li>
+        </ul>
+      </div>
+
+      <div class="aut-col reveal">
+        <div class="aut-col-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2M12 12v4M8 12h8"/>
+          </svg>
+        </div>
+        <h3 class="aut-col-title">Trajetória Relevante</h3>
+        <ul class="aut-list">
+          <li>Supervisão clínica em agência especializada de cuidados</li>
+          <li>Orientação familiar e gestão de casos de alta complexidade</li>
+          <li>Prática autônoma com pacientes crônicos e geriátricos</li>
+          <li>Interface clínico-institucional com foco em gestão de crônicos</li>
+        </ul>
+      </div>
+
+      <div class="aut-col reveal">
+        <div class="aut-col-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+          </svg>
+        </div>
+        <h3 class="aut-col-title">Competências Transversais</h3>
+        <div class="competencias-tags">
+          <span class="tag">Análise de Indicadores</span>
+          <span class="tag">Relatórios Técnicos</span>
+          <span class="tag">Gestão de Risco</span>
+          <span class="tag">Protocolos Clínicos</span>
+          <span class="tag">Interface Jurídica</span>
+          <span class="tag">Governança</span>
+          <span class="tag">Saúde Suplementar</span>
+          <span class="tag">Geriatria</span>
+          <span class="tag">EBM</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTATO ─── -->
+<section id="contato">
+  <div class="container">
+    <div class="contato-grid">
+
+      <div class="contato-left reveal">
+        <span class="linha-ouro"></span>
+        <span class="label" style="color:var(--ouro)">Contato</span>
+        <h2>Vamos<br>conversar</h2>
+        <p>
+          Se você representa uma instituição, empresa ou operadora com demandas técnicas na área da saúde, ou busca um parceiro com rigor clínico e visão de gestão, estou disponível para uma conversa objetiva.
+        </p>
+        <div class="contato-info">
+          <div class="contato-info-item">
+            <div class="contato-info-dot"></div>
+            <span class="contato-info-text">israelfsantiago@gmail.com</span>
+          </div>
+          <div class="contato-info-item">
+            <div class="contato-info-dot"></div>
+            <span class="contato-info-text">linkedin.com/in/israelfsantiago</span>
+          </div>
+          <div class="contato-info-item">
+            <div class="contato-info-dot"></div>
+            <span class="contato-info-text">@israelgeriatria.rj</span>
+          </div>
+          <div class="contato-info-item">
+            <div class="contato-info-dot"></div>
+            <span class="contato-info-text">Rio de Janeiro · RJ</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contato-right reveal">
+        <form class="contato-form" onsubmit="handleSubmit(event)">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+            </div>
+            <div class="form-group">
+              <label for="org">Organização</label>
+              <input type="text" id="org" name="org" placeholder="Empresa ou instituição">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="seu@email.com.br" required>
+          </div>
+          <div class="form-group">
+            <label for="assunto">Assunto</label>
+            <input type="text" id="assunto" name="assunto" placeholder="Como posso ajudar?">
+          </div>
+          <div class="form-group">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" placeholder="Descreva brevemente sua demanda ou proposta..."></textarea>
+          </div>
+          <button type="submit" class="btn-form">Enviar mensagem →</button>
+          <p class="form-note">Resposta em até 48 horas úteis.</p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-left">Israel Santiago</div>
+  <ul class="footer-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#atuacao">Atuação</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <div class="footer-right">
+    Enfermeiro Executivo de Saúde · Rio de Janeiro<br>
+    © 2026 Israel Santiago
+  </div>
+</footer>
+
+<script>
+  // ─── NAV SCROLL ───
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ─── REVEAL ON SCROLL ───
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        // Stagger children of same parent
+        const siblings = entry.target.parentElement.querySelectorAll('.reveal');
+        let delay = 0;
+        siblings.forEach((sib, idx) => {
+          if (sib === entry.target) delay = idx * 80;
+        });
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // ─── FORM ───
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-form');
+    btn.textContent = 'Mensagem enviada ✓';
+    btn.style.background = 'rgba(255,255,255,0.15)';
+    btn.style.color = 'var(--ouro)';
+    btn.disabled = true;
+    setTimeout(() => {
+      e.target.reset();
+      btn.textContent = 'Enviar mensagem →';
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.disabled = false;
+    }, 3500);
+  }
+
+  // ─── SMOOTH LINKS ───
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
