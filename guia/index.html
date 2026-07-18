@@ -302,7 +302,12 @@ p.p b { font-weight: 500; color: var(--texto); }
   transition: transform 0.25s ease;
 }
 .previa:hover { transform: translateY(-4px); }
-.previa img { width: 100%; height: auto; }
+.previa img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  height: auto;
+}
 .previa-legenda {
   padding: 0.85rem 1.1rem;
   font-size: 0.78rem;
