@@ -126,13 +126,14 @@ img { max-width: 100%; display: block; }
 
 .hero-frase {
   font-size: clamp(2.6rem, 6.5vw, 4.6rem);
-  font-weight: 200;
+  font-weight: 700;
   color: #fff;
   letter-spacing: -0.05em;
   line-height: 1.02;
   margin-bottom: 1.8rem;
   max-width: 16ch;
 }
+.hero-duvida { color: var(--dourado); }
 
 .hero-sub {
   font-size: clamp(1.05rem, 2vw, 1.3rem);
@@ -284,37 +285,6 @@ p.p b { font-weight: 500; color: var(--texto); }
   font-weight: 300;
   color: var(--suave);
   line-height: 1.72;
-}
-
-/* ═══════ PRÉVIA ═══════ */
-.previa-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.4rem;
-  margin-top: 2.5rem;
-}
-.previa {
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--borda);
-  background: #fff;
-  box-shadow: 0 4px 24px rgba(10,74,56,0.07);
-  transition: transform 0.25s ease;
-}
-.previa:hover { transform: translateY(-4px); }
-.previa img {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  height: auto;
-}
-.previa-legenda {
-  padding: 0.85rem 1.1rem;
-  font-size: 0.78rem;
-  font-weight: 400;
-  color: var(--fraco);
-  border-top: 1px solid var(--borda);
-  background: var(--creme);
 }
 
 /* ═══════ AUTOR ═══════ */
@@ -608,7 +578,7 @@ footer {
     <div class="marca">Israel Santiago · <b>Geriatria</b></div>
 
     <div class="hero-eyebrow">Guia prático para famílias</div>
-    <h1 class="hero-frase">"Tá tudo bem, filho."</h1>
+    <h1 class="hero-frase">"Tá tudo bem, filho."<br><span class="hero-duvida">Será que está mesmo?</span></h1>
     <p class="hero-sub">
       É a frase mais perigosa que um idoso pode dizer. E você escuta ela <b>toda semana.</b>
     </p>
@@ -732,34 +702,6 @@ footer {
         <div class="parte-num">Parte 6</div>
         <div class="parte-titulo">Até onde este guia vai</div>
         <div class="parte-desc">A parte honesta. O que você consegue fazer sozinho e o que exige formação clínica, lado a lado. Sem prometer que um PDF resolve tudo.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════ PRÉVIA ═══════ -->
-<section class="s">
-  <div class="s-inner">
-    <div class="eyebrow">Por dentro</div>
-    <h2>Veja antes <b>de comprar.</b></h2>
-    <p class="p">Páginas reais do guia, sem maquiagem.</p>
-
-    <div class="previa-grid">
-      <div class="previa">
-        <img src="prev-1-capa.png" alt="Capa do guia Antes da Crise">
-        <div class="previa-legenda">A capa</div>
-      </div>
-      <div class="previa">
-        <img src="prev-2-ficha.png" alt="Ficha de linha de base para preencher">
-        <div class="previa-legenda">Parte 1 · A ficha de linha de base</div>
-      </div>
-      <div class="previa">
-        <img src="prev-3-triagem.png" alt="Sistema de triagem verde ambar vermelho">
-        <div class="previa-legenda">Parte 4 · O sistema de triagem</div>
-      </div>
-      <div class="previa">
-        <img src="prev-4-vermelhos.png" alt="Lista de sinais de emergencia">
-        <div class="previa-legenda">Parte 5 · Os sinais de emergência</div>
       </div>
     </div>
   </div>
