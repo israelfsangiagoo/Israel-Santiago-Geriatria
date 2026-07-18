@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antes da Crise | Guia para famílias que cuidam de um idoso</title>
+<meta name="description" content="O que observar em um pai ou mãe idoso, semana após semana, para enxergar o problema antes dele chegar. Por Israel Santiago, enfermeiro pós-graduado em geriatria.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --verde: #0a4a38;
+  --verde-fundo: #073a2c;
+  --verde-medio: #0f6e56;
+  --verde-menta: #e1f5ee;
+  --dourado: #c9a96e;
+  --dourado-fundo: #f7f0e2;
+  --creme: #faf8f4;
+  --creme-escuro: #f2ede4;
+
+  --t-verde: #2d7a5f;
+  --t-verde-bg: #e8f3ee;
+  --t-ambar: #b07d2a;
+  --t-ambar-bg: #f9f0df;
+  --t-vermelho: #9c3428;
+  --t-vermelho-bg: #f7eae7;
+
+  --texto: #16211d;
+  --suave: #5c635f;
+  --fraco: #8b918d;
+  --borda: rgba(10,74,56,0.11);
+
+  --f: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--f);
+  background: var(--creme);
+  color: var(--texto);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ═══════ BOTÃO ═══════ */
+.btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 1.25rem 3rem;
+  background: var(--dourado);
+  color: #16211d;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 4px 20px rgba(201,169,110,0.28);
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,169,110,0.38); }
+.btn:focus-visible { outline: 3px solid var(--verde); outline-offset: 3px; }
+.btn small {
+  font-size: 0.74rem;
+  font-weight: 400;
+  opacity: 0.62;
+  letter-spacing: 0.02em;
+}
+.btn-nota {
+  margin-top: 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--fraco);
+}
+.btn-nota.claro { color: rgba(255,255,255,0.4); }
+
+/* ═══════ HERO ═══════ */
+.hero {
+  background: var(--verde);
+  padding: 4rem 7% 4.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -140px; right: -180px;
+  width: 640px; height: 640px;
+  border: 1px solid rgba(201,169,110,0.09);
+  border-radius: 50%;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -300px; left: -180px;
+  width: 560px; height: 560px;
+  border: 1px solid rgba(201,169,110,0.06);
+  border-radius: 50%;
+}
+.hero-inner { position: relative; z-index: 2; max-width: 1160px; margin: 0 auto; }
+
+.marca {
+  font-size: 0.84rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.42);
+  margin-bottom: 3.5rem;
+}
+.marca b { font-weight: 600; color: var(--dourado); }
+
+.hero-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(201,169,110,0.7);
+  margin-bottom: 1.6rem;
+}
+
+.hero-frase {
+  font-size: clamp(2.6rem, 6.5vw, 4.6rem);
+  font-weight: 200;
+  color: #fff;
+  letter-spacing: -0.05em;
+  line-height: 1.02;
+  margin-bottom: 1.8rem;
+  max-width: 16ch;
+}
+
+.hero-sub {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.62);
+  line-height: 1.65;
+  max-width: 44ch;
+  margin-bottom: 2.6rem;
+}
+.hero-sub b { font-weight: 500; color: var(--dourado); }
+
+/* ═══════ SEÇÃO ═══════ */
+.s {
+  padding: 5rem 7%;
+  border-bottom: 1px solid var(--borda);
+}
+.s.alt { background: var(--creme-escuro); }
+.s-inner { max-width: 1160px; margin: 0 auto; }
+
+.eyebrow {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dourado);
+  margin-bottom: 0.9rem;
+}
+
+h2 {
+  font-size: clamp(1.9rem, 4vw, 2.9rem);
+  font-weight: 200;
+  color: var(--verde);
+  letter-spacing: -0.04em;
+  line-height: 1.14;
+  margin-bottom: 1.8rem;
+}
+h2 b { font-weight: 600; }
+
+p.p {
+  font-size: 1.02rem;
+  font-weight: 300;
+  color: var(--suave);
+  line-height: 1.85;
+  max-width: 58ch;
+}
+p.p + p.p { margin-top: 1.1rem; }
+p.p b { font-weight: 500; color: var(--texto); }
+
+/* ═══════ TESE: O ÂMBAR ═══════ */
+.tese { background: var(--verde); border-bottom: none; }
+.tese h2 { color: #fff; }
+.tese h2 b { color: var(--dourado); }
+.tese p.p { color: rgba(255,255,255,0.6); }
+.tese p.p b { color: #fff; font-weight: 500; }
+
+.faixas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 2.8rem 0;
+}
+.faixa {
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 8px;
+  padding: 1.5rem 1.4rem;
+  position: relative;
+  overflow: hidden;
+}
+.faixa.destaque {
+  background: rgba(201,169,110,0.11);
+  border-color: rgba(201,169,110,0.42);
+}
+.faixa-topo { height: 3px; position: absolute; top: 0; left: 0; right: 0; }
+.faixa.v .faixa-topo { background: var(--t-verde); }
+.faixa.a .faixa-topo { background: var(--dourado); }
+.faixa.r .faixa-topo { background: var(--t-vermelho); }
+
+.faixa-nome {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+.faixa.v .faixa-nome { color: #6bbd9a; }
+.faixa.a .faixa-nome { color: var(--dourado); }
+.faixa.r .faixa-nome { color: #d9705f; }
+
+.faixa-titulo {
+  font-size: 1.02rem;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+}
+.faixa-desc {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.48);
+  line-height: 1.65;
+}
+
+.tese-remate {
+  border-left: 3px solid var(--dourado);
+  padding-left: 1.5rem;
+  max-width: 62ch;
+}
+.tese-remate p {
+  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+}
+.tese-remate p b { font-weight: 600; color: var(--dourado); }
+
+/* ═══════ DENTRO ═══════ */
+.partes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+.parte {
+  background: #fff;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 1.6rem;
+}
+.s.alt .parte { background: var(--creme); }
+.parte-num {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dourado);
+  margin-bottom: 0.7rem;
+}
+.parte-titulo {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--verde);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.parte-desc {
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--suave);
+  line-height: 1.72;
+}
+
+/* ═══════ PRÉVIA ═══════ */
+.previa-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.4rem;
+  margin-top: 2.5rem;
+}
+.previa {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--borda);
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(10,74,56,0.07);
+  transition: transform 0.25s ease;
+}
+.previa:hover { transform: translateY(-4px); }
+.previa img { width: 100%; height: auto; }
+.previa-legenda {
+  padding: 0.85rem 1.1rem;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--fraco);
+  border-top: 1px solid var(--borda);
+  background: var(--creme);
+}
+
+/* ═══════ AUTOR ═══════ */
+.autor-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+.autor-card {
+  background: var(--verde);
+  border-radius: 10px;
+  padding: 2rem 1.8rem;
+}
+.autor-ini {
+  width: 62px; height: 62px;
+  border: 1px solid rgba(201,169,110,0.4);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--dourado);
+  margin-bottom: 1.2rem;
+}
+.autor-nome {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+}
+.autor-linha {
+  font-size: 0.84rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.autor-linha:last-child { border-bottom: none; }
+.autor-linha b { font-weight: 500; color: var(--dourado); }
+
+/* ═══════ PREÇO ═══════ */
+.preco { background: var(--verde); border-bottom: none; text-align: center; position: relative; overflow: hidden; }
+.preco::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 620px; height: 620px;
+  border: 1px solid rgba(201,169,110,0.07);
+  border-radius: 50%;
+}
+.preco-inner { position: relative; z-index: 2; max-width: 780px; margin: 0 auto; }
+.preco h2 { color: #fff; }
+.preco h2 b { color: var(--dourado); }
+
+.comparativo {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 2.5rem 0;
+  text-align: left;
+}
+.comp {
+  background: var(--verde-fundo);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.comp-item {
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+}
+.comp-val {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  white-space: nowrap;
+}
+.comp.final { background: rgba(201,169,110,0.13); }
+.comp.final .comp-item { color: #fff; font-weight: 500; font-size: 1rem; }
+.comp.final .comp-val { color: var(--dourado); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.03em; }
+
+.preco-tag {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(201,169,110,0.7);
+  margin-bottom: 0.8rem;
+}
+.preco-valor {
+  font-size: clamp(3.6rem, 9vw, 5.4rem);
+  font-weight: 200;
+  color: var(--dourado);
+  letter-spacing: -0.055em;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.preco-valor sup { font-size: 0.36em; font-weight: 400; vertical-align: super; margin-right: 4px; }
+.preco-desc {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.42);
+  margin-bottom: 2.2rem;
+}
+
+/* ═══════ GARANTIA ═══════ */
+.garantia {
+  display: flex;
+  gap: 1.4rem;
+  align-items: flex-start;
+  background: var(--dourado-fundo);
+  border: 1px solid rgba(201,169,110,0.3);
+  border-radius: 10px;
+  padding: 1.8rem 2rem;
+  max-width: 760px;
+}
+.garantia-selo {
+  width: 54px; height: 54px;
+  border: 2px solid var(--dourado);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #8a6d33;
+  flex-shrink: 0;
+  line-height: 1.1;
+  text-align: center;
+}
+.garantia-titulo {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #6f5726;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+}
+.garantia-texto {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #7d6636;
+  line-height: 1.75;
+}
+
+/* ═══════ FAQ ═══════ */
+.faq { max-width: 780px; margin-top: 2.5rem; }
+.q {
+  border-bottom: 1px solid var(--borda);
+  padding: 1.3rem 0;
+}
+.q:first-child { border-top: 1px solid var(--borda); }
+.q-p {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--verde);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.q-r {
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--suave);
+  line-height: 1.8;
+}
+.q-r b { font-weight: 500; color: var(--texto); }
+
+/* ═══════ PONTE ═══════ */
+.ponte {
+  background: var(--creme-escuro);
+  border: 1px solid var(--borda);
+  border-left: 3px solid var(--dourado);
+  border-radius: 0 8px 8px 0;
+  padding: 1.8rem 2rem;
+  max-width: 780px;
+  margin-top: 2.5rem;
+}
+.ponte-titulo {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--verde);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.ponte-texto {
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--suave);
+  line-height: 1.8;
+}
+.ponte-link {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--verde-medio);
+  text-decoration: none;
+  border-bottom: 1px solid var(--dourado);
+  padding-bottom: 1px;
+}
+.ponte-link:hover { color: var(--verde); }
+
+/* ═══════ FINAL ═══════ */
+.final {
+  background: var(--verde);
+  padding: 5.5rem 7%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.final::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 700px; height: 700px;
+  border: 1px solid rgba(201,169,110,0.07);
+  border-radius: 50%;
+}
+.final-inner { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; }
+.final h2 { color: #fff; margin-bottom: 1.2rem; }
+.final h2 b { color: var(--dourado); }
+.final-texto {
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.85;
+  margin-bottom: 2.4rem;
+  max-width: 52ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ═══════ AVISO + RODAPÉ ═══════ */
+.aviso {
+  padding: 2.2rem 7%;
+  background: var(--creme-escuro);
+  border-top: 1px solid var(--borda);
+}
+.aviso-inner {
+  max-width: 74ch;
+  margin: 0 auto;
+  font-size: 0.76rem;
+  font-weight: 300;
+  color: var(--fraco);
+  line-height: 1.75;
+}
+.aviso-inner b { font-weight: 500; color: var(--suave); }
+
+footer {
+  background: var(--verde);
+  padding: 1.8rem 7%;
+  text-align: center;
+}
+.f-txt {
+  font-size: 0.74rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.3);
+  line-height: 1.75;
+}
+.f-txt b { font-weight: 500; color: rgba(201,169,110,0.6); }
+
+/* ═══════ RESPONSIVO ═══════ */
+@media (max-width: 880px) {
+  .faixas { grid-template-columns: 1fr; }
+  .autor-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .comp { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+  .garantia { flex-direction: column; gap: 1rem; }
+  .btn { width: 100%; padding: 1.25rem 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="marca">Israel Santiago · <b>Geriatria</b></div>
+
+    <div class="hero-eyebrow">Guia prático para famílias</div>
+    <h1 class="hero-frase">"Tá tudo bem, filho."</h1>
+    <p class="hero-sub">
+      É a frase mais perigosa que um idoso pode dizer. E você escuta ela <b>toda semana.</b>
+    </p>
+
+    <a href="#COLOQUE-AQUI-O-LINK-DO-CHECKOUT" class="btn">
+      Quero o guia
+      <small>R$ 47 · acesso imediato</small>
+    </a>
+    <p class="btn-nota claro">PDF para celular, tablet ou computador · Garantia de 7 dias</p>
+  </div>
+</section>
+
+<!-- ═══════ O PROBLEMA ═══════ -->
+<section class="s">
+  <div class="s-inner">
+    <div class="eyebrow">Por que isso acontece</div>
+    <h2>Ele não vai <b>te contar.</b></h2>
+
+    <p class="p">
+      Não vai dizer que esqueceu o remédio três vezes essa semana. Não vai mencionar a tontura de quinta. Não vai contar que anda dormindo mal, que a comida perdeu a graça, que sentiu uma dor e achou melhor não preocupar ninguém.
+    </p>
+    <p class="p">
+      Idoso protege filho. É uma geração inteira que aprendeu a não dar trabalho, a sofrer calado, a responder "tá tudo bem" com um sorriso. <b>E não é falha dele nem sua.</b>
+    </p>
+    <p class="p">
+      O problema é que, sem formação em saúde, você não tem como saber o que perguntar. E o que você não pergunta, ele não conta.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════ A TESE: O ÂMBAR ═══════ -->
+<section class="s tese">
+  <div class="s-inner">
+    <div class="eyebrow">O que ninguém te explicou</div>
+    <h2>Toda crise passou pelo<br><b>âmbar</b> primeiro.</h2>
+
+    <p class="p">
+      Na prática clínica, a saúde de um idoso vive em uma de três faixas. E a família só enxerga duas delas.
+    </p>
+
+    <div class="faixas">
+      <div class="faixa v">
+        <div class="faixa-topo"></div>
+        <div class="faixa-nome">Verde</div>
+        <div class="faixa-titulo">Está como sempre foi</div>
+        <div class="faixa-desc">Todo mundo vê. É o dia comum, sem susto, em que a resposta "tá tudo bem" é verdadeira.</div>
+      </div>
+      <div class="faixa a destaque">
+        <div class="faixa-topo"></div>
+        <div class="faixa-nome">Âmbar</div>
+        <div class="faixa-titulo">Alguma coisa mudou</div>
+        <div class="faixa-desc">Ninguém vê. Dormiu pior, comeu menos, uma tontura nova, o humor caiu. Parece pequeno. É aqui que a crise nasce.</div>
+      </div>
+      <div class="faixa r">
+        <div class="faixa-topo"></div>
+        <div class="faixa-nome">Vermelho</div>
+        <div class="faixa-titulo">Emergência</div>
+        <div class="faixa-desc">Todo mundo vê. A queda, a internação, a confusão que assustou a casa inteira. Quando chega aqui, já era.</div>
+      </div>
+    </div>
+
+    <div class="tese-remate">
+      <p>
+        A queda que interna não começou no chão. Começou duas semanas antes, no âmbar, e ninguém viu. <b>É lá que dá pra agir.</b>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ A VIRADA ═══════ -->
+<section class="s">
+  <div class="s-inner">
+    <div class="eyebrow">A virada</div>
+    <h2>Para ver o âmbar, você precisa<br>de <b>duas coisas.</b></h2>
+
+    <p class="p">
+      A primeira é saber qual é o <b>normal dele</b>. Não existe valor padrão para idoso. Uma pressão que preocupa numa pessoa é a média de outra há dez anos. Sem esse parâmetro, você não tem como saber se algo mudou.
+    </p>
+    <p class="p">
+      A segunda é <b>perguntar as coisas certas, toda semana</b>. Não "tá tudo bem?", que sempre recebe a mesma resposta. As perguntas que não deixam espaço para o automático.
+    </p>
+    <p class="p">
+      É exatamente isso que eu faço com cada paciente que acompanho. E é exatamente isso que está neste guia: <b>o método, inteiro, na sua mão.</b>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════ O QUE TEM DENTRO ═══════ -->
+<section class="s alt">
+  <div class="s-inner">
+    <div class="eyebrow">O que você recebe</div>
+    <h2>Seis partes. <b>Nenhuma sobrando.</b></h2>
+
+    <div class="partes">
+      <div class="parte">
+        <div class="parte-num">Parte 1</div>
+        <div class="parte-titulo">A linha de base</div>
+        <div class="parte-desc">A ficha que mapeia o normal do seu familiar. Você preenche uma vez, com ele bem, e passa a ter parâmetro para o ano inteiro. É o documento que responde "mas ele estava assim antes?".</div>
+      </div>
+      <div class="parte">
+        <div class="parte-num">Parte 2</div>
+        <div class="parte-titulo">As sete perguntas</div>
+        <div class="parte-desc">O check-in semanal que eu aplico na prática. Cada pergunta vem com a razão clínica que existe por trás dela, porque entender o porquê muda a forma como você escuta a resposta.</div>
+      </div>
+      <div class="parte">
+        <div class="parte-num">Parte 3</div>
+        <div class="parte-titulo">Perguntas por condição</div>
+        <div class="parte-desc">Módulos extras para hipertensão, diabetes, insuficiência cardíaca, DPOC, demência e risco de quedas. Use só o que se aplica ao seu caso.</div>
+      </div>
+      <div class="parte">
+        <div class="parte-num">Parte 4</div>
+        <div class="parte-titulo">Como interpretar</div>
+        <div class="parte-desc">O sistema de triagem verde, âmbar e vermelho. Coletar informação sem saber o que fazer com ela gera ansiedade. Aqui você aprende a classificar a semana e o que fazer em cada faixa.</div>
+      </div>
+      <div class="parte">
+        <div class="parte-num">Parte 5</div>
+        <div class="parte-titulo">Os sinais que não esperam</div>
+        <div class="parte-desc">A lista de emergência para imprimir e deixar onde a família toda veja. O que exige atendimento imediato, descrito do jeito que aparece no idoso, que muitas vezes é diferente do que você imagina.</div>
+      </div>
+      <div class="parte">
+        <div class="parte-num">Parte 6</div>
+        <div class="parte-titulo">Até onde este guia vai</div>
+        <div class="parte-desc">A parte honesta. O que você consegue fazer sozinho e o que exige formação clínica, lado a lado. Sem prometer que um PDF resolve tudo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PRÉVIA ═══════ -->
+<section class="s">
+  <div class="s-inner">
+    <div class="eyebrow">Por dentro</div>
+    <h2>Veja antes <b>de comprar.</b></h2>
+    <p class="p">Páginas reais do guia, sem maquiagem.</p>
+
+    <div class="previa-grid">
+      <div class="previa">
+        <img src="prev-1-capa.png" alt="Capa do guia Antes da Crise">
+        <div class="previa-legenda">A capa</div>
+      </div>
+      <div class="previa">
+        <img src="prev-2-ficha.png" alt="Ficha de linha de base para preencher">
+        <div class="previa-legenda">Parte 1 · A ficha de linha de base</div>
+      </div>
+      <div class="previa">
+        <img src="prev-3-triagem.png" alt="Sistema de triagem verde ambar vermelho">
+        <div class="previa-legenda">Parte 4 · O sistema de triagem</div>
+      </div>
+      <div class="previa">
+        <img src="prev-4-vermelhos.png" alt="Lista de sinais de emergencia">
+        <div class="previa-legenda">Parte 5 · Os sinais de emergência</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ AUTOR ═══════ -->
+<section class="s alt">
+  <div class="s-inner">
+    <div class="eyebrow">Quem escreveu</div>
+    <h2>Não é <b>conteúdo de internet.</b></h2>
+
+    <div class="autor-grid">
+      <div class="autor-card">
+        <div class="autor-ini">IS</div>
+        <div class="autor-nome">Israel Santiago</div>
+        <div class="autor-linha">Enfermeiro</div>
+        <div class="autor-linha">Pós-graduado em <b>Geriatria</b></div>
+        <div class="autor-linha"><b>COREN-RJ 720.727</b></div>
+        <div class="autor-linha">Rio de Janeiro</div>
+      </div>
+
+      <div>
+        <p class="p">
+          Passei anos supervisionando cuidadores e acompanhando famílias de perto. Vi o que funciona e vi o que falha. Vi famílias pagarem caro e ficarem desamparadas justamente quando mais precisavam.
+        </p>
+        <p class="p">
+          E vi, dezenas de vezes, a mesma cena: a crise que assustou todo mundo tinha dado sinal semanas antes. Os sinais estavam ali. <b>Faltava alguém que soubesse enxergar.</b>
+        </p>
+        <p class="p">
+          Este guia não é uma coletânea de dicas que eu juntei na internet. É o protocolo que eu aplico de verdade, com os pacientes que acompanho hoje, escrito em português para quem não é da área.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PREÇO ═══════ -->
+<section class="s preco">
+  <div class="preco-inner">
+    <div class="eyebrow">O investimento</div>
+    <h2>Compare com o que a<br>crise <b>custa.</b></h2>
+
+    <div class="comparativo">
+      <div class="comp">
+        <span class="comp-item">Uma ida desnecessária ao pronto-socorro</span>
+        <span class="comp-val">R$ 300 a R$ 800</span>
+      </div>
+      <div class="comp">
+        <span class="comp-item">Uma consulta particular com especialista</span>
+        <span class="comp-val">R$ 400 a R$ 900</span>
+      </div>
+      <div class="comp">
+        <span class="comp-item">Uma internação que poderia ter sido evitada</span>
+        <span class="comp-val">Dezenas de milhares</span>
+      </div>
+      <div class="comp final">
+        <span class="comp-item">O guia Antes da Crise</span>
+        <span class="comp-val">R$ 47</span>
+      </div>
+    </div>
+
+    <div class="preco-tag">Pagamento único</div>
+    <div class="preco-valor"><sup>R$</sup>47</div>
+    <p class="preco-desc">Sem mensalidade. Seu para sempre.</p>
+
+    <a href="#COLOQUE-AQUI-O-LINK-DO-CHECKOUT" class="btn">
+      Quero o guia agora
+      <small>Acesso imediato após o pagamento</small>
+    </a>
+    <p class="btn-nota claro">Pix, cartão ou boleto · Garantia de 7 dias</p>
+  </div>
+</section>
+
+<!-- ═══════ GARANTIA ═══════ -->
+<section class="s">
+  <div class="s-inner">
+    <div class="eyebrow">Risco zero</div>
+    <h2>Se não servir, <b>eu devolvo.</b></h2>
+
+    <div class="garantia">
+      <div class="garantia-selo">7<br>dias</div>
+      <div>
+        <div class="garantia-titulo">Garantia incondicional</div>
+        <div class="garantia-texto">
+          Você tem sete dias para ler o guia inteiro, aplicar o primeiro check-in e decidir. Se achar que não vale, me manda uma mensagem e eu devolvo o valor integral. Sem formulário, sem justificativa, sem perguntas. O risco é meu, não seu.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FAQ ═══════ -->
+<section class="s alt">
+  <div class="s-inner">
+    <div class="eyebrow">Antes de decidir</div>
+    <h2>O que costumam <b>me perguntar.</b></h2>
+
+    <div class="faq">
+
+      <div class="q">
+        <div class="q-p">Não entendo nada de saúde. Vou conseguir usar?</div>
+        <div class="q-r">Sim, e o guia foi escrito exatamente para isso. Não tem jargão, não tem termo técnico solto. Cada pergunta vem com a explicação do porquê ela existe, em português comum. <b>Se você sabe conversar com seu pai, você sabe usar o guia.</b></div>
+      </div>
+
+      <div class="q">
+        <div class="q-p">Meu pai já tem cuidador. Ainda faz sentido?</div>
+        <div class="q-r">Faz, e talvez mais ainda. O cuidador executa o cuidado: banho, comida, companhia. Mas ele quase nunca tem formação clínica para reconhecer que uma confusão nova pode ser infecção, ou que uma tontura pode ser a medicação. <b>O guia é para você enxergar o que ninguém está olhando.</b></div>
+      </div>
+
+      <div class="q">
+        <div class="q-p">Quanto tempo isso vai me tomar por semana?</div>
+        <div class="q-r">Menos de dez minutos. A ficha de linha de base leva uns quinze minutos, mas é uma vez só. Depois disso, o check-in semanal é rápido. <b>Consistência importa muito mais que profundidade aqui.</b></div>
+      </div>
+
+      <div class="q">
+        <div class="q-p">Isso substitui o médico dele?</div>
+        <div class="q-r">Não, e eu não venderia isso dizendo que substitui. O guia é material educativo e de orientação. O que ele faz é te dar informação real para levar às consultas, no lugar de "acho que ele está bem". <b>O médico decide melhor quando recebe dados, não impressões.</b></div>
+      </div>
+
+      <div class="q">
+        <div class="q-p">Como eu recebo?</div>
+        <div class="q-r">Em PDF, no seu e-mail, logo após a confirmação do pagamento. Abre no celular, no tablet, no computador. Você pode imprimir as partes que quiser, e recomendo imprimir a ficha de linha de base e a lista de sinais de emergência.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-p">Meu pai mora comigo. Serve igual?</div>
+        <div class="q-r">Serve. Morar junto não significa enxergar. Muita coisa acontece devagar demais para quem convive todo dia perceber, e o método existe justamente para tornar visível o que a convivência normaliza.</div>
+      </div>
+
+    </div>
+
+    <div class="ponte">
+      <div class="ponte-titulo">E se eu quiser que você faça isso por mim?</div>
+      <div class="ponte-texto">
+        Existe essa opção. Eu acompanho famílias de forma contínua: faço o check-in, interpreto o que os sinais dizem em conjunto e converso com você quando algo muda. Mas comece pelo guia. Aplique por algumas semanas. Se em algum momento você sentir que precisa de alguém interpretando junto, aí a gente conversa.
+      </div>
+      <a href="https://www.israelsantiago.com.br" class="ponte-link" target="_blank" rel="noopener">Conhecer os planos de acompanhamento</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FINAL ═══════ -->
+<section class="final">
+  <div class="final-inner">
+    <h2>Ele já está te dando<br>os <b>sinais.</b></h2>
+    <p class="final-texto">
+      Toda crise avisa antes. A diferença entre a família que enxerga e a que só descobre no hospital não é sorte, é método. Este é o meu, e a partir de hoje pode ser o seu.
+    </p>
+
+    <a href="#COLOQUE-AQUI-O-LINK-DO-CHECKOUT" class="btn">
+      Quero o guia
+      <small>R$ 47 · pagamento único</small>
+    </a>
+    <p class="btn-nota claro">Garantia de 7 dias · Devolução integral sem perguntas</p>
+  </div>
+</section>
+
+<!-- ═══════ AVISO ═══════ -->
+<section class="aviso">
+  <p class="aviso-inner">
+    <b>Aviso importante.</b> Este material tem caráter educativo e de orientação em saúde. Ele não substitui consulta médica, diagnóstico ou prescrição, e não deve ser usado para tomar decisões clínicas por conta própria. Na dúvida sobre qualquer sinal ou sintoma, procure um profissional de saúde. Em caso de emergência, procure atendimento imediato.
+  </p>
+</section>
+
+<!-- ═══════ RODAPÉ ═══════ -->
+<footer>
+  <p class="f-txt">
+    <b>Israel Santiago · Geriatria</b><br>
+    Enfermeiro · Pós-graduado em Geriatria · COREN-RJ 720.727<br>
+    www.israelsantiago.com.br · @israelsantiago.com.br
+  </p>
+</footer>
+
+</body>
+</html>
