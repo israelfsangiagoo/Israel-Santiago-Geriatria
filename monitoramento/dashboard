@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Geriátrico — Israel Santiago</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root{--navy:#1B2A4A;--blue:#2563EB;--teal:#0D9488;--red:#DC2626;--orange:#EA580C;--yellow:#D97706;--green:#16A34A;--purple:#7C3AED;--slate:#64748B;--border:#E2E8F0;--text:#1E293B;--muted:#64748B;--row-alt:#F1F5F9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#F0F4F8;color:var(--text);font-size:13px}
+.header{background:var(--navy);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.header-title{color:#fff;font-size:15px;font-weight:600}
+.header-sub{color:#94A3B8;font-size:11px;margin-top:2px}
+.last-update{color:#60A5FA;font-size:10px;margin-top:3px}
+.header-badge{background:#0F2140;color:#60A5FA;font-size:10px;padding:5px 12px;border-radius:6px}
+.header-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tabs{background:#0F1E35;padding:0 24px;display:flex;gap:2px;overflow-x:auto}
+.tab{padding:10px 16px;font-size:12px;font-weight:500;color:#94A3B8;background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.tab.active{color:#fff;border-bottom-color:var(--blue)}
+.tab:hover:not(.active){color:#CBD5E1}
+.page{display:none;padding:20px 24px}
+.page.active{display:block}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-bottom:20px}
+.kpi-card{border-radius:10px;padding:14px 16px;color:#fff}
+.kpi-card .lbl{font-size:10px;font-weight:500;opacity:.85;margin-bottom:6px}
+.kpi-card .val{font-size:30px;font-weight:600;line-height:1;margin-bottom:4px}
+.kpi-card .sub{font-size:10px;opacity:.7}
+.section{background:#fff;border-radius:10px;border:1px solid var(--border);overflow:hidden;margin-bottom:16px}
+.sec-head{padding:10px 16px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:8px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:768px){.two-col{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:11px}
+th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:500;font-size:10px;white-space:nowrap}
+td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--row-alt)}
+tr:hover td{background:#EFF6FF}
+.badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:10px;font-weight:600}
+.b-crit{background:#F5F3FF;color:#7C3AED}.b-alto{background:#FEE2E2;color:#DC2626}
+.b-med{background:#FFF7ED;color:#EA580C}.b-baixo{background:#F0FDF4;color:#16A34A}
+.b-ok{background:#F0FDF4;color:#16A34A}.b-warn{background:#FFF7ED;color:#EA580C}
+.b-err{background:#FEE2E2;color:#DC2626}.b-info{background:#EFF6FF;color:#2563EB}
+.b-open{background:#FEE2E2;color:#DC2626}.b-prog{background:#FFFBEB;color:#D97706}
+.b-done{background:#F0FDF4;color:#16A34A}.b-inact{background:#F1F5F9;color:#64748B}
+.b-sim{background:#FEE2E2;color:#DC2626}.b-nao{background:#F0FDF4;color:#16A34A}
+.risk-row{display:flex;align-items:center;gap:10px;padding:8px 16px;border-bottom:1px solid var(--border)}
+.risk-row:last-child{border-bottom:none}
+.risk-name{min-width:70px;font-weight:600;font-size:12px}
+.risk-bg{flex:1;height:10px;background:#E2E8F0;border-radius:99px;overflow:hidden}
+.risk-fill{height:100%;border-radius:99px;transition:width .6s ease}
+.risk-pct{min-width:36px;text-align:right;font-weight:600;font-size:11px}
+.risk-count{min-width:22px;text-align:center;font-weight:700;font-size:13px}
+.alert-row{display:flex;gap:10px;padding:10px 16px;border-bottom:1px solid var(--border);align-items:flex-start}
+.alert-row:last-child{border-bottom:none}
+.alert-dot{width:10px;height:10px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.alert-name{font-weight:600;font-size:12px;margin-bottom:3px}
+.alert-text{color:var(--muted);font-size:11px;line-height:1.5;margin-bottom:4px}
+.alert-action{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;display:inline-block}
+.loader{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px;color:var(--muted)}
+.spinner{width:36px;height:36px;border:3px solid #E2E8F0;border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:center;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:12px;padding:28px;width:500px;max-width:95vw;max-height:90vh;overflow-y:auto}
+.modal h2{font-size:15px;font-weight:600;margin-bottom:6px}
+.modal p{color:var(--muted);font-size:12px;margin-bottom:16px;line-height:1.6}
+.modal label{display:block;font-size:11px;font-weight:600;color:var(--slate);margin-bottom:4px;margin-top:12px}
+.modal input{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:12px}
+.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
+.btn{padding:8px 18px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:none}
+.btn-primary{background:var(--blue);color:#fff}.btn-secondary{background:#F1F5F9;color:var(--text)}
+.chart-wrap{padding:16px;position:relative}
+.chart-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11px;color:var(--muted);padding:0 16px 12px}
+.legend-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0;display:inline-block}
+.sec-label{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;margin-top:16px}
+.footer{text-align:center;padding:14px;color:var(--muted);font-size:10px;background:#fff;border-top:1px solid var(--border)}
+.cfg-btn{background:#1E3A5F;color:#60A5FA;border:none;padding:6px 12px;border-radius:6px;font-size:10px;cursor:pointer;font-weight:500}
+.cfg-btn:hover{background:var(--blue);color:#fff}
+code{background:#F1F5F9;padding:1px 5px;border-radius:4px;font-size:11px}
+</style>
+</head>
+<body>
+
+<div class="modal-bg" id="configModal">
+  <div class="modal">
+    <h2>⚙️ Configurar GIDs das Abas</h2>
+    <p>
+      <strong>Como encontrar o GID:</strong><br>
+      Abra a planilha no Google Sheets → clique em cada aba → copie o número após <code>gid=</code> na URL do navegador.<br><br>
+      <strong>Dica:</strong> Certifique-se de que a planilha está publicada em <em>Arquivo → Compartilhar → Publicar na web → Planilha inteira → Publicar</em>.
+    </p>
+    <label>GID — Aba PACIENTES</label>
+    <input id="cfg-pac" placeholder="ex: 1873909523" />
+    <label>GID — Aba VISITAS</label>
+    <input id="cfg-vis" placeholder="ex: 234567890" />
+    <label>GID — Aba INTERCORRÊNCIAS</label>
+    <input id="cfg-int" placeholder="ex: 345678901" />
+    <label>GID — Aba POLIFARMÁCIA</label>
+    <input id="cfg-med" placeholder="ex: 456789012" />
+    <label>GID — Aba PENDÊNCIAS</label>
+    <input id="cfg-pend" placeholder="ex: 567890123" />
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeConfig()">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveConfig()">Salvar & Recarregar</button>
+    </div>
+  </div>
+</div>
+
+<div class="header">
+  <div>
+    <div class="header-title">Consultoria Geriátrica — Painel de Gestão Clínica</div>
+    <div class="header-sub">Enf.º Israel Santiago · Geriatria & Saúde do Idoso</div>
+    <div class="last-update" id="lastUpdate">Aguardando configuração...</div>
+  </div>
+  <div class="header-actions">
+    <button class="cfg-btn" onclick="openConfig()">⚙️ Configurar GIDs</button>
+    <button class="cfg-btn" onclick="reloadAll()">↺ Atualizar</button>
+    <div class="header-badge">Live · Google Sheets</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showPage('painel',this)">📊 Painel</button>
+  <button class="tab" onclick="showPage('pacientes',this)">🧓 Pacientes</button>
+  <button class="tab" onclick="showPage('visitas',this)">🏥 Visitas</button>
+  <button class="tab" onclick="showPage('intercorrencias',this)">⚠️ Intercorrências</button>
+  <button class="tab" onclick="showPage('polifarmacia',this)">💊 Polifarmácia</button>
+  <button class="tab" onclick="showPage('pendencias',this)">📋 Pendências</button>
+</div>
+
+<div class="page active" id="page-painel">
+  <div id="painel-loader" class="loader"><div class="spinner"></div><span>Carregando...</span></div>
+  <div id="painel-content" style="display:none">
+    <div class="sec-label">KPIs Principais</div>
+    <div class="kpi-grid" id="kpiGrid"></div>
+    <div class="two-col">
+      <div>
+        <div class="sec-label">Distribuição de Risco Clínico</div>
+        <div class="section" id="riskBars"></div>
+      </div>
+      <div>
+        <div class="sec-label">Visitas por Tipo</div>
+        <div class="section">
+          <div class="chart-wrap" style="height:200px"><canvas id="visChart"></canvas></div>
+          <div class="chart-legend" id="visLegend"></div>
+        </div>
+      </div>
+    </div>
+    <div class="sec-label">Alertas Clínicos Ativos</div>
+    <div class="section">
+      <div class="sec-head" style="background:#7F1D1D;color:#FCA5A5">🚨 Pacientes em alto risco — ação requerida</div>
+      <div id="alertsList"></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="sec-label">Resumo Operacional</div>
+        <div class="section"><table><thead><tr><th>Indicador</th><th>Valor</th><th>Status</th></tr></thead><tbody id="summaryTable"></tbody></table></div>
+      </div>
+      <div>
+        <div class="sec-label">Score de Fragilidade</div>
+        <div class="section"><div class="chart-wrap" style="height:240px"><canvas id="riskChart"></canvas></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-pacientes">
+  <div id="pac-loader" class="loader"><div class="spinner"></div><span>Carregando pacientes...</span></div>
+  <div id="pac-content" style="display:none"><div class="sec-label">Base de Pacientes</div><div style="overflow-x:auto" class="section"><table id="pacTable"></table></div></div>
+</div>
+<div class="page" id="page-visitas">
+  <div id="vis-loader" class="loader"><div class="spinner"></div><span>Carregando visitas...</span></div>
+  <div id="vis-content" style="display:none"><div class="sec-label">Visitas & Sinais Vitais</div><div style="overflow-x:auto" class="section"><table id="visTable"></table></div></div>
+</div>
+<div class="page" id="page-intercorrencias">
+  <div id="int-loader" class="loader"><div class="spinner"></div><span>Carregando intercorrências...</span></div>
+  <div id="int-content" style="display:none"><div class="sec-label">Intercorrências & Internações</div><div style="overflow-x:auto" class="section"><table id="intTable"></table></div></div>
+</div>
+<div class="page" id="page-polifarmacia">
+  <div id="med-loader" class="loader"><div class="spinner"></div><span>Carregando medicamentos...</span></div>
+  <div id="med-content" style="display:none"><div class="sec-label">Gestão de Medicamentos</div><div style="overflow-x:auto" class="section"><table id="medTable"></table></div></div>
+</div>
+<div class="page" id="page-pendencias">
+  <div id="pend-loader" class="loader"><div class="spinner"></div><span>Carregando pendências...</span></div>
+  <div id="pend-content" style="display:none"><div class="sec-label">Pendências & Tarefas</div><div style="overflow-x:auto" class="section"><table id="pendTable"></table></div></div>
+</div>
+
+<div class="footer">© Consultoria Geriátrica Israel Santiago · israelfsantiagoo.com.br · Documento Clínico Confidencial</div>
+
+<script>
+const SHEET_ID="14Jtrn_dFTVh9tpFsiujhe8stUBvc1t8j";
+let _cb=0;
+
+function getCfg(){return{pac:localStorage.getItem('gid_pac')||'',vis:localStorage.getItem('gid_vis')||'',int:localStorage.getItem('gid_int')||'',med:localStorage.getItem('gid_med')||'',pend:localStorage.getItem('gid_pend')||''};}
+function openConfig(){const c=getCfg();['pac','vis','int','med','pend'].forEach(k=>{document.getElementById('cfg-'+k).value=c[k];});document.getElementById('configModal').classList.add('open');}
+function closeConfig(){document.getElementById('configModal').classList.remove('open');}
+function saveConfig(){['pac','vis','int','med','pend'].forEach(k=>{const v=document.getElementById('cfg-'+k).value.trim();if(v)localStorage.setItem('gid_'+k,v);});closeConfig();reloadAll();}
+
+// JSONP via Google Visualization API — funciona de file:// e http://
+function fetchGviz(gid){
+  return new Promise((resolve,reject)=>{
+    const name='__gsCb'+(++_cb);
+    const timer=setTimeout(()=>{delete window[name];reject(new Error('Timeout · GID: '+gid));},15000);
+    window[name]=function(resp){
+      clearTimeout(timer);delete window[name];
+      try{
+        const t=resp.table;
+        if(!t||!t.cols){resolve([]);return;}
+        const headers=t.cols.map(c=>(c.label||c.id||'').trim());
+        const rows=(t.rows||[]).map(row=>{
+          const obj={};
+          t.cols.forEach((col,i)=>{
+            const key=(col.label||col.id||'').trim();
+            if(!key)return;
+            const cell=row.c?row.c[i]:null;
+            obj[key]=cell&&cell.v!=null?String(cell.v):'';
+          });
+          return obj;
+        }).filter(r=>r['ID']||r['Nome Completo']||Object.values(r).filter(v=>v).length>1);
+        console.log('gviz rows:', rows.length, rows[0]||'nenhum'); resolve(rows);
+      }catch(e){reject(e);}
+    };
+    const s=document.createElement('script');
+    s.src=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json;responseHandler:${name}&gid=${gid}&range=A3:T200`;
+    s.onerror=()=>{clearTimeout(timer);delete window[name];reject(new Error('Erro de script · GID: '+gid));};
+    document.head.appendChild(s);
+  });
+}
+
+function badge(v,cls){return`<span class="badge ${cls}">${v}</span>`;}
+function riskBadge(v){const l=(v||'').toLowerCase();if(l.includes('crít'))return badge(v,'b-crit');if(l==='alto')return badge(v,'b-alto');if(l.includes('dio'))return badge(v,'b-med');if(l==='baixo')return badge(v,'b-baixo');return v;}
+function statusBadge(v){const l=(v||'').toLowerCase();if(l==='ativo')return badge(v,'b-ok');if(l==='inativo')return badge(v,'b-inact');if(l==='aberto')return badge(v,'b-open');if(l.includes('andamento'))return badge(v,'b-prog');if(l.includes('clu'))return badge(v,'b-done');return v;}
+function gravBadge(v){const l=(v||'').toLowerCase();if(l==='grave')return badge(v,'b-alto');if(l.includes('crít'))return badge(v,'b-crit');if(l==='moderada')return badge(v,'b-med');if(l==='leve')return badge(v,'b-baixo');return v;}
+function prioBadge(v){const l=(v||'').toLowerCase();if(l==='alta')return badge(v,'b-alto');if(l.includes('dia'))return badge(v,'b-med');if(l==='baixa')return badge(v,'b-baixo');return v;}
+function snBadge(v){return v==='Sim'?badge(v,'b-sim'):v==='Não'?badge(v,'b-nao'):v;}
+
+const WRAP=['Diagnósticos','Descrição','Conduta','Resolução','Indicação','Observações'];
+function buildTable(id,data){
+  if(!data||!data.length){document.getElementById(id).innerHTML='<tr><td style="text-align:center;padding:24px;color:#999">Sem dados</td></tr>';return;}
+  const keys=Object.keys(data[0]);
+  let h='<thead><tr>'+keys.map(k=>`<th>${k}</th>`).join('')+'</tr></thead><tbody>';
+  data.forEach(row=>{
+    h+='<tr>'+keys.map(k=>{
+      let v=row[k]||'';
+      if(k==='Risco Clínico')v=riskBadge(v);
+      else if(['Status','Status Paciente'].includes(k))v=statusBadge(v);
+      else if(k==='Gravidade')v=gravBadge(v);
+      else if(k==='Prioridade')v=prioBadge(v);
+      else if(['Internação?','Critério Beers','Interação Med.','Polifarmácia'].includes(k))v=snBadge(v);
+      const w=WRAP.includes(k);
+      return`<td style="max-width:${w?'200px':'none'};white-space:${w?'normal':'nowrap'}">${v}</td>`;
+    }).join('')+'</tr>';
+  });
+  document.getElementById(id).innerHTML=h+'</tbody>';
+}
+
+let visCI=null,riskCI=null;
+function drawVisChart(data){
+  const cnt={};data.forEach(r=>{const t=r['Tipo']||'';if(t)cnt[t]=(cnt[t]||0)+1;});
+  const labels=Object.keys(cnt),values=labels.map(k=>cnt[k]),clrs=['#2563EB','#0D9488','#7C3AED','#DC2626','#EA580C'];
+  if(visCI)visCI.destroy();
+  visCI=new Chart(document.getElementById('visChart'),{type:'doughnut',data:{labels,datasets:[{data:values,backgroundColor:clrs.slice(0,labels.length),borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false}}}});
+  const total=values.reduce((a,b)=>a+b,0);
+  document.getElementById('visLegend').innerHTML=labels.map((l,i)=>`<span style="display:flex;align-items:center;gap:5px"><span class="legend-dot" style="background:${clrs[i]}"></span>${l} ${Math.round(values[i]/total*100)}%</span>`).join('');
+}
+function drawRiskChart(data){
+  const s=data.slice(0,10),names=s.map(r=>(r['Nome Completo']||'').split(' ').slice(0,2).join(' ')),scores=s.map(r=>parseInt(r['Score Fragilidade'])||0);
+  const clrs=s.map(r=>{const rk=(r['Risco Clínico']||'').toLowerCase();if(rk.includes('crít'))return'#7C3AED';if(rk==='alto')return'#DC2626';if(rk.includes('dio'))return'#EA580C';return'#16A34A';});
+  if(riskCI)riskCI.destroy();
+  riskCI=new Chart(document.getElementById('riskChart'),{type:'bar',data:{labels:names,datasets:[{data:scores,backgroundColor:clrs,borderRadius:4,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{max:10,grid:{color:'#F1F5F9'},ticks:{font:{size:10}}},y:{grid:{display:false},ticks:{font:{size:10}}}}}});
+}
+
+function renderPainel(pac,vis,intD,med,pend){
+  const total=pac.length,ativos=pac.filter(r=>r['Status']==='Ativo').length,altoRisco=pac.filter(r=>['Alto','Crítico'].includes(r['Risco Clínico'])).length;
+  const intern=intD.filter(r=>r['Internação?']==='Sim').length,polif=pac.filter(r=>r['Polifarmácia']==='Sim').length,pendUrg=pend.filter(r=>r['Prioridade']==='Alta'&&r['Status']==='Aberto').length;
+  document.getElementById('kpiGrid').innerHTML=[{label:'Total de Pacientes',val:total,sub:'cadastrados',bg:'#1D4ED8'},{label:'Pacientes Ativos',val:ativos,sub:'em acompanhamento',bg:'#0D9488'},{label:'Alto Risco',val:altoRisco,sub:'Alto + Crítico',bg:'#DC2626'},{label:'Visitas Registradas',val:vis.length,sub:'no período',bg:'#0369A1'},{label:'Internações',val:intern,sub:'registradas',bg:'#EA580C'},{label:'Pendências Urgentes',val:pendUrg,sub:'aguardando',bg:'#92400E'}].map(k=>`<div class="kpi-card" style="background:${k.bg}"><div class="lbl">${k.label}</div><div class="val">${k.val}</div><div class="sub">${k.sub}</div></div>`).join('');
+  const rg={'Crítico':{c:'#7C3AED',n:0},'Alto':{c:'#DC2626',n:0},'Médio':{c:'#EA580C',n:0},'Baixo':{c:'#16A34A',n:0}};
+  pac.forEach(r=>{if(rg[r['Risco Clínico']])rg[r['Risco Clínico']].n++;});
+  document.getElementById('riskBars').innerHTML=Object.entries(rg).map(([nm,{c,n}])=>{const pct=total>0?Math.round(n/total*100):0;return`<div class="risk-row"><span class="risk-name" style="color:${c}">${nm}</span><span class="risk-count" style="color:${c}">${n}</span><div class="risk-bg"><div class="risk-fill" style="width:${pct}%;background:${c}"></div></div><span class="risk-pct" style="color:${c}">${pct}%</span></div>`;}).join('');
+  document.getElementById('alertsList').innerHTML=pac.filter(r=>['Alto','Crítico'].includes(r['Risco Clínico'])).slice(0,4).map(r=>{const isCrit=r['Risco Clínico']==='Crítico';const dc=isCrit?'#7C3AED':'#DC2626';const ab=isCrit?'#F5F3FF':'#FEE2E2';return`<div class="alert-row"><div class="alert-dot" style="background:${dc}"></div><div style="flex:1"><div class="alert-name">${r['ID']||''} — ${r['Nome Completo']||''}</div><div class="alert-text">Risco ${r['Risco Clínico']} · ${r['Diagnósticos']||'—'} · Fragilidade: ${r['Score Fragilidade']||'—'}/10</div><span class="alert-action" style="background:${ab};color:${dc}">Próxima visita: ${r['Próxima Consulta']||'A definir'}</span></div></div>`;}).join('')||'<div style="padding:16px;text-align:center;color:#999">Nenhum alerta ativo</div>';
+  const beers=med.filter(r=>r['Critério Beers']==='Sim').length;
+  document.getElementById('summaryTable').innerHTML=[['Taxa alto risco',`${altoRisco}/${total} (${total?Math.round(altoRisco/total*100):0}%)`,altoRisco/total>0.3?'warn':'ok'],['Pacientes c/ polifarmácia',`${polif}/${total}`,polif/total>0.5?'warn':'ok'],['Internações registradas',intern,intern>=3?'err':'ok'],['Critério de Beers',`${beers} medicamentos`,beers>0?'err':'ok'],['Pendências urgentes abertas',pendUrg,pendUrg>0?'err':'ok'],['Total de visitas',vis.length,'info']].map(([ind,val,st])=>`<tr><td>${ind}</td><td><strong>${val}</strong></td><td>${badge(st==='ok'?'✓ OK':st==='warn'?'⚠ Atenção':st==='err'?'✕ Revisar':'ℹ Info','b-'+st)}</td></tr>`).join('');
+  drawVisChart(vis);drawRiskChart(pac);
+}
+
+function showErr(lid,gid,msg){document.getElementById(lid).innerHTML=`<div style="text-align:center;padding:40px"><div style="font-size:28px;margin-bottom:10px">⚠️</div><div style="font-weight:600;color:#DC2626;margin-bottom:6px">Erro ao carregar dados</div><div style="font-size:11px;color:#999;margin-bottom:16px">${msg}</div><div style="font-size:11px;color:#64748B;margin-bottom:16px">GID utilizado: <code>${gid||'não configurado'}</code></div><button class="btn btn-primary" onclick="openConfig()">⚙️ Verificar GIDs</button></div>`;}
+
+async function loadOne(gidKey,lid,cid,tid){
+  const gid=getCfg()[gidKey];
+  if(!gid){showErr(lid,'','GID não configurado');return[];}
+  try{const data=await fetchGviz(gid);if(tid)buildTable(tid,data);document.getElementById(lid).style.display='none';document.getElementById(cid).style.display='block';return data;}
+  catch(e){showErr(lid,gid,e.message);return[];}
+}
+
+function resetLoaders(){['painel','pac','vis','int','med','pend'].forEach(k=>{const l=document.getElementById(k+'-loader'),c=document.getElementById(k+'-content');if(l){l.style.display='flex';l.innerHTML='<div class="spinner"></div><span>Carregando...</span>';}if(c)c.style.display='none';});}
+
+async function reloadAll(){
+  resetLoaders();
+  const cfg=getCfg();
+  if(!Object.values(cfg).some(v=>v)){
+    document.getElementById('painel-loader').innerHTML=`<div style="text-align:center;padding:40px;max-width:400px"><div style="font-size:32px;margin-bottom:12px">⚙️</div><div style="font-weight:600;font-size:14px;margin-bottom:8px">Configure os GIDs da planilha</div><div style="font-size:12px;color:#64748B;margin-bottom:20px;line-height:1.6">Clique em <strong>Configurar GIDs</strong> acima e insira os números de identificação de cada aba da sua planilha publicada no Google Sheets.</div><button class="btn btn-primary" onclick="openConfig()">⚙️ Configurar GIDs</button></div>`;
+    return;
+  }
+  try{
+    const[pac,vis,intD,med,pend]=await Promise.all([loadOne('pac','pac-loader','pac-content','pacTable'),loadOne('vis','vis-loader','vis-content','visTable'),loadOne('int','int-loader','int-content','intTable'),loadOne('med','med-loader','med-content','medTable'),loadOne('pend','pend-loader','pend-content','pendTable')]);
+    renderPainel(pac,vis,intD,med,pend);
+    document.getElementById('painel-loader').style.display='none';
+    document.getElementById('painel-content').style.display='block';
+    document.getElementById('lastUpdate').textContent='Atualizado: '+new Date().toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  }catch(e){document.getElementById('painel-loader').innerHTML=`<div style="padding:40px;text-align:center;color:#DC2626">${e.message}</div>`;}
+}
+
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');btn.classList.add('active');}
+window.addEventListener('load',reloadAll);
+</script>
+</body>
+</html>
