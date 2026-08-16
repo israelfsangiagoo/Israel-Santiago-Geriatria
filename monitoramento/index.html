@@ -334,6 +334,13 @@ h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif}
         <button class="btn btn-primary btn-block" onclick="saveCfg()">💾 Salvar & Importar</button>
       </div>
       <div class="cfg-section">
+        <div class="cfg-title">☁️ Salvar na planilha (envio)</div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Cole aqui a URL do Web App do Google (Apps Script). Com ela, tudo que você cadastrar no app é gravado direto na sua planilha.</p>
+        <div class="field"><label>URL do Web App</label><input id="cfg-syncurl" placeholder="https://script.google.com/macros/s/.../exec"></div>
+        <button class="btn btn-primary btn-block" onclick="saveSyncUrl()">💾 Salvar URL</button>
+        <button class="btn btn-ghost btn-block" style="margin-top:8px" onclick="testSync()">🧪 Testar envio</button>
+      </div>
+      <div class="cfg-section">
         <div class="cfg-title">🗑️ Dados Locais</div>
         <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Dados salvos localmente no dispositivo. Exportar antes de limpar.</p>
         <div style="display:flex;gap:8px">
@@ -875,6 +882,7 @@ function savePaciente(){
   document.getElementById('p-nome').dataset.editId='';
   renderPatients();
   showToast('✓ Paciente salvo!');
+  if(DB.cfg().syncUrl) sendToSheet('pacientes', patToSheet(p)).then(ok=>showToast(ok?'☁️ Enviado à planilha':'Salvo no aparelho (sem conexão)'));
 }
 
 function editPaciente(id){
@@ -907,7 +915,7 @@ function saveVisita(){
   const data = document.getElementById('v-data').value;
   if(!pacId||!data){ showToast('⚠️ Paciente e data obrigatórios'); return; }
   const vis = DB.visits();
-  vis.push({
+  const nova = {
     id:uid(), pacienteId:pacId, data,
     tipo:document.getElementById('v-tipo').value,
     pa:document.getElementById('v-pa').value,
@@ -918,7 +926,8 @@ function saveVisita(){
     temp:document.getElementById('v-temp').value,
     obs:document.getElementById('v-obs').value,
     criadoEm:new Date().toISOString(),
-  });
+  };
+  vis.push(nova);
   DB.set('visits', vis);
   // reset
   ['v-pac','v-pa','v-spo2','v-fc','v-glic','v-peso','v-temp','v-obs'].forEach(id=>{
@@ -927,13 +936,14 @@ function saveVisita(){
   closeOverlay('ov-vis');
   renderVisits();
   showToast('✓ Visita registrada!');
+  if(DB.cfg().syncUrl) sendToSheet('visitas', visToSheet(nova)).then(ok=>showToast(ok?'☁️ Enviado à planilha':'Salvo no aparelho (sem conexão)'));
 }
 
 function savePendencia(){
   const desc = document.getElementById('pe-desc').value.trim();
   if(!desc){ showToast('⚠️ Descrição obrigatória'); return; }
   const pends = DB.pendings();
-  pends.push({
+  const nova = {
     id:uid(),
     pacienteId:document.getElementById('pe-pac').value||null,
     descricao:desc,
@@ -941,12 +951,14 @@ function savePendencia(){
     prazo:document.getElementById('pe-prazo').value,
     status:'Aberto',
     criadoEm:new Date().toISOString(),
-  });
+  };
+  pends.push(nova);
   DB.set('pendings', pends);
   document.getElementById('pe-desc').value='';
   closeOverlay('ov-pend');
   renderPendings();
   showToast('✓ Pendência salva!');
+  if(DB.cfg().syncUrl) sendToSheet('pendencias', pendToSheet(nova)).then(ok=>showToast(ok?'☁️ Enviado à planilha':'Salvo no aparelho (sem conexão)'));
 }
 
 // ══ RELATÓRIO PDF ════════════════════════════════════
@@ -1055,7 +1067,7 @@ function gerarRelatorio(){
 
 // ══ GOOGLE SHEETS SYNC ═══════════════════════════════
 let _cb=0;
-const SHEET_ID='14Jtrn_dFTVh9tpFsiujhe8stUBvc1t8j';
+const SHEET_ID='1nWoybB5uu7n8EmKf4zHAoPM3HpgAKGNV1UzJh3IEID0';
 
 function fetchGviz(gid){
   return new Promise((resolve,reject)=>{
@@ -1131,16 +1143,66 @@ function loadCfgForm(){
   ['pac','vis','int','med','pend'].forEach(k=>{
     const el=document.getElementById('cfg-'+k); if(el) el.value=cfg[k]||'';
   });
+  const su=document.getElementById('cfg-syncurl'); if(su) su.value=cfg.syncUrl||'';
 }
 
 function saveCfg(){
-  const cfg={};
+  const cfg = DB.cfg();               // preserva syncUrl e demais chaves
   ['pac','vis','int','med','pend'].forEach(k=>{
     const el=document.getElementById('cfg-'+k); if(el&&el.value.trim()) cfg[k]=el.value.trim();
   });
   DB.setCfg(cfg);
   showToast('✓ GIDs salvos!');
   setTimeout(syncSheets, 500);
+}
+
+function saveSyncUrl(){
+  const cfg = DB.cfg();
+  const el=document.getElementById('cfg-syncurl');
+  const url=(el?el.value.trim():'');
+  if(url && !/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec/.test(url)){
+    showToast('⚠️ URL deve terminar em /exec'); return;
+  }
+  cfg.syncUrl=url; DB.setCfg(cfg);
+  showToast(url?'✓ URL salva!':'URL removida');
+}
+
+// ══ ENVIO PARA A PLANILHA (app → Sheets) ═══════════════
+function sendToSheet(type, data){
+  const url=(DB.cfg().syncUrl||'').trim();
+  if(!url) return Promise.resolve(false);      // sem URL: só salva local
+  return fetch(url,{
+    method:'POST', mode:'no-cors',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body:JSON.stringify({type,data})
+  }).then(()=>true).catch(()=>false);
+}
+
+function patToSheet(p){
+  return {'ID':p.id,'Nome Completo':p.nome,'Idade':p.idade,'Sexo':p.sexo,
+    'Diagnósticos':p.diagnosticos,'Risco Clínico':p.risco,'Score Fragilidade':p.score,
+    'Plano':p.plano,'Status':p.status,'Polifarmácia':p.polifarmacia,
+    'Próxima Consulta':p.prox,'Cuidador':p.cuidador,'Telefone':p.telefone};
+}
+function visToSheet(v){
+  const nome=(DB.patients().find(x=>x.id===v.pacienteId)||{}).nome||'';
+  return {'ID':v.id,'Paciente':nome,'Nome Completo':nome,'Data':v.data,'Tipo':v.tipo,
+    'PA':v.pa,'Pressão Arterial':v.pa,'SpO2':v.spo2,'Saturação':v.spo2,
+    'FC':v.fc,'Frequência Cardíaca':v.fc,'Glicemia':v.glicemia,'Peso':v.peso,
+    'Temperatura':v.temp,'Temp':v.temp,'Observações':v.obs,'Conduta':v.obs};
+}
+function pendToSheet(pe){
+  const nome=(DB.patients().find(x=>x.id===pe.pacienteId)||{}).nome||'';
+  return {'ID':pe.id,'Paciente':nome,'Nome Completo':nome,'Descrição':pe.descricao,
+    'Prioridade':pe.prioridade,'Status':pe.status,'Prazo':pe.prazo,'Data':pe.prazo};
+}
+
+function testSync(){
+  const url=(DB.cfg().syncUrl||'').trim();
+  if(!url){ showToast('⚠️ Cole e salve a URL primeiro'); return; }
+  showToast('🧪 Enviando teste...');
+  sendToSheet('teste',{'ID':'teste-'+Date.now(),'Nome Completo':'TESTE Senevia'})
+    .then(ok=>showToast(ok?'✓ Enviado! Confira a planilha':'⚠️ Falha de conexão'));
 }
 
 // ══ EXPORT CSV ════════════════════════════════════════
