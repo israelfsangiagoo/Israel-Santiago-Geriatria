@@ -1084,7 +1084,8 @@ function fetchGviz(gid){
             const key=(col.label||col.id||'').trim();
             if(!key)return;
             const cell=row.c?row.c[i]:null;
-            obj[key]=cell&&cell.v!=null?String(cell.v):'';
+            // prefere o valor FORMATADO (cell.f), que já vem como "20/08/2029" para datas
+            obj[key]=cell?(cell.f!=null?String(cell.f):(cell.v!=null?String(cell.v):'')):'';
           });
           return obj;
         }).filter(r=>Object.values(r).some(v=>v));
@@ -1098,40 +1099,48 @@ function fetchGviz(gid){
   });
 }
 
+// pega o valor de uma coluna aceitando variações de nome (acento/maiúscula/sinônimos)
+function pickCol(row, aliases){
+  const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();
+  const map={}; Object.keys(row).forEach(k=>{ map[norm(k)]=row[k]; });
+  for(const a of aliases){ const v=map[norm(a)]; if(v!=null && String(v).trim()!=='') return String(v).trim(); }
+  return '';
+}
+
 async function syncSheets(){
   const cfg = DB.cfg();
   if(!cfg.pac){ showToast('Configure os GIDs primeiro'); navTo('config',null); return; }
   showToast('⏳ Importando do Sheets...');
   try{
     const data = await fetchGviz(cfg.pac);
-    const pats = DB.patients();
-    let added=0, updated=0;
-    data.forEach(row=>{
-      const nome=(row['Nome Completo']||row['Nome']||'').trim();
-      if(!nome) return;
-      const existing = pats.find(p=>p.nome===nome);
-      const p = {
-        id:existing?.id||uid(), nome,
-        idade:row['Idade']||row['idade']||'',
-        sexo:row['Sexo']||'',
-        diagnosticos:row['Diagnósticos']||row['Diagnosticos']||'',
-        risco:row['Risco Clínico']||row['Risco']||'Médio',
-        score:row['Score Fragilidade']||'',
-        plano:row['Plano']||'Essencial',
-        status:row['Status']||'Ativo',
-        polifarmacia:row['Polifarmácia']||row['Polifarmacia']||'Não',
-        prox:row['Próxima Consulta']||row['Proxima Consulta']||'',
-        cuidador:row['Cuidador']||'',
-        telefone:row['Telefone']||'',
-        criadoEm:existing?.criadoEm||new Date().toISOString(),
+    const antigos = DB.patients();
+    // a planilha é a fonte da verdade: a lista é REESCRITA com o que está nela
+    const novos = data.map(row=>{
+      const nome = pickCol(row,['Nome Completo','Nome']);
+      if(!nome) return null;
+      const existente = antigos.find(p=>p.nome===nome);
+      const sheetId = pickCol(row,['ID']);
+      return {
+        id: sheetId || existente?.id || uid(),
+        nome,
+        idade: pickCol(row,['Idade']),
+        sexo: pickCol(row,['Sexo']) || existente?.sexo || '',
+        diagnosticos: pickCol(row,['Diagnósticos','Diagnosticos']),
+        risco: pickCol(row,['Risco Clínico','Risco']) || 'Médio',
+        score: pickCol(row,['Score Fragilidade','Fragilidade']),
+        plano: pickCol(row,['Plano']) || existente?.plano || '',
+        status: pickCol(row,['Status']) || 'Ativo',
+        polifarmacia: pickCol(row,['Polifarmácia','Polifarmacia']) || 'Não',
+        prox: pickCol(row,['Próxima Consulta','Proxima Consulta']),
+        cuidador: pickCol(row,['Responsável Familiar','Responsavel Familiar','Cuidador','Responsável','Responsavel']),
+        telefone: pickCol(row,['Telefone','Contato Familiar','Contato']),
+        criadoEm: existente?.criadoEm || new Date().toISOString(),
       };
-      if(existing){ const i=pats.indexOf(existing); pats[i]=p; updated++; }
-      else{ pats.push(p); added++; }
-    });
-    DB.set('patients',pats);
+    }).filter(Boolean);
+    DB.set('patients', novos);
     renderPainel();
     renderPatients();
-    showToast(`✓ ${added} novos, ${updated} atualizados`);
+    showToast(`✓ ${novos.length} pacientes sincronizados`);
   }catch(e){
     showToast('⚠️ Erro: '+e.message);
   }
@@ -1225,7 +1234,20 @@ function clearData(){
 
 // ══ UTILS ═════════════════════════════════════════════
 function todayStr(){ return new Date().toISOString().slice(0,10); }
-function fmtDate(d){ if(!d) return ''; try{ return new Date(d+'T12:00:00').toLocaleDateString('pt-BR'); }catch(e){ return d; } }
+function fmtDate(d){
+  if(!d) return '';
+  d=String(d).trim();
+  if(!d||d==='-') return '';
+  if(/^\d{1,2}\/\d{1,2}\/\d{2,4}$/.test(d)) return d;              // já está dd/mm/aaaa
+  let m=d.match(/^Date\((\d+),(\d+),(\d+)/);                        // formato gviz Date(a,m,d)
+  if(m) return `${String(+m[3]).padStart(2,'0')}/${String(+m[2]+1).padStart(2,'0')}/${m[1]}`;
+  if(/^\d{4}-\d{2}-\d{2}/.test(d)){                                 // ISO aaaa-mm-dd
+    const dt=new Date(d+'T12:00:00');
+    if(!isNaN(dt)) return dt.toLocaleDateString('pt-BR');
+  }
+  const dt=new Date(d);
+  return isNaN(dt)? d : dt.toLocaleDateString('pt-BR');
+}
 
 function showToast(msg,dur=2500){
   const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
