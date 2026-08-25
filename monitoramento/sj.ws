@@ -1,4 +1,4 @@
-const CACHE = 'senevia-v12';
+const CACHE = 'senevia-v13';
 const ASSETS = [
   './',
   './index.html',
