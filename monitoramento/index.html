@@ -273,11 +273,13 @@ h1,h2,h3,.serif{font-family:'Inter',sans-serif;font-weight:600;letter-spacing:-.
         <input id="pac-search" placeholder="Buscar paciente..." oninput="renderPatients()">
       </div>
       <div class="chips" id="pac-chips">
-        <div class="chip active" data-filter="todos" onclick="setPacFilter(this,'todos')">Todos</div>
-        <div class="chip" data-filter="Ativo" onclick="setPacFilter(this,'Ativo')">Ativos</div>
-        <div class="chip" data-filter="Crítico" onclick="setPacFilter(this,'Crítico')">Crítico</div>
-        <div class="chip" data-filter="Alto" onclick="setPacFilter(this,'Alto')">Alto Risco</div>
-        <div class="chip" data-filter="Médio" onclick="setPacFilter(this,'Médio')">Médio Risco</div>
+        <div class="chip active" data-filter="todos" onclick="setPacFilter('todos')">Todos</div>
+        <div class="chip" data-filter="ativos" onclick="setPacFilter('ativos')">Ativos</div>
+        <div class="chip" data-filter="id" onclick="setPacFilter('id')">ID</div>
+        <div class="chip" data-filter="ad" onclick="setPacFilter('ad')">AD</div>
+        <div class="chip" data-filter="altorisco" onclick="setPacFilter('altorisco')">Alto risco</div>
+        <div class="chip" data-filter="medio" onclick="setPacFilter('medio')">Médio</div>
+        <div class="chip" data-filter="baixo" onclick="setPacFilter('baixo')">Baixo</div>
       </div>
       <div id="pac-list"></div>
     </div>
@@ -605,15 +607,15 @@ function renderPainel(){
   const intersMes = inters.filter(i=>mesDe(i.data)===mesAtual);
 
   const kpis = [
-    {l:'Total',v:total,s:'pacientes',bg:'var(--green)'},
-    {l:'Ativos',v:ativos,s:'em acomp.',bg:'var(--teal)'},
-    {l:'Pacientes ID',v:idCount,s:'internação domic.',bg:'var(--blue)'},
-    {l:'Pacientes AD',v:adCount,s:'assist. domiciliar',bg:'#7c3aed'},
-    {l:'Alto Risco',v:altoRisco,s:'Alto + Crítico',bg:'var(--red)'},
+    {l:'Total',v:total,s:'pacientes',bg:'var(--green)',f:'todos'},
+    {l:'Ativos',v:ativos,s:'em acomp.',bg:'var(--teal)',f:'ativos'},
+    {l:'Pacientes ID',v:idCount,s:'internação domic.',bg:'var(--blue)',f:'id'},
+    {l:'Pacientes AD',v:adCount,s:'assist. domiciliar',bg:'#7c3aed',f:'ad'},
+    {l:'Alto Risco',v:altoRisco,s:'Alto + Crítico',bg:'var(--red)',f:'altorisco'},
     {l:'Intercorrências',v:intersMes.length,s:'no mês',bg:'var(--orange)'},
   ];
   document.getElementById('kpi-grid').innerHTML = kpis.map(k=>
-    `<div class="kpi" style="background:${k.bg}">
+    `<div class="kpi" style="background:${k.bg}${k.f?';cursor:pointer':''}"${k.f?` onclick="kpiFilter('${k.f}')"`:''}>
       <div class="k-lbl">${k.l}</div>
       <div class="k-val">${k.v}</div>
       <div class="k-sub">${k.s}</div>
@@ -706,18 +708,27 @@ function showInter(id){
 
 // ══ PACIENTES ════════════════════════════════════════
 let pacFilter = 'todos';
-function setPacFilter(el, v){
+function setPacFilter(v){
   pacFilter = v;
-  document.querySelectorAll('#pac-chips .chip').forEach(c=>c.classList.remove('active'));
-  el.classList.add('active');
+  document.querySelectorAll('#pac-chips .chip').forEach(c=>c.classList.toggle('active', c.dataset.filter===v));
   renderPatients();
+}
+// clique num KPI do painel -> abre Pacientes já filtrado
+function kpiFilter(v){
+  navTo('pacientes', document.querySelector('.nav-item[onclick*="pacientes"]'));
+  setPacFilter(v);
 }
 
 function renderPatients(){
   const q = (document.getElementById('pac-search')?.value||'').toLowerCase();
   let pats = DB.patients();
-  if(pacFilter==='Ativo') pats = pats.filter(p=>p.status==='Ativo');
-  else if(pacFilter!=='todos') pats = pats.filter(p=>p.risco===pacFilter);
+  const modU = p => (p.modalidade||'').trim().toUpperCase();
+  if(pacFilter==='ativos') pats = pats.filter(p=>p.status==='Ativo');
+  else if(pacFilter==='id') pats = pats.filter(p=>modU(p).startsWith('ID'));
+  else if(pacFilter==='ad') pats = pats.filter(p=>modU(p).startsWith('AD'));
+  else if(pacFilter==='altorisco') pats = pats.filter(p=>['Alto','Crítico'].includes(p.risco));
+  else if(pacFilter==='medio') pats = pats.filter(p=>p.risco==='Médio');
+  else if(pacFilter==='baixo') pats = pats.filter(p=>p.risco==='Baixo');
   if(q) pats = pats.filter(p=>(p.nome||'').toLowerCase().includes(q)||(p.diagnosticos||'').toLowerCase().includes(q));
   const el = document.getElementById('pac-list');
   if(!pats.length){ el.innerHTML=`<div class="empty"><div class="empty-ico">👴</div><div class="empty-msg">Nenhum paciente encontrado</div><div class="empty-sub">Toque em + para cadastrar</div></div>`; return; }
