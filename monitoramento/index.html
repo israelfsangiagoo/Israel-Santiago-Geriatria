@@ -261,6 +261,11 @@ h1,h2,h3,.serif{font-family:'Inter',sans-serif;font-weight:600;letter-spacing:-.
       </div>
 
       <div class="card">
+        <div class="card-title">🚑 Intercorrências recentes</div>
+        <div id="inter-list"></div>
+      </div>
+
+      <div class="card">
         <div class="card-title">Resumo Operacional</div>
         <table class="sum-table" id="sum-table"></table>
       </div>
@@ -582,16 +587,16 @@ function renderPainel(){
   const pats = DB.patients();
   const vis = DB.visits();
   const pends = DB.pendings();
+  const inters = DB.get('intercorrencias');
   const total = pats.length;
   const ativos = pats.filter(p=>p.status==='Ativo').length;
   const altoRisco = pats.filter(p=>['Alto','Crítico'].includes(p.risco)).length;
-  const urgentes = pends.filter(p=>p.prioridade==='Alta'&&p.status==='Aberto').length;
 
   const kpis = [
     {l:'Total',v:total,s:'pacientes',bg:'var(--green)'},
     {l:'Ativos',v:ativos,s:'em acomp.',bg:'var(--teal)'},
     {l:'Alto Risco',v:altoRisco,s:'Alto + Crítico',bg:'var(--red)'},
-    {l:'Urgências',v:urgentes,s:'pendências',bg:'var(--orange)'},
+    {l:'Intercorrências',v:inters.length,s:'registradas',bg:'var(--orange)'},
   ];
   document.getElementById('kpi-grid').innerHTML = kpis.map(k=>
     `<div class="kpi" style="background:${k.bg}">
@@ -625,14 +630,38 @@ function renderPainel(){
       </div>`).join('')
     : '<div class="empty" style="padding:16px"><div class="empty-sub">Nenhum alerta ativo</div></div>';
 
+  // lista de intercorrências recentes (5 mais recentes)
+  const inter5 = inters.slice(-5).reverse();
+  document.getElementById('inter-list').innerHTML = inter5.length
+    ? inter5.map(i=>{
+        const g=(i.gravidade||'');
+        const gcls = /cr[ií]t/i.test(g)?'b-crit':/grave/i.test(g)?'b-alto':/moder/i.test(g)?'b-medio':'b-baixo';
+        const intern = i.internacao==='Sim';
+        const linha = [i.tipo, i.descricao, fmtDate(i.data)].filter(Boolean).join(' · ');
+        return `<div class="alert-item">
+          <div class="alert-dot" style="background:${intern?'#b91c1c':'#c2410c'}"></div>
+          <div style="flex:1">
+            <div class="alert-name">${i.nome||'—'}</div>
+            <div class="alert-text">${linha||'—'}</div>
+            <div style="margin-top:4px;display:flex;gap:5px;flex-wrap:wrap">
+              ${g?`<span class="badge ${gcls}">${g}</span>`:''}
+              ${intern?'<span class="badge b-sim">Internação</span>':''}
+            </div>
+          </div>
+        </div>`;
+      }).join('')
+    : '<div class="empty" style="padding:16px"><div class="empty-sub">Nenhuma intercorrência registrada</div></div>';
+
+  const urgentes = pends.filter(p=>p.prioridade==='Alta'&&p.status==='Aberto').length;
+  const internacoes = inters.filter(i=>i.internacao==='Sim').length;
   const polif = pats.filter(p=>p.polifarmacia==='Sim').length;
   const hoje = vis.filter(v=>v.data===todayStr()).length;
   document.getElementById('sum-table').innerHTML = [
     ['Taxa alto risco', `${altoRisco}/${total}`, altoRisco/total>0.3?'warn':'ok'],
+    ['Intercorrências c/ internação', `${internacoes}/${inters.length}`, internacoes>0?'warn':'ok'],
     ['Polifarmácia', `${polif}/${total}`, polif/total>0.5?'warn':'ok'],
-    ['Visitas hoje', hoje, 'info'],
     ['Pendências urgentes', urgentes, urgentes>0?'err':'ok'],
-    ['Total de visitas', vis.length, 'info'],
+    ['Visitas hoje', hoje, 'info'],
   ].map(([l,v,s])=>`<tr>
     <td class="lbl">${l}</td>
     <td class="val">
@@ -1138,6 +1167,32 @@ async function syncSheets(){
       };
     }).filter(Boolean);
     DB.set('patients', novos);
+
+    // importa a aba de Intercorrências (se o GID estiver configurado)
+    if(cfg.int){
+      try{
+        const dataInt = await fetchGviz(cfg.int);
+        const inters = dataInt.map(row=>{
+          const nome = pickCol(row,['Nome Paciente','Paciente','Nome Completo','Nome']);
+          const tipo = pickCol(row,['Tipo']);
+          const desc = pickCol(row,['Descrição','Descricao']);
+          if(!nome && !tipo && !desc) return null;
+          return {
+            id: pickCol(row,['ID']) || uid(),
+            idPaciente: pickCol(row,['ID Paciente']),
+            nome,
+            data: pickCol(row,['Data Evento','Data']),
+            tipo,
+            descricao: desc,
+            gravidade: pickCol(row,['Gravidade']),
+            internacao: pickCol(row,['Internação?','Internacao?','Internação','Internacao']),
+            resolucao: pickCol(row,['Resolução','Resolucao']),
+          };
+        }).filter(Boolean);
+        DB.set('intercorrencias', inters);
+      }catch(e){ /* se falhar, mantém o que já tinha */ }
+    }
+
     renderPainel();
     renderPatients();
     showToast(`✓ ${novos.length} pacientes sincronizados`);
