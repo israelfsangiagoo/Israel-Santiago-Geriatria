@@ -336,6 +336,7 @@ h1,h2,h3,.serif{font-family:'Inter',sans-serif;font-weight:600;letter-spacing:-.
         <div class="field"><label>GID — Intercorrências</label><input id="cfg-int" placeholder="ex: 345678901"></div>
         <div class="field"><label>GID — Polifarmácia</label><input id="cfg-med" placeholder="ex: 456789012"></div>
         <div class="field"><label>GID — Pendências</label><input id="cfg-pend" placeholder="ex: 567890123"></div>
+        <div class="field"><label>GID — Modalidade</label><input id="cfg-mod" placeholder="ex: 678901234"></div>
         <button class="btn btn-primary btn-block" onclick="saveCfg()">💾 Salvar & Importar</button>
       </div>
       <div class="cfg-section">
@@ -694,7 +695,7 @@ function renderPatients(){
       <div class="list-avatar">${initials}</div>
       <div class="list-info">
         <div class="list-name">${p.nome}</div>
-        <div class="list-detail">${p.idade||'?'} anos · <span class="badge ${riskCls}">${p.risco||'—'}</span></div>
+        <div class="list-detail">${p.idade||'?'} anos · <span class="badge ${riskCls}">${p.risco||'—'}</span>${p.modalidade?' · '+p.modalidade:''}</div>
       </div>
       <div class="list-arrow">›</div>
     </div>`;
@@ -742,6 +743,8 @@ function renderDetalhe(pacId){
       <div class="sec-label">Dados Clínicos</div>
       <div class="card" style="padding:14px">
         <table class="sum-table">
+          ${p.modalidade?`<tr><td class="lbl">Modalidade</td><td class="val"><span class="badge b-info">${p.modalidade}</span></td></tr>`:''}
+          ${p.convenio?`<tr><td class="lbl">Convênio</td><td class="val">${p.convenio}</td></tr>`:''}
           <tr><td class="lbl">Diagnósticos</td><td class="val" style="text-align:left">${p.diagnosticos||'—'}</td></tr>
           <tr><td class="lbl">Score Fragilidade</td><td class="val">${p.score||'—'}/10</td></tr>
           <tr><td class="lbl">Polifarmácia</td><td class="val"><span class="badge ${p.polifarmacia==='Sim'?'b-sim':'b-nao'}">${p.polifarmacia||'Não'}</span></td></tr>
@@ -1098,7 +1101,8 @@ function gerarRelatorio(){
 let _cb=0;
 const SHEET_ID='1nWoybB5uu7n8EmKf4zHAoPM3HpgAKGNV1UzJh3IEID0';
 
-function fetchGviz(gid){
+function fetchGviz(gid, rng){
+  rng = rng || 'A3:T200';
   return new Promise((resolve,reject)=>{
     const name='__gcb'+(++_cb);
     const timer=setTimeout(()=>{delete window[name];reject(new Error('Timeout GID:'+gid));},15000);
@@ -1122,11 +1126,14 @@ function fetchGviz(gid){
       }catch(e){reject(e);}
     };
     const s=document.createElement('script');
-    s.src=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json;responseHandler:${name}&gid=${gid}&range=A3:T200&headers=1`;
+    s.src=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json;responseHandler:${name}&gid=${gid}&range=${rng}&headers=1`;
     s.onerror=()=>{clearTimeout(timer);delete window[name];reject(new Error('Erro script GID:'+gid));};
     document.head.appendChild(s);
   });
 }
+
+// normaliza texto (minúsculo, sem acento) — para casar nomes
+function normTxt(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim(); }
 
 // pega o valor de uma coluna aceitando variações de nome (acento/maiúscula/sinônimos)
 function pickCol(row, aliases){
@@ -1166,6 +1173,30 @@ async function syncSheets(){
         criadoEm: existente?.criadoEm || new Date().toISOString(),
       };
     }).filter(Boolean);
+
+    // importa a aba de Modalidade (se o GID estiver configurado) e junta na ficha
+    if(cfg.mod){
+      try{
+        const dm = await fetchGviz(cfg.mod, 'A1:H500');
+        const modById={}, modByNome={};
+        dm.forEach(r=>{
+          const id = pickCol(r,['ID']);
+          const nm = pickCol(r,['Nome','Nome Completo','Nome Paciente']);
+          const info = {
+            modalidade: pickCol(r,['Modalidade']),
+            convenio: pickCol(r,['Convênio','Convenio']),
+            complexidade: pickCol(r,['Complexidade']),
+          };
+          if(id) modById[id]=info;
+          if(nm) modByNome[normTxt(nm)]=info;
+        });
+        novos.forEach(p=>{
+          const info = modById[p.id] || modByNome[normTxt(p.nome)];
+          if(info){ p.modalidade=info.modalidade; p.convenio=info.convenio; if(info.complexidade) p.complexidade=info.complexidade; }
+        });
+      }catch(e){ /* se falhar, segue sem modalidade */ }
+    }
+
     DB.set('patients', novos);
 
     // importa a aba de Intercorrências (se o GID estiver configurado)
@@ -1204,7 +1235,7 @@ async function syncSheets(){
 // ══ CONFIG ════════════════════════════════════════════
 function loadCfgForm(){
   const cfg = DB.cfg();
-  ['pac','vis','int','med','pend'].forEach(k=>{
+  ['pac','vis','int','med','pend','mod'].forEach(k=>{
     const el=document.getElementById('cfg-'+k); if(el) el.value=cfg[k]||'';
   });
   const su=document.getElementById('cfg-syncurl'); if(su) su.value=cfg.syncUrl||'';
@@ -1212,7 +1243,7 @@ function loadCfgForm(){
 
 function saveCfg(){
   const cfg = DB.cfg();               // preserva syncUrl e demais chaves
-  ['pac','vis','int','med','pend'].forEach(k=>{
+  ['pac','vis','int','med','pend','mod'].forEach(k=>{
     const el=document.getElementById('cfg-'+k); if(el&&el.value.trim()) cfg[k]=el.value.trim();
   });
   DB.setCfg(cfg);
