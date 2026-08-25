@@ -256,12 +256,7 @@ h1,h2,h3,.serif{font-family:'Inter',sans-serif;font-weight:600;letter-spacing:-.
       </div>
 
       <div class="card">
-        <div class="card-title">⚠️ Alertas Clínicos</div>
-        <div id="alertas"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">🚑 Intercorrências recentes</div>
+        <div class="card-title">🚑 Intercorrências do mês</div>
         <div id="inter-list"></div>
       </div>
 
@@ -512,6 +507,15 @@ h1,h2,h3,.serif{font-family:'Inter',sans-serif;font-weight:600;letter-spacing:-.
   </div>
 </div>
 
+<!-- DETALHE DE INTERCORRÊNCIA -->
+<div class="overlay" id="ov-inter" onclick="if(event.target===this)closeOverlay('ov-inter')">
+  <div class="drawer" onclick="event.stopPropagation()">
+    <div class="drawer-handle"></div>
+    <div id="inter-detail"></div>
+    <button class="btn btn-ghost btn-block" style="margin-top:16px" onclick="closeOverlay('ov-inter')">Fechar</button>
+  </div>
+</div>
+
 <script>
 // ══ DATA LAYER ══════════════════════════════════════
 const DB = {
@@ -592,12 +596,21 @@ function renderPainel(){
   const total = pats.length;
   const ativos = pats.filter(p=>p.status==='Ativo').length;
   const altoRisco = pats.filter(p=>['Alto','Crítico'].includes(p.risco)).length;
+  const modU = p => (p.modalidade||'').trim().toUpperCase();
+  const idCount = pats.filter(p=>modU(p).startsWith('ID')).length;   // ID 24hrs, ID 12 hrs...
+  const adCount = pats.filter(p=>modU(p).startsWith('AD')).length;   // Assistência Domiciliar
+  // intercorrências do mês vigente
+  const mesAtual = new Date().getMonth()+1;
+  const mesDe = d=>{ d=String(d||'').trim(); let m=d.match(/^Date\(\d+,(\d+),/); if(m) return (+m[1])+1; m=d.match(/^\d{1,2}\/(\d{1,2})(?:\/\d{2,4})?$/); if(m) return +m[1]; m=d.match(/^\d{4}-(\d{2})-/); if(m) return +m[1]; return null; };
+  const intersMes = inters.filter(i=>mesDe(i.data)===mesAtual);
 
   const kpis = [
     {l:'Total',v:total,s:'pacientes',bg:'var(--green)'},
     {l:'Ativos',v:ativos,s:'em acomp.',bg:'var(--teal)'},
+    {l:'Pacientes ID',v:idCount,s:'internação domic.',bg:'var(--blue)'},
+    {l:'Pacientes AD',v:adCount,s:'assist. domiciliar',bg:'#7c3aed'},
     {l:'Alto Risco',v:altoRisco,s:'Alto + Crítico',bg:'var(--red)'},
-    {l:'Intercorrências',v:inters.length,s:'registradas',bg:'var(--orange)'},
+    {l:'Intercorrências',v:intersMes.length,s:'no mês',bg:'var(--orange)'},
   ];
   document.getElementById('kpi-grid').innerHTML = kpis.map(k=>
     `<div class="kpi" style="background:${k.bg}">
@@ -618,28 +631,15 @@ function renderPainel(){
     </div>`;
   }).join('');
 
-  const alertas = pats.filter(p=>['Alto','Crítico'].includes(p.risco)).slice(0,5);
-  document.getElementById('alertas').innerHTML = alertas.length
-    ? alertas.map(p=>`
-      <div class="alert-item">
-        <div class="alert-dot" style="background:${p.risco==='Crítico'?'#5b21b6':'#b91c1c'}"></div>
-        <div>
-          <div class="alert-name">${p.nome}</div>
-          <div class="alert-text">${p.risco} · Score ${p.score||'—'}/10 · ${p.diagnosticos||'—'}</div>
-          ${p.prox?`<span style="font-size:10px;color:var(--muted)">Próx: ${fmtDate(p.prox)}</span>`:''}
-        </div>
-      </div>`).join('')
-    : '<div class="empty" style="padding:16px"><div class="empty-sub">Nenhum alerta ativo</div></div>';
-
-  // lista de intercorrências recentes (5 mais recentes)
-  const inter5 = inters.slice(-5).reverse();
-  document.getElementById('inter-list').innerHTML = inter5.length
-    ? inter5.map(i=>{
+  // lista de intercorrências do mês vigente (mais recentes primeiro)
+  const interList = intersMes.slice().reverse();
+  document.getElementById('inter-list').innerHTML = interList.length
+    ? interList.map(i=>{
         const g=(i.gravidade||'');
         const gcls = /cr[ií]t/i.test(g)?'b-crit':/grave/i.test(g)?'b-alto':/moder/i.test(g)?'b-medio':'b-baixo';
         const intern = i.internacao==='Sim';
         const linha = [i.tipo, i.descricao, fmtDate(i.data)].filter(Boolean).join(' · ');
-        return `<div class="alert-item">
+        return `<div class="alert-item" style="cursor:pointer" onclick="showInter('${i.id}')">
           <div class="alert-dot" style="background:${intern?'#b91c1c':'#c2410c'}"></div>
           <div style="flex:1">
             <div class="alert-name">${i.nome||'—'}</div>
@@ -649,9 +649,10 @@ function renderPainel(){
               ${intern?'<span class="badge b-sim">Internação</span>':''}
             </div>
           </div>
+          <div class="list-arrow" style="align-self:center">›</div>
         </div>`;
       }).join('')
-    : '<div class="empty" style="padding:16px"><div class="empty-sub">Nenhuma intercorrência registrada</div></div>';
+    : '<div class="empty" style="padding:16px"><div class="empty-sub">Nenhuma intercorrência neste mês</div></div>';
 
   const urgentes = pends.filter(p=>p.prioridade==='Alta'&&p.status==='Aberto').length;
   const internacoes = inters.filter(i=>i.internacao==='Sim').length;
@@ -669,6 +670,38 @@ function renderPainel(){
       <span class="badge ${s==='ok'?'b-baixo':s==='warn'?'b-medio':s==='err'?'b-alto':'b-info'}">${v}</span>
     </td>
   </tr>`).join('');
+}
+
+// abre a ficha completa de uma intercorrência
+function showInter(id){
+  const i = DB.get('intercorrencias').find(x=>x.id===id);
+  if(!i) return;
+  const g=(i.gravidade||'');
+  const gcls = /cr[ií]t/i.test(g)?'b-crit':/grave/i.test(g)?'b-alto':/moder/i.test(g)?'b-medio':'b-baixo';
+  const intern = i.internacao==='Sim';
+  const rows = [
+    ['Paciente', i.nome],
+    ['Data do evento', fmtDate(i.data)],
+    ['Tipo', i.tipo],
+    ['Internação', i.internacao],
+    ['Hospital', i.hospital],
+    ['Data internação', fmtDate(i.dataInternacao)],
+    ['Data alta', fmtDate(i.dataAlta)],
+    ['Dias internado', i.diasInternado],
+    ['Resolução', i.resolucao],
+  ].filter(r=>r[1] && String(r[1]).trim()!=='');
+  document.getElementById('inter-detail').innerHTML = `
+    <div class="drawer-title">Intercorrência</div>
+    <div class="drawer-sub">${i.nome||''}</div>
+    <div style="margin-bottom:14px;display:flex;gap:6px;flex-wrap:wrap">
+      ${g?`<span class="badge ${gcls}">${g}</span>`:''}
+      ${intern?'<span class="badge b-sim">Internação</span>':'<span class="badge b-nao">Sem internação</span>'}
+    </div>
+    ${i.descricao?`<div class="card" style="padding:12px;margin-bottom:12px;box-shadow:none;border:1px solid var(--border)"><div style="font-size:13px;color:var(--text);line-height:1.5">${i.descricao}</div></div>`:''}
+    <table class="sum-table">${rows.map(r=>`<tr><td class="lbl">${r[0]}</td><td class="val" style="text-align:right">${r[1]}</td></tr>`).join('')}</table>
+    ${i.obs?`<div class="sec-label">Observações</div><div style="font-size:13px;color:#3a463f;line-height:1.5">${i.obs}</div>`:''}
+  `;
+  openOverlay('ov-inter');
 }
 
 // ══ PACIENTES ════════════════════════════════════════
@@ -1217,7 +1250,12 @@ async function syncSheets(){
             descricao: desc,
             gravidade: pickCol(row,['Gravidade']),
             internacao: pickCol(row,['Internação?','Internacao?','Internação','Internacao']),
+            hospital: pickCol(row,['Hospital']),
+            dataInternacao: pickCol(row,['Data Internação','Data Internacao']),
+            dataAlta: pickCol(row,['Data Alta']),
+            diasInternado: pickCol(row,['Dias Internado']),
             resolucao: pickCol(row,['Resolução','Resolucao']),
+            obs: pickCol(row,['Observações','Observacoes','Obs']),
           };
         }).filter(Boolean);
         DB.set('intercorrencias', inters);
