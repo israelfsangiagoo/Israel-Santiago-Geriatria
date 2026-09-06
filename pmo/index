@@ -1,0 +1,1024 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Israel Santiago, Head de Operacoes e PMO. Estrategia, pessoas, processos e execucao.">
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Israel Santiago</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap">
+
+<style>
+/* ============================================================
+   Israel Santiago  ·  Head de Operações & PMO
+   Paleta: papel off-white, grafite, verde profundo, bronze
+   ============================================================ */
+
+:root{
+  --bg:#F4F3EE;
+  --bg-2:#FAF9F5;
+  --surface:#FFFFFF;
+  --ink:#14181A;
+  --ink-2:#39403C;
+  --muted:#767C76;
+  --faint:#9BA09A;
+  --line:#DFDDD3;
+  --line-soft:#EAE8E0;
+  --accent:#123A2D;
+  --accent-2:#1E6349;
+  --accent-wash:#E6EBE5;
+  --gold:#94764B;
+  --gold-wash:#EFE6D6;
+  --btn-bg:#123A2D;
+  --btn-fg:#F7F6F1;
+  --shadow:0 1px 2px rgba(20,24,26,.04), 0 12px 32px -18px rgba(18,58,45,.22);
+  --focus:#1E6349;
+  --impact-bg:#123A2D;
+  --impact-fg:#F1EFE7;
+
+  --f-display:"Helvetica Neue", "Inter", Helvetica, Arial, "Segoe UI", sans-serif;
+  --f-serif:var(--f-display);
+  --f-mono:var(--f-display);
+
+  --pad:clamp(20px, 5vw, 72px);
+  --maxw:1240px;
+  --rule:1px solid var(--line);
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C100E;
+    --bg-2:#111614;
+    --surface:#151A18;
+    --ink:#ECEEE9;
+    --ink-2:#C2C8C2;
+    --muted:#8B928B;
+    --faint:#6C736D;
+    --line:#242A27;
+    --line-soft:#1C211E;
+    --accent:#7FC1A2;
+    --accent-2:#5AA684;
+    --accent-wash:#16211C;
+    --gold:#C6A579;
+    --gold-wash:#241F16;
+    --btn-bg:#4E9878;
+    --btn-fg:#06100B;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 16px 40px -22px rgba(0,0,0,.8);
+    --focus:#7FC1A2;
+    --impact-bg:#141F1A;
+    --impact-fg:#ECEEE9;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C100E;
+  --bg-2:#111614;
+  --surface:#151A18;
+  --ink:#ECEEE9;
+  --ink-2:#C2C8C2;
+  --muted:#8B928B;
+  --faint:#6C736D;
+  --line:#242A27;
+  --line-soft:#1C211E;
+  --accent:#7FC1A2;
+  --accent-2:#5AA684;
+  --accent-wash:#16211C;
+  --gold:#C6A579;
+  --gold-wash:#241F16;
+  --btn-bg:#4E9878;
+  --btn-fg:#06100B;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 16px 40px -22px rgba(0,0,0,.8);
+  --focus:#7FC1A2;
+  --impact-bg:#141F1A;
+  --impact-fg:#ECEEE9;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--f-display);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+
+::selection{background:var(--accent-wash);color:var(--ink)}
+
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:2px}
+
+/* ---------- primitivos de tipografia ---------- */
+.eyebrow{
+  
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+  display:flex;align-items:center;gap:12px;
+}
+.eyebrow::before{
+  content:"";width:22px;height:1px;background:var(--gold);flex:none;
+}
+h1,h2,h3,h4{margin:0;font-weight:500;letter-spacing:-.032em;text-wrap:balance;line-height:1.06}
+h2{font-size:clamp(30px,4.2vw,54px)}
+h3{font-size:clamp(19px,1.5vw,22px);letter-spacing:-.018em;line-height:1.25}
+p{margin:0}
+.lead{font-size:clamp(16px,1.25vw,18.5px);line-height:1.68;color:var(--ink-2);max-width:62ch}
+.body{font-size:15.5px;line-height:1.7;color:var(--muted)}
+
+.idx{
+  font-size:11px;letter-spacing:.12em;font-variant-numeric:tabular-nums;
+  color:var(--gold);font-weight:500;
+}
+
+/* ---------- layout ---------- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+section{position:relative}
+.sec{padding:clamp(72px,10vw,132px) 0}
+.sec-head{display:flex;flex-direction:column;gap:20px;max-width:70ch}
+.rule{height:1px;background:var(--line-soft);border:0;margin:0}
+
+/* ---------- nav ---------- */
+header.nav{
+  position:sticky;top:0;z-index:60;
+  background:color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter:saturate(150%) blur(14px);
+  -webkit-backdrop-filter:saturate(150%) blur(14px);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s ease, background .3s ease;
+}
+header.nav.stuck{border-bottom-color:var(--line)}
+.nav-in{
+  max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);
+  height:68px;display:flex;align-items:center;gap:28px;
+}
+.brand{display:flex;align-items:baseline;gap:10px;margin-right:auto;min-width:0}
+.brand .n{font-size:15.5px;font-weight:600;letter-spacing:-.02em;white-space:nowrap}
+.brand .r{
+  font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted);white-space:nowrap;
+}
+.menu{display:flex;align-items:center;gap:30px}
+.menu a{
+  font-size:14px;color:var(--ink-2);position:relative;padding:6px 0;
+  transition:color .2s ease;
+}
+.menu a::after{
+  content:"";position:absolute;left:0;right:100%;bottom:2px;height:1px;
+  background:var(--accent-2);transition:right .28s cubic-bezier(.2,.7,.3,1);
+}
+.menu a:hover{color:var(--ink)}
+.menu a:hover::after,.menu a.active::after{right:0}
+.menu a.active{color:var(--ink)}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:9px;
+  border:1px solid var(--line);border-radius:999px;
+  padding:9px 16px;font-size:13.5px;color:var(--ink);
+  transition:border-color .25s ease,background .25s ease,transform .25s ease;
+}
+.nav-cta:hover{border-color:var(--accent-2);background:var(--accent-wash)}
+.nav-cta .ar{transition:transform .28s cubic-bezier(.2,.7,.3,1);display:inline-block}
+.nav-cta:hover .ar{transform:translateX(3px)}
+.burger{
+  display:none;width:40px;height:40px;border:1px solid var(--line);border-radius:10px;
+  background:transparent;cursor:pointer;padding:0;align-items:center;justify-content:center;
+}
+.burger span{display:block;width:16px;height:1px;background:var(--ink);position:relative}
+.burger span::before,.burger span::after{
+  content:"";position:absolute;left:0;width:16px;height:1px;background:var(--ink);
+  transition:transform .25s ease, opacity .2s ease;
+}
+.burger span::before{top:-5px}
+.burger span::after{top:5px}
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{transform:translateY(5px) rotate(45deg)}
+.burger[aria-expanded="true"] span::after{transform:translateY(-5px) rotate(-45deg)}
+.progress{height:1px;background:var(--accent-2);width:0;transition:width .12s linear}
+
+.sheet{
+  display:none;border-top:1px solid var(--line);background:var(--bg);
+  padding:12px var(--pad) 26px;
+}
+.sheet.open{display:block}
+.sheet a{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 0;border-bottom:1px solid var(--line-soft);font-size:17px;letter-spacing:-.01em;
+}
+.sheet a .i{font-size:11px;color:var(--faint)}
+.sheet .sheet-cta{
+  margin-top:22px;display:flex;justify-content:center;background:var(--btn-bg);color:var(--btn-fg);
+  border-radius:999px;padding:15px;border-bottom:0;font-size:15px;
+}
+
+/* ---------- botões ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 22px;border-radius:999px;font-size:14.5px;letter-spacing:-.005em;
+  border:1px solid transparent;cursor:pointer;
+  transition:transform .25s cubic-bezier(.2,.7,.3,1), background .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.btn-primary{background:var(--btn-bg);color:var(--btn-fg);box-shadow:var(--shadow)}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{border-color:var(--line);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--accent-2);background:var(--accent-wash)}
+.btn .ar{transition:transform .28s cubic-bezier(.2,.7,.3,1)}
+.btn:hover .ar{transform:translateX(3px)}
+.btn-ghost:hover .ar.down{transform:translateY(3px)}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(48px,7vw,84px);padding-bottom:clamp(56px,7vw,96px)}
+.hero-grid{
+  display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);
+  gap:clamp(36px,5vw,76px);align-items:center;
+}
+.hero h1{
+  font-size:clamp(40px,6.1vw,82px);
+  line-height:.97;letter-spacing:-.045em;font-weight:500;
+  margin:26px 0 0;
+}
+.hero h1 .em{
+  color:var(--accent);font-weight:500;
+}
+.hero .lead{margin-top:26px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.hero-note{
+  margin-top:34px;padding-top:22px;border-top:1px solid var(--line-soft);
+  display:flex;gap:12px;align-items:flex-start;max-width:46ch;
+}
+.hero-note .dot{
+  width:7px;height:7px;border-radius:50%;background:var(--gold);margin-top:8px;flex:none;
+  box-shadow:0 0 0 4px var(--gold-wash);
+}
+.hero-note p{font-size:14.5px;line-height:1.62;color:var(--ink-2)}
+
+/* painel visual do hero */
+.panel{
+  background:var(--surface);border:1px solid var(--line);border-radius:4px;
+  padding:clamp(18px,2vw,26px);box-shadow:var(--shadow);
+  display:grid;grid-template-columns:minmax(0,1fr) 178px;gap:clamp(18px,2vw,26px);
+}
+.photo{
+  position:relative;aspect-ratio:4/5;border-radius:2px;overflow:hidden;
+  background:
+    linear-gradient(135deg, var(--accent-wash) 0%, var(--bg-2) 55%, var(--gold-wash) 130%);
+  border:1px solid var(--line-soft);
+  display:flex;align-items:flex-end;padding:16px;
+}
+.photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.photo::before{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(var(--line-soft) 1px, transparent 1px),linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size:34px 34px;opacity:.55;
+}
+.photo-tag{
+  position:relative;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);
+  background:color-mix(in srgb, var(--surface) 82%, transparent);
+  border:1px solid var(--line-soft);border-radius:2px;padding:6px 9px;
+}
+.chain{display:flex;flex-direction:column;justify-content:center;position:relative}
+.chain-title{
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--faint);margin-bottom:16px;
+}
+.node{display:flex;align-items:center;gap:11px;position:relative;padding:7px 0}
+.node .mk{
+  width:9px;height:9px;border-radius:50%;border:1px solid var(--line);
+  background:var(--bg-2);flex:none;position:relative;z-index:2;
+}
+.node .lb{font-size:13.5px;color:var(--muted);letter-spacing:-.01em;transition:color .3s ease}
+.node.key .mk{background:var(--accent-2);border-color:var(--accent-2);box-shadow:0 0 0 4px var(--accent-wash)}
+.node.key .lb{color:var(--ink);font-weight:500}
+.node.end .mk{border-color:var(--gold);background:var(--gold)}
+.node.end .lb{color:var(--ink-2)}
+.chain-line{
+  position:absolute;left:4px;top:44px;bottom:14px;width:1px;background:var(--line);z-index:1;
+}
+.chain-line::after{
+  content:"";position:absolute;left:-1.5px;width:4px;height:4px;border-radius:50%;
+  background:var(--accent-2);animation:travel 4.6s cubic-bezier(.6,.05,.3,1) infinite;
+}
+@keyframes travel{
+  0%{top:0;opacity:0}
+  8%{opacity:1}
+  85%{opacity:1}
+  100%{top:100%;opacity:0}
+}
+
+/* ---------- faixa de posicionamento ---------- */
+.band{
+  border-top:var(--rule);border-bottom:var(--rule);
+  background:var(--bg-2);
+}
+.band-in{
+  padding:clamp(52px,7vw,88px) 0;display:grid;grid-template-columns:auto minmax(0,1fr);
+  gap:clamp(22px,4vw,52px);align-items:start;
+}
+.qmark{
+  font-size:clamp(46px,6vw,80px);line-height:.72;color:var(--gold);
+  opacity:.55;font-weight:400;
+}
+.band q{quotes:none}
+.band .q{
+  font-weight:400;
+  font-size:clamp(24px,3.4vw,42px);line-height:1.24;letter-spacing:-.032em;color:var(--ink);
+  max-width:19ch;
+}
+.band .q b{font-weight:500;color:var(--accent)}
+.band .meta{
+  margin-top:26px;display:flex;flex-wrap:wrap;gap:10px;
+}
+.pill{
+  font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 12px;
+}
+
+/* ---------- sobre ---------- */
+.about-grid{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1fr);gap:clamp(32px,6vw,88px)}
+.about-copy{display:flex;flex-direction:column;gap:22px}
+.about-copy p{font-size:clamp(16px,1.2vw,18px);line-height:1.72;color:var(--ink-2);max-width:58ch}
+.about-copy p.first{color:var(--ink)}
+.about-side{border-top:var(--rule);padding-top:10px;align-self:start;margin-top:14px}
+.stat{padding:18px 0;border-bottom:1px solid var(--line-soft)}
+.stat:last-child{border-bottom:0}
+.stat .k{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)}
+.stat .v{font-size:16px;color:var(--ink);margin-top:6px;letter-spacing:-.015em}
+
+/* ---------- cards de atuação ---------- */
+.cards{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  border-top:var(--rule);border-left:var(--rule);margin-top:clamp(38px,5vw,60px);
+}
+.card{
+  border-right:var(--rule);border-bottom:var(--rule);
+  padding:clamp(24px,2.6vw,34px);background:transparent;
+  display:flex;flex-direction:column;gap:14px;position:relative;
+  transition:background .35s ease;
+}
+.card::before{
+  content:"";position:absolute;left:0;top:-1px;height:2px;width:0;background:var(--accent-2);
+  transition:width .45s cubic-bezier(.2,.7,.3,1);
+}
+.card:hover{background:var(--bg-2)}
+.card:hover::before{width:100%}
+.card .top{display:flex;align-items:center;justify-content:space-between}
+.card h3{margin-top:2px}
+.card p{font-size:14.8px;line-height:1.66;color:var(--muted)}
+.card .gl{
+  width:26px;height:26px;border-radius:50%;border:1px solid var(--line);
+  display:grid;place-items:center;color:var(--faint);
+  transition:border-color .3s ease,color .3s ease,transform .3s ease;
+}
+.card:hover .gl{border-color:var(--accent-2);color:var(--accent-2);transform:rotate(-45deg)}
+
+/* ---------- papel / diagrama ---------- */
+.role{background:var(--bg-2);border-top:var(--rule);border-bottom:var(--rule)}
+.role-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(36px,5vw,72px);align-items:center}
+.role-copy p{margin-top:22px}
+.role-copy .kicker{
+  margin-top:28px;padding:16px 18px;border-left:2px solid var(--gold);background:var(--gold-wash);
+  font-size:15px;color:var(--ink);line-height:1.6;border-radius:0 3px 3px 0;
+}
+.diagram{
+  background:var(--surface);border:1px solid var(--line);border-radius:4px;
+  padding:clamp(22px,3vw,38px);box-shadow:var(--shadow);
+  display:flex;flex-direction:column;align-items:center;gap:0;
+}
+.dnode{
+  width:100%;max-width:420px;text-align:center;border:1px solid var(--line);border-radius:3px;
+  padding:13px 16px;background:var(--bg-2);
+}
+.dnode .t{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.dnode.primary{
+  background:var(--accent);border-color:var(--accent);
+}
+.dnode.primary .t{color:var(--btn-fg);font-weight:500;letter-spacing:.12em}
+.dnode.result{border-color:var(--gold);background:var(--gold-wash)}
+.dnode.result .t{color:var(--gold);font-weight:500}
+.dconn{width:1px;height:26px;background:var(--line);position:relative}
+.dconn::after{
+  content:"";position:absolute;left:-2.5px;bottom:-1px;width:6px;height:6px;
+  border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg);
+}
+.dareas{
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:460px;
+  padding:16px;border:1px dashed var(--line);border-radius:3px;background:transparent;
+}
+.chip{
+  font-size:12.5px;padding:7px 13px;border-radius:999px;border:1px solid var(--line);
+  color:var(--ink-2);background:var(--bg-2);
+  transition:border-color .25s ease,color .25s ease,transform .25s ease;
+}
+.chip:hover{border-color:var(--accent-2);color:var(--accent);transform:translateY(-1px)}
+
+/* ---------- método ---------- */
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:clamp(44px,6vw,72px)}
+.steps::before{
+  content:"";position:absolute;left:0;right:0;top:11px;height:1px;
+  background:linear-gradient(90deg,var(--line) 0%,var(--line) 100%);
+}
+.step{padding:0 clamp(14px,2vw,30px) 0 0;position:relative}
+.step:not(:first-child){padding-left:clamp(14px,2vw,30px)}
+.step .dotwrap{position:relative;height:22px;display:flex;align-items:center}
+.step .dt{
+  width:9px;height:9px;border-radius:50%;background:var(--bg);border:1px solid var(--accent-2);
+  position:relative;z-index:2;
+}
+.step:last-child .dt{background:var(--accent-2)}
+.step .n{font-size:11px;font-variant-numeric:tabular-nums;letter-spacing:.1em;color:var(--gold);margin-top:20px}
+.step h3{margin-top:8px}
+.step p{margin-top:12px;font-size:14.6px;line-height:1.65;color:var(--muted);max-width:30ch}
+
+/* ---------- experiência ---------- */
+.exp{border-top:var(--rule)}
+.exp-list{margin-top:clamp(34px,4vw,54px);border-top:var(--rule)}
+.exp-row{
+  display:grid;grid-template-columns:56px minmax(0,1fr) minmax(0,1.25fr);
+  gap:clamp(16px,3vw,40px);align-items:baseline;
+  padding:clamp(20px,2.4vw,28px) 0;border-bottom:var(--rule);
+  transition:padding-left .35s cubic-bezier(.2,.7,.3,1), background .3s ease;
+}
+.exp-row:hover{padding-left:14px;background:var(--bg-2)}
+.exp-row .num{font-size:11px;font-variant-numeric:tabular-nums;color:var(--faint);letter-spacing:.08em}
+.exp-row h3{font-size:clamp(18px,1.7vw,24px);letter-spacing:-.022em}
+.exp-row p{font-size:15px;color:var(--muted);line-height:1.6}
+.slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:32px}
+.slot{
+  border:1px dashed var(--line);border-radius:3px;padding:22px;background:transparent;
+  display:flex;flex-direction:column;gap:8px;
+}
+.slot .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.slot .v{font-size:15px;color:var(--muted);line-height:1.55}
+
+/* ---------- diferencial ---------- */
+.diffs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,2.6vw,32px);margin-top:clamp(40px,5vw,64px)}
+.diff{
+  background:var(--surface);border:1px solid var(--line);border-radius:4px;
+  padding:clamp(24px,2.6vw,34px);display:flex;flex-direction:column;gap:14px;
+  transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s ease;
+}
+.diff:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.diff .ico{color:var(--accent-2)}
+.diff p{font-size:15px;line-height:1.65;color:var(--muted)}
+
+/* ---------- frase de impacto ---------- */
+.impact{
+  border-top:var(--rule);border-bottom:var(--rule);
+  background:var(--impact-bg);color:var(--impact-fg);
+}
+.impact-in{
+  min-height:clamp(340px,62vh,560px);display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(64px,9vw,110px) 0;gap:34px;
+}
+.impact .q{
+  font-weight:400;font-size:clamp(30px,5.6vw,74px);
+  line-height:1.06;letter-spacing:-.038em;max-width:17ch;
+}
+.impact .q i{color:#C9A97C;font-style:normal;font-weight:400}
+.impact .words{display:flex;flex-wrap:wrap;gap:0 26px;align-items:center}
+.impact .words span{
+  font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  opacity:.72;position:relative;padding:4px 0;
+}
+.impact .words span:not(:last-child)::after{
+  content:"";position:absolute;right:-14px;top:50%;width:3px;height:3px;border-radius:50%;
+  background:#C9A97C;
+}
+.impact hr{border:0;height:1px;background:currentColor;opacity:.16;margin:0;max-width:180px}
+
+/* ---------- contato ---------- */
+.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.86fr);gap:clamp(36px,6vw,80px);align-items:start}
+.contact h2{font-size:clamp(34px,5vw,64px);letter-spacing:-.035em}
+.contact .lead{margin-top:24px}
+.contact .cta-row{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.channels{border-top:var(--rule)}
+.ch{
+  display:flex;align-items:center;gap:16px;padding:20px 0;border-bottom:var(--rule);
+  transition:padding-left .3s cubic-bezier(.2,.7,.3,1);
+}
+.ch:hover{padding-left:8px}
+.ch .k{
+  font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--faint);width:86px;flex:none;
+}
+.ch .v{font-size:15.5px;color:var(--ink);letter-spacing:-.01em;word-break:break-word}
+.ch .v.pending{color:var(--faint)}
+.ch .go{margin-left:auto;color:var(--faint);font-size:13px;flex:none}
+.ch a.v{border-bottom:1px solid var(--line);padding-bottom:1px;transition:border-color .25s ease}
+.ch a.v:hover{border-color:var(--accent-2)}
+.copy{
+  background:transparent;border:1px solid var(--line);border-radius:999px;
+  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);padding:6px 11px;cursor:pointer;margin-left:auto;flex:none;
+  transition:border-color .25s ease,color .25s ease;
+}
+.copy:hover{border-color:var(--accent-2);color:var(--accent)}
+
+/* ---------- footer ---------- */
+footer.ft{border-top:var(--rule);background:var(--bg-2)}
+.ft-in{padding:44px 0 40px;display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between}
+.ft .name{font-size:19px;font-weight:600;letter-spacing:-.025em}
+.ft .role{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.ft .cr{font-size:11px;color:var(--faint);letter-spacing:.04em}
+.top-link{font-size:13.5px;color:var(--muted);display:inline-flex;gap:8px;align-items:center}
+.top-link:hover{color:var(--ink)}
+
+/* ---------- reveal ---------- */
+.js .rv{opacity:0;transform:translateY(16px)}
+.js .rv.in{opacity:1;transform:none;transition:opacity .8s cubic-bezier(.2,.7,.3,1), transform .8s cubic-bezier(.2,.7,.3,1)}
+.js .rv.d1.in{transition-delay:.07s}
+.js .rv.d2.in{transition-delay:.14s}
+.js .rv.d3.in{transition-delay:.21s}
+.js .rv.d4.in{transition-delay:.28s}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  .js .rv{opacity:1;transform:none}
+}
+
+/* ---------- responsivo ---------- */
+@media (max-width:1080px){
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+  .panel{grid-template-columns:minmax(0,1fr) 190px;max-width:620px}
+  .role-grid{grid-template-columns:1fr;gap:40px}
+  .about-grid{grid-template-columns:1fr;gap:40px}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .contact-grid{grid-template-columns:1fr;gap:44px}
+}
+@media (max-width:900px){
+  .menu{display:none}
+  .nav-cta{display:none}
+  .burger{display:flex}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:38px}
+  .steps::before{display:none}
+  .step{padding:0 18px 0 18px !important;border-left:1px solid var(--line)}
+  .step .dotwrap{display:none}
+  .step .n{margin-top:0}
+  .diffs{grid-template-columns:1fr}
+}
+@media (max-width:680px){
+  .hero h1{font-size:clamp(36px,10.5vw,52px)}
+  .panel{grid-template-columns:1fr;max-width:none}
+  .photo{aspect-ratio:5/4}
+  .chain{border-top:1px solid var(--line-soft);padding-top:18px}
+  .cards{grid-template-columns:1fr}
+  .band-in{grid-template-columns:1fr;gap:8px}
+  .qmark{font-size:56px}
+  .band .q{max-width:none}
+  .exp-row{grid-template-columns:36px minmax(0,1fr);row-gap:8px}
+  .exp-row p{grid-column:2}
+  .slots{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr;row-gap:28px}
+  .hero-ctas .btn{flex:1 1 auto;justify-content:center}
+  .ch .k{width:70px}
+  .impact-in{min-height:auto}
+}
+</style>
+
+</head>
+<body>
+<script>document.documentElement.classList.add('js');</script>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#topo" aria-label="Israel Santiago, início">
+      <span class="n">Israel Santiago</span>
+      <span class="r">Operações &amp; PMO</span>
+    </a>
+    <nav class="menu" aria-label="Navegação principal">
+      <a href="#sobre">Sobre</a>
+      <a href="#atuacao">Atuação</a>
+      <a href="#metodo">Como trabalho</a>
+      <a href="#experiencia">Experiência</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="nav-cta" href="#contato">Vamos conversar <span class="ar">→</span></a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="sheet" aria-label="Abrir menu"><span></span></button>
+  </div>
+  <div class="progress" id="progress"></div>
+  <div class="sheet" id="sheet">
+    <a href="#sobre"><span>Sobre</span><span class="i">01</span></a>
+    <a href="#atuacao"><span>Atuação</span><span class="i">02</span></a>
+    <a href="#papel"><span>Meu papel</span><span class="i">03</span></a>
+    <a href="#metodo"><span>Como trabalho</span><span class="i">04</span></a>
+    <a href="#experiencia"><span>Experiência</span><span class="i">05</span></a>
+    <a href="#contato"><span>Contato</span><span class="i">06</span></a>
+    <a class="sheet-cta" href="#contato">Vamos conversar</a>
+  </div>
+</header>
+
+<main id="topo">
+
+  <!-- ======================= HERO ======================= -->
+  <section class="hero wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Head de Operações &amp; PMO</div>
+        <h1>Eu transformo estratégia em <span class="em">execução</span>.</h1>
+        <p class="lead">Atuo na interseção entre estratégia, operações e projetos, conectando liderança, equipes e clientes para fazer a empresa funcionar melhor e crescer com estrutura.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#contato">Vamos conversar <span class="ar">→</span></a>
+          <a class="btn btn-ghost" href="#sobre">Conheça meu trabalho <span class="ar down">↓</span></a>
+        </div>
+        <div class="hero-note">
+          <span class="dot" aria-hidden="true"></span>
+          <p>Eu organizo a operação para que o CEO possa focar no crescimento do negócio.</p>
+        </div>
+      </div>
+
+      <div class="panel rv d1" aria-label="Da estratégia ao resultado">
+        <!-- Espaço reservado para a foto profissional.
+             Para inserir: <img src="foto.jpg" alt="Israel Santiago"> dentro de .photo -->
+        <div class="photo">
+          <span class="photo-tag">Foto profissional</span>
+        </div>
+        <div class="chain">
+          <div class="chain-title">Fluxo de valor</div>
+          <div class="chain-line" aria-hidden="true"></div>
+          <div class="node"><span class="mk"></span><span class="lb">CEO</span></div>
+          <div class="node"><span class="mk"></span><span class="lb">Estratégia</span></div>
+          <div class="node key"><span class="mk"></span><span class="lb">PMO</span></div>
+          <div class="node"><span class="mk"></span><span class="lb">Operação</span></div>
+          <div class="node end"><span class="mk"></span><span class="lb">Resultado</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================ FRASE DE POSICIONAMENTO ================ -->
+  <section class="band">
+    <div class="wrap band-in">
+      <div class="qmark" aria-hidden="true">“</div>
+      <div class="rv">
+        <p class="q">Crescer é importante. <b>Crescer com estrutura</b> é o que sustenta o negócio.</p>
+        <div class="meta">
+          <span class="pill">Processo</span>
+          <span class="pill">Prioridade</span>
+          <span class="pill">Previsibilidade</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= SOBRE ======================= -->
+  <section class="sec wrap" id="sobre">
+    <div class="about-grid">
+      <div class="sec-head rv">
+        <div class="eyebrow">Sobre</div>
+        <h2>Quem está por trás da operação</h2>
+      </div>
+      <div class="about-copy rv d1">
+        <p class="first">Sou um profissional de gestão com experiência em liderança, operações, projetos e saúde, hoje direcionando minha atuação para ambientes onde organização, velocidade e execução fazem diferença.</p>
+        <p>Meu trabalho está em entender o que precisa acontecer, organizar quem precisa fazer, estabelecer prioridades e acompanhar a execução até o resultado.</p>
+        <p>Mais do que administrar tarefas, atuo para criar clareza operacional.</p>
+        <div class="about-side" style="margin-top:16px">
+          <div class="stat"><div class="k">Posição</div><div class="v">Braço direito do CEO na operação</div></div>
+          <div class="stat"><div class="k">Interface</div><div class="v">Liderança, equipes internas e clientes</div></div>
+          <div class="stat"><div class="k">Entrega</div><div class="v">Estratégia decidida virando execução acompanhada</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= ATUAÇÃO ======================= -->
+  <section class="sec wrap" id="atuacao" style="padding-top:0">
+    <div class="sec-head rv">
+      <div class="eyebrow">Atuação</div>
+      <h2>Onde eu gero valor</h2>
+      <p class="lead">Cinco frentes que sustentam uma operação capaz de crescer sem perder controle.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card rv">
+        <div class="top"><span class="idx">01</span><span class="gl" aria-hidden="true">→</span></div>
+        <h3>Operações</h3>
+        <p>Estruturo processos, rotinas e fluxos para tornar a operação mais organizada, previsível e escalável.</p>
+      </article>
+      <article class="card rv d1">
+        <div class="top"><span class="idx">02</span><span class="gl" aria-hidden="true">→</span></div>
+        <h3>Projetos</h3>
+        <p>Transformo objetivos em planos de execução, acompanho prazos, responsáveis, prioridades e entregas.</p>
+      </article>
+      <article class="card rv d2">
+        <div class="top"><span class="idx">03</span><span class="gl" aria-hidden="true">→</span></div>
+        <h3>Processos</h3>
+        <p>Identifico gargalos, retrabalho e ineficiências e transformo isso em processos mais simples e claros.</p>
+      </article>
+      <article class="card rv d1">
+        <div class="top"><span class="idx">04</span><span class="gl" aria-hidden="true">→</span></div>
+        <h3>Pessoas</h3>
+        <p>Conecto profissionais, distribuo responsabilidades e acompanho a execução para que cada área saiba exatamente o que precisa entregar.</p>
+      </article>
+      <article class="card rv d2">
+        <div class="top"><span class="idx">05</span><span class="gl" aria-hidden="true">→</span></div>
+        <h3>Performance</h3>
+        <p>Acompanho indicadores, riscos, prioridades e resultados para apoiar decisões melhores.</p>
+      </article>
+      <article class="card rv d3" style="justify-content:flex-end">
+        <div class="top"><span class="idx" style="color:var(--faint)">•</span></div>
+        <p style="color:var(--ink-2)">Cada frente existe para responder a uma pergunta simples: o que foi decidido está realmente acontecendo?</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ======================= MEU PAPEL ======================= -->
+  <section class="sec role" id="papel">
+    <div class="wrap role-grid">
+      <div class="role-copy rv">
+        <div class="eyebrow">Meu papel</div>
+        <h2 style="margin-top:20px">Mais próximo da operação. Mais próximo da decisão.</h2>
+        <p class="lead">Meu papel é criar a conexão entre aquilo que foi decidido e aquilo que precisa ser executado.</p>
+        <div class="kicker">Eu acompanho o todo sem perder os detalhes que fazem a operação funcionar.</div>
+      </div>
+
+      <div class="diagram rv d1" role="img" aria-label="Fluxo: CEO, estratégia, Head de Operações e PMO, áreas de execução, resultado">
+        <div class="dnode"><div class="t">CEO</div></div>
+        <div class="dconn" aria-hidden="true"></div>
+        <div class="dnode"><div class="t">Estratégia</div></div>
+        <div class="dconn" aria-hidden="true"></div>
+        <div class="dnode primary"><div class="t">Head de Operações / PMO</div></div>
+        <div class="dconn" aria-hidden="true"></div>
+        <div class="dareas">
+          <span class="chip">Projetos</span>
+          <span class="chip">CS</span>
+          <span class="chip">Social</span>
+          <span class="chip">Criação</span>
+          <span class="chip">Tráfego</span>
+          <span class="chip">Comercial</span>
+        </div>
+        <div class="dconn" aria-hidden="true"></div>
+        <div class="dnode result"><div class="t">Resultado</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= MÉTODO ======================= -->
+  <section class="sec wrap" id="metodo">
+    <div class="sec-head rv">
+      <div class="eyebrow">Como eu trabalho</div>
+      <h2>Meu método é simples.</h2>
+      <p class="lead">Quatro etapas que se repetem em qualquer operação, do primeiro diagnóstico ao ajuste contínuo.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step rv">
+        <div class="dotwrap"><span class="dt"></span></div>
+        <div class="n">01</div>
+        <h3>Entender</h3>
+        <p>Mapear objetivos, contexto, prioridades e problemas.</p>
+      </div>
+      <div class="step rv d1">
+        <div class="dotwrap"><span class="dt"></span></div>
+        <div class="n">02</div>
+        <h3>Organizar</h3>
+        <p>Estruturar processos, responsabilidades, projetos e prioridades.</p>
+      </div>
+      <div class="step rv d2">
+        <div class="dotwrap"><span class="dt"></span></div>
+        <div class="n">03</div>
+        <h3>Executar</h3>
+        <p>Acompanhar a operação e garantir que as entregas avancem.</p>
+      </div>
+      <div class="step rv d3">
+        <div class="dotwrap"><span class="dt"></span></div>
+        <div class="n">04</div>
+        <h3>Melhorar</h3>
+        <p>Analisar resultados, identificar gargalos e ajustar continuamente.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EXPERIÊNCIA ======================= -->
+  <section class="sec wrap exp" id="experiencia">
+    <div class="sec-head rv">
+      <div class="eyebrow">Experiência</div>
+      <h2>Experiência que conecta gestão e execução</h2>
+    </div>
+
+    <div class="exp-list">
+      <div class="exp-row rv">
+        <span class="num">01</span>
+        <h3>Gestão Executiva</h3>
+        <p>Liderança e tomada de decisão.</p>
+      </div>
+      <div class="exp-row rv">
+        <span class="num">02</span>
+        <h3>Operações</h3>
+        <p>Organização e estruturação operacional.</p>
+      </div>
+      <div class="exp-row rv">
+        <span class="num">03</span>
+        <h3>Projetos</h3>
+        <p>Planejamento, acompanhamento e execução.</p>
+      </div>
+      <div class="exp-row rv">
+        <span class="num">04</span>
+        <h3>Customer Success</h3>
+        <p>Visão do cliente e acompanhamento das entregas.</p>
+      </div>
+      <div class="exp-row rv">
+        <span class="num">05</span>
+        <h3>Processos</h3>
+        <p>Criação e melhoria de fluxos.</p>
+      </div>
+      <div class="exp-row rv">
+        <span class="num">06</span>
+        <h3>Health &amp; Business</h3>
+        <p>Experiência multidisciplinar em gestão, saúde e negócios.</p>
+      </div>
+    </div>
+
+    <div class="slots rv d1">
+      <div class="slot">
+        <div class="k">Espaço reservado</div>
+        <div class="v">Empresas e cargos reais entram aqui, com período e escopo de responsabilidade.</div>
+      </div>
+      <div class="slot">
+        <div class="k">Espaço reservado</div>
+        <div class="v">Cases de projeto entram aqui, com contexto, o que foi estruturado e o resultado.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= DIFERENCIAL ======================= -->
+  <section class="sec wrap" style="padding-top:0">
+    <div class="sec-head rv">
+      <div class="eyebrow">Diferencial</div>
+      <h2>O que eu faço diferente</h2>
+    </div>
+
+    <div class="diffs">
+      <article class="diff rv">
+        <span class="ico" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg>
+        </span>
+        <h3>Visão do todo</h3>
+        <p>Consigo conectar estratégia, pessoas, projetos e operação.</p>
+      </article>
+      <article class="diff rv d1">
+        <span class="ico" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V6M4 6h9l-2 3 2 3H4"/><circle cx="19" cy="18" r="2"/><path d="M19 16V9"/></svg>
+        </span>
+        <h3>Execução</h3>
+        <p>Não fico apenas no planejamento. Acompanho o que precisa acontecer.</p>
+      </article>
+      <article class="diff rv d2">
+        <span class="ico" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="4" rx="1"/><rect x="3" y="15" width="7" height="5" rx="1"/><rect x="14" y="11" width="7" height="9" rx="1"/></svg>
+        </span>
+        <h3>Organização</h3>
+        <p>Transformo complexidade em processos, prioridades e responsabilidades claras.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ======================= FRASE DE IMPACTO ======================= -->
+  <section class="impact">
+    <div class="wrap impact-in">
+      <p class="q rv">Meu trabalho é fazer a operação parar de depender do <i>improviso</i>.</p>
+      <hr class="rv d1">
+      <div class="words rv d2">
+        <span>Processo</span><span>Clareza</span><span>Responsabilidade</span><span>Execução</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CONTATO ======================= -->
+  <section class="sec wrap contact" id="contato">
+    <div class="contact-grid">
+      <div class="rv">
+        <div class="eyebrow">Contato</div>
+        <h2 style="margin-top:20px">Vamos conversar?</h2>
+        <p class="lead">Se você está estruturando uma empresa, crescendo uma operação ou precisa de alguém para transformar estratégia em execução, vamos conversar.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:israelfsantiago@gmail.com?subject=Contato%20pelo%20site">Entrar em contato <span class="ar">→</span></a>
+          <span class="body" style="font-size:13.5px">Resposta por e-mail.</span>
+        </div>
+      </div>
+
+      <div class="channels rv d1">
+        <div class="ch">
+          <span class="k">E-mail</span>
+          <a class="v" href="mailto:israelfsantiago@gmail.com">israelfsantiago@gmail.com</a>
+          <button class="copy" id="copyMail" type="button">Copiar</button>
+        </div>
+        <div class="ch">
+          <span class="k">LinkedIn</span>
+          <span class="v pending">Perfil a ser adicionado</span>
+          <span class="go" aria-hidden="true">↗</span>
+        </div>
+        <div class="ch">
+          <span class="k">Instagram</span>
+          <span class="v pending">Perfil a ser adicionado</span>
+          <span class="go" aria-hidden="true">↗</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <div class="wrap ft-in">
+    <div>
+      <div class="name">Israel Santiago</div>
+      <div class="role">Head de Operações &amp; PMO</div>
+    </div>
+    <a class="top-link" href="#topo">Voltar ao topo <span aria-hidden="true">↑</span></a>
+    <div class="cr">© 2026 Israel Santiago</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- menu mobile ---- */
+  var burger = document.getElementById('burger');
+  var sheet  = document.getElementById('sheet');
+  function closeSheet(){ sheet.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }
+  burger.addEventListener('click', function(){
+    var open = sheet.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sheet.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeSheet); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeSheet(); });
+
+  /* ---- barra de progresso e estado do header ---- */
+  var nav = document.getElementById('nav');
+  var bar = document.getElementById('progress');
+  var ticking = false;
+  function onScroll(){
+    var st = window.scrollY || document.documentElement.scrollTop;
+    var h  = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (st / h) * 100 : 0) + '%';
+    nav.classList.toggle('stuck', st > 8);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(onScroll); }
+  }, {passive:true});
+  onScroll();
+
+  /* ---- seção ativa no menu ---- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.menu a'));
+  var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  if('IntersectionObserver' in window){
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(!en.isIntersecting) return;
+        var i = targets.indexOf(en.target);
+        links.forEach(function(l,j){ l.classList.toggle('active', i === j); });
+      });
+    }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
+    targets.forEach(function(t){ if(t) spy.observe(t); });
+  }
+
+  /* ---- entrada suave das seções (visíveis por padrão no primeiro quadro) ---- */
+  var items = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+  if(reduce || !('IntersectionObserver' in window)){
+    items.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var vh = window.innerHeight;
+    var pending = [];
+    items.forEach(function(el){
+      if(el.getBoundingClientRect().top < vh * 0.92){ el.classList.add('in'); }
+      else { pending.push(el); }
+    });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+    pending.forEach(function(el){ io.observe(el); });
+    setTimeout(function(){ pending.forEach(function(el){ el.classList.add('in'); }); }, 2200);
+  }
+
+  /* ---- copiar e-mail ---- */
+  var btn = document.getElementById('copyMail');
+  btn.addEventListener('click', function(){
+    var mail = 'israelfsantiago@gmail.com';
+    var done = function(){
+      btn.textContent = 'Copiado';
+      setTimeout(function(){ btn.textContent = 'Copiar'; }, 1800);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(mail).then(done).catch(function(){ done(); });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = mail; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); }catch(e){}
+      document.body.removeChild(ta); done();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
