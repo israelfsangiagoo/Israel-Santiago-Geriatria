@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Israel Santiago, Head de Operacoes e PMO. Estrategia, pessoas, processos e execucao.">
+<title>Israel Santiago | Head de Operacoes e PMO</title>
+<meta name="description" content="Israel Santiago. Head de Operacoes e PMO com expertise executiva em saude. Estrategia, pessoas, processos e execucao.">
 <style>img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Israel Santiago</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -850,6 +851,143 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
   .step.is-loop .dotwrap::after{display:none}
 }
 
+/* ============================================================
+   JUNÇÃO PMO + SAÚDE: novos blocos
+   ============================================================ */
+
+/* menu maior pede quebra mais cedo */
+@media (max-width:1060px){
+  .menu,.nav-cta{display:none}
+  .burger{display:flex}
+}
+.menu{gap:24px}
+
+/* ---------- números do topo ---------- */
+.stats{
+  margin-top:clamp(42px,6vw,68px);padding-top:28px;border-top:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,3vw,34px);
+}
+.st{display:flex;flex-direction:column;gap:8px}
+.st .v{
+  font-size:clamp(28px,3.6vw,42px);font-weight:500;letter-spacing:-.045em;line-height:1;
+  color:var(--ink);font-variant-numeric:tabular-nums;display:flex;align-items:baseline;
+}
+.st .v i{font-style:normal;color:var(--gold);font-size:.55em;margin-left:3px}
+.st .k{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);line-height:1.55}
+@media (max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}}
+
+/* ---------- citação no Sobre ---------- */
+.pull{
+  margin:4px 0;padding:20px 24px;border-left:2px solid var(--accent-2);
+  background:var(--accent-wash);border-radius:0 4px 4px 0;
+  font-size:clamp(16px,1.5vw,19px);line-height:1.55;color:var(--ink);letter-spacing:-.015em;
+}
+
+/* ---------- filtro da atuação ---------- */
+.filtro{display:flex;flex-wrap:wrap;gap:9px;margin-top:clamp(28px,4vw,40px)}
+.fb{
+  font-family:inherit;font-size:13px;color:var(--ink-2);background:transparent;
+  border:1px solid var(--line);border-radius:999px;padding:9px 15px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:9px;letter-spacing:-.005em;
+  transition:background .3s ease,border-color .3s ease,color .3s ease,transform .3s cubic-bezier(.22,.68,.24,1);
+}
+.fb .qt{
+  font-size:10.5px;font-variant-numeric:tabular-nums;color:var(--faint);
+  border-left:1px solid var(--line);padding-left:9px;
+}
+.fb:hover{border-color:var(--accent-2);color:var(--ink);transform:translateY(-1px)}
+.fb.active{background:var(--btn-bg);border-color:var(--btn-bg);color:var(--btn-fg)}
+.fb.active .qt{color:color-mix(in srgb, var(--btn-fg) 62%, transparent);border-left-color:color-mix(in srgb, var(--btn-fg) 30%, transparent)}
+
+/* ---------- cards (agora com respiro, para o filtro funcionar) ---------- */
+.cards{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;
+  border:0;margin-top:22px;
+}
+.card{
+  border:1px solid var(--line);border-radius:5px;background:transparent;
+  padding:clamp(22px,2.4vw,30px);gap:13px;
+  transition:background .35s ease,border-color .35s ease,box-shadow .4s ease,transform .4s cubic-bezier(.22,.68,.24,1);
+}
+.card:hover{background:var(--surface);border-color:var(--accent-2);box-shadow:var(--shadow);transform:translateY(-3px)}
+.card::before{border-radius:5px 5px 0 0;top:0}
+.card[hidden]{display:none}
+.card.pop{animation:cardIn .5s cubic-bezier(.22,.68,.24,1) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
+.et{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--line);border-radius:999px;padding:4px 10px;white-space:nowrap;
+}
+.et.saude{color:var(--gold);border-color:var(--gold);background:var(--gold-wash)}
+
+/* ---------- público da saúde ---------- */
+.publico{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:5px;overflow:hidden;
+  margin-top:clamp(34px,5vw,52px);
+}
+.pb{
+  background:var(--bg-2);padding:clamp(20px,2.4vw,28px);
+  display:flex;flex-direction:column;gap:10px;transition:background .35s ease;
+}
+.pb:hover{background:var(--surface)}
+.pn{font-size:11px;letter-spacing:.12em;color:var(--gold);font-variant-numeric:tabular-nums}
+.pb h3{font-size:17px;letter-spacing:-.02em;line-height:1.28}
+.pb p{font-size:14.5px;color:var(--muted);line-height:1.6}
+.pb.destaque{background:var(--accent-wash)}
+.pb.destaque .pn{color:var(--accent-2)}
+.pb.destaque p{color:var(--ink-2)}
+
+/* ---------- formação em três colunas ---------- */
+.tri{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(24px,3vw,44px);margin-top:clamp(34px,5vw,52px);
+}
+.tc{border-top:1px solid var(--line);padding-top:22px}
+.tt{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{
+  padding:13px 0;border-bottom:1px solid var(--line-soft);
+  font-size:15.5px;color:var(--ink);letter-spacing:-.012em;line-height:1.45;
+  transition:padding-left .35s cubic-bezier(.22,.68,.24,1);
+}
+.tl li:hover{padding-left:6px}
+.tl li:last-child{border-bottom:0}
+.comp{display:flex;flex-wrap:wrap;gap:8px}
+
+/* ---------- galeria ---------- */
+.gal{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;margin-top:clamp(30px,4vw,46px);
+}
+.gp{margin:0;display:flex;flex-direction:column;gap:13px}
+.gp img{
+  width:100%;aspect-ratio:4/3;object-fit:cover;display:block;
+  border-radius:5px;border:1px solid var(--line-soft);
+  transition:transform .8s cubic-bezier(.22,.68,.24,1);
+}
+.gp:hover img{transform:scale(1.015)}
+.gp .gtag{
+  display:grid;place-items:center;width:100%;aspect-ratio:4/3;border-radius:5px;
+  border:1px dashed var(--line);
+  background:linear-gradient(140deg,var(--accent-wash),var(--bg-2) 62%,var(--gold-wash));
+  font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+}
+.gp:has(img) .gtag{display:none}
+.gp figcaption{font-size:13.5px;color:var(--muted);line-height:1.5}
+
+@media (max-width:900px){
+  .publico{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tri{grid-template-columns:1fr;gap:8px}
+  .gal{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:680px){
+  .publico{grid-template-columns:1fr}
+  .gal{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}
+  .pull{padding:16px 18px}
+}
+
 </style>
 
 </head>
@@ -865,8 +1003,9 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
     <nav class="menu" aria-label="Navegação principal">
       <a href="#sobre">Sobre</a>
       <a href="#atuacao">Atuação</a>
-      <a href="#metodo">Como trabalho</a>
-      <a href="#experiencia">Experiência</a>
+      <a href="#metodo">Método</a>
+      <a href="#saude">Saúde</a>
+      <a href="#formacao">Formação</a>
       <a href="#contato">Contato</a>
     </nav>
     <a class="nav-cta" href="#contato">Vamos conversar <span class="ar">→</span></a>
@@ -877,9 +1016,10 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
     <a href="#sobre"><span>Sobre</span><span class="i">01</span></a>
     <a href="#atuacao"><span>Atuação</span><span class="i">02</span></a>
     <a href="#papel"><span>Meu papel</span><span class="i">03</span></a>
-    <a href="#metodo"><span>Como trabalho</span><span class="i">04</span></a>
-    <a href="#experiencia"><span>Experiência</span><span class="i">05</span></a>
-    <a href="#contato"><span>Contato</span><span class="i">06</span></a>
+    <a href="#metodo"><span>Método</span><span class="i">04</span></a>
+    <a href="#saude"><span>Saúde</span><span class="i">05</span></a>
+    <a href="#formacao"><span>Formação</span><span class="i">06</span></a>
+    <a href="#contato"><span>Contato</span><span class="i">07</span></a>
     <a class="sheet-cta" href="#contato">Vamos conversar</a>
   </div>
 </header>
@@ -890,9 +1030,9 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
   <section class="hero wrap">
     <div class="hero-grid">
       <div>
-        <div class="eyebrow fx">Head de Operações &amp; PMO</div>
+        <div class="eyebrow fx">Head de PMO em Saúde</div>
         <h1>Eu transformo estratégia em <span class="em">execução.</span></h1>
-        <p class="lead fx f2">Atuo na interseção entre estratégia, operações e projetos, conectando liderança, equipes e clientes para fazer a empresa funcionar melhor e crescer com estrutura.</p>
+        <p class="lead fx f2">Atuo na interseção entre estratégia, operações e projetos, conectando liderança, equipes e clientes para fazer a empresa funcionar melhor e crescer com estrutura. A origem é a saúde, onde aprendi a organizar complexidade sob risco real. O método vale para qualquer operação.</p>
         <div class="hero-ctas fx f3">
           <a class="btn btn-primary" href="#contato">Vamos conversar <span class="ar">→</span></a>
           <a class="btn btn-ghost" href="#sobre">Conheça meu trabalho <span class="ar down">↓</span></a>
@@ -907,7 +1047,7 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
         <!-- FOTO: tire o comentário da linha <img> abaixo e deixe foto.jpg
              na mesma pasta deste arquivo. A etiqueta some sozinha. -->
         <div class="photo">
-          <img src="foto.jpg" alt="Israel Santiago, Head de Operações e PMO">
+          <!-- <img src="foto.jpg" alt="Israel Santiago, Head de Operações e PMO"> -->
           <span class="photo-tag">Foto profissional</span>
         </div>
         <div class="chain">
@@ -920,6 +1060,14 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
           <div class="node end"><span class="mk"></span><span class="lb">Resultado</span></div>
         </div>
       </div>
+    </div>
+
+    <!-- números do topo -->
+    <div class="stats fx f4">
+      <div class="st"><span class="v"><b class="count" data-to="4">0</b><i>+</i></span><span class="k">Anos de atuação executiva</span></div>
+      <div class="st"><span class="v"><b class="count" data-to="13">0</b></span><span class="k">Frentes de atuação</span></div>
+      <div class="st"><span class="v"><b class="count" data-to="8">0</b></span><span class="k">Áreas de expertise em saúde</span></div>
+      <div class="st"><span class="v"><b>RJ</b></span><span class="k">Rio de Janeiro, também remoto</span></div>
     </div>
   </section>
 
@@ -947,11 +1095,17 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
       </div>
       <div class="about-copy rv d1">
         <p class="first">Sou um profissional de gestão com experiência em liderança, operações, projetos e saúde, hoje direcionando minha atuação para ambientes onde organização, velocidade e execução fazem diferença.</p>
-        <p>Meu trabalho está em entender o que precisa acontecer, organizar quem precisa fazer, estabelecer prioridades e acompanhar a execução até o resultado.</p>
-        <p>Mais do que administrar tarefas, atuo para criar clareza operacional.</p>
-        <div class="about-side" style="margin-top:16px">
+        <p>Minha trajetória foi construída na interseção entre cuidado clínico, estrutura organizacional e tomada de decisão. Enfermeiro de formação, com especialização em geriatria e MBA em gestão, transitei por ambientes que exigem precisão técnica e visão estratégica ao mesmo tempo: da supervisão clínica à interface com equipes jurídicas, da análise de indicadores à estruturação de fluxos.</p>
+        <p>Meu trabalho está em entender o que precisa acontecer, organizar quem precisa fazer, estabelecer prioridades e acompanhar a execução até o resultado. Mais do que administrar tarefas, atuo para criar clareza operacional.</p>
+
+        <blockquote class="pull">Trabalho com organizações que precisam de um profissional capaz de organizar complexidade, transformando demandas em processos sustentáveis e mensuráveis.</blockquote>
+
+        <p>Atuo junto a operadoras de saúde, instituições, clínicas, agências e empresas que demandam rigor técnico, raciocínio sistêmico e entrega com impacto real. Meu compromisso não é com a presença. É com o resultado.</p>
+
+        <div class="about-side">
           <div class="stat"><div class="k">Posição</div><div class="v">Braço direito do CEO na operação</div></div>
-          <div class="stat"><div class="k">Interface</div><div class="v">Liderança, equipes internas e clientes</div></div>
+          <div class="stat"><div class="k">Interface</div><div class="v">Liderança, equipes internas, clientes e áreas técnicas</div></div>
+          <div class="stat"><div class="k">Base</div><div class="v">Rio de Janeiro, com atuação também remota</div></div>
           <div class="stat"><div class="k">Entrega</div><div class="v">Estratégia decidida virando execução acompanhada</div></div>
         </div>
       </div>
@@ -963,38 +1117,82 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
     <div class="sec-head rv">
       <div class="eyebrow">Atuação</div>
       <h2>Onde eu gero valor</h2>
-      <p class="lead">Cinco frentes que sustentam uma operação capaz de crescer sem perder controle.</p>
+      <p class="lead">Treze frentes que sustentam uma operação capaz de crescer sem perder controle. Cinco vêm da gestão e dos projetos, oito vêm da saúde. Use o filtro para ver o recorte que interessa a você.</p>
     </div>
 
-    <div class="cards">
-      <article class="card rv">
-        <div class="top"><span class="idx">01</span><span class="gl" aria-hidden="true">→</span></div>
+    <!-- filtro -->
+    <div class="filtro rv d1" role="tablist" aria-label="Filtrar frentes de atuação">
+      <button class="fb active" role="tab" aria-selected="true" data-f="tudo">Tudo <span class="qt">13</span></button>
+      <button class="fb" role="tab" aria-selected="false" data-f="pmo">Operações &amp; PMO <span class="qt">5</span></button>
+      <button class="fb" role="tab" aria-selected="false" data-f="saude">Saúde <span class="qt">8</span></button>
+    </div>
+
+    <div class="cards" id="cards">
+      <article class="card rv" data-a="pmo">
+        <div class="top"><span class="idx">01</span><span class="et">Gestão</span></div>
         <h3>Operações</h3>
         <p>Estruturo processos, rotinas e fluxos para tornar a operação mais organizada, previsível e escalável.</p>
       </article>
-      <article class="card rv d1">
-        <div class="top"><span class="idx">02</span><span class="gl" aria-hidden="true">→</span></div>
+      <article class="card rv" data-a="pmo">
+        <div class="top"><span class="idx">02</span><span class="et">Gestão</span></div>
         <h3>Projetos</h3>
         <p>Transformo objetivos em planos de execução, acompanho prazos, responsáveis, prioridades e entregas.</p>
       </article>
-      <article class="card rv d2">
-        <div class="top"><span class="idx">03</span><span class="gl" aria-hidden="true">→</span></div>
+      <article class="card rv" data-a="pmo">
+        <div class="top"><span class="idx">03</span><span class="et">Gestão</span></div>
         <h3>Processos</h3>
         <p>Identifico gargalos, retrabalho e ineficiências e transformo isso em processos mais simples e claros.</p>
       </article>
-      <article class="card rv d1">
-        <div class="top"><span class="idx">04</span><span class="gl" aria-hidden="true">→</span></div>
+      <article class="card rv" data-a="pmo">
+        <div class="top"><span class="idx">04</span><span class="et">Gestão</span></div>
         <h3>Pessoas</h3>
         <p>Conecto profissionais, distribuo responsabilidades e acompanho a execução para que cada área saiba exatamente o que precisa entregar.</p>
       </article>
-      <article class="card rv d2">
-        <div class="top"><span class="idx">05</span><span class="gl" aria-hidden="true">→</span></div>
+      <article class="card rv" data-a="pmo">
+        <div class="top"><span class="idx">05</span><span class="et">Gestão</span></div>
         <h3>Performance</h3>
         <p>Acompanho indicadores, riscos, prioridades e resultados para apoiar decisões melhores.</p>
       </article>
-      <article class="card rv d3" style="justify-content:flex-end">
-        <div class="top"><span class="idx" style="color:var(--faint)">•</span></div>
-        <p style="color:var(--ink-2)">Cada frente existe para responder a uma pergunta simples: o que foi decidido está realmente acontecendo?</p>
+
+      <article class="card rv" data-a="saude">
+        <div class="top"><span class="idx">06</span><span class="et saude">Saúde</span></div>
+        <h3>Linhas de cuidado</h3>
+        <p>Estruturação e revisão de protocolos assistenciais com foco em continuidade, eficiência e adequação às diretrizes clínicas vigentes, da concepção ao monitoramento.</p>
+      </article>
+      <article class="card rv" data-a="saude">
+        <div class="top"><span class="idx">07</span><span class="et saude">Saúde</span></div>
+        <h3>Governança clínica</h3>
+        <p>Apoio à construção de estruturas de governança que garantam segurança assistencial, conformidade técnica e rastreabilidade das decisões clínicas.</p>
+      </article>
+      <article class="card rv" data-a="saude">
+        <div class="top"><span class="idx">08</span><span class="et saude">Saúde</span></div>
+        <h3>Pacientes crônicos</h3>
+        <p>Estratégias de acompanhamento longitudinal para populações de alta complexidade, com foco em prevenção de agudizações e sustentabilidade do cuidado.</p>
+      </article>
+      <article class="card rv" data-a="saude">
+        <div class="top"><span class="idx">09</span><span class="et saude">Saúde</span></div>
+        <h3>Interface jurídico-técnica</h3>
+        <p>Suporte técnico em processos envolvendo operadoras, perícias, contestações e análise de pertinência clínica. Linguagem clínica traduzida para contextos jurídicos.</p>
+      </article>
+      <article class="card rv" data-a="saude">
+        <div class="top"><span class="idx">10</span><span class="et saude">Saúde</span></div>
+        <h3>Pertinência técnica</h3>
+        <p>Avaliação criteriosa de solicitações e procedimentos à luz de protocolos clínicos, diretrizes baseadas em evidências e normas regulatórias.</p>
+      </article>
+      <article class="card rv" data-a="saude">
+        <div class="top"><span class="idx">11</span><span class="et saude">Saúde</span></div>
+        <h3>Relatórios clínicos</h3>
+        <p>Documentação técnica de alto padrão para suporte a decisões institucionais, processos judiciais, auditorias e comunicação com instâncias reguladoras.</p>
+      </article>
+      <article class="card rv" data-a="saude">
+        <div class="top"><span class="idx">12</span><span class="et saude">Saúde</span></div>
+        <h3>Fluxos assistenciais</h3>
+        <p>Mapeamento, redesenho e implementação de fluxos internos que reduzam falhas, aumentem a eficiência operacional e melhorem a experiência clínica.</p>
+      </article>
+      <article class="card rv" data-a="saude">
+        <div class="top"><span class="idx">13</span><span class="et saude">Saúde</span></div>
+        <h3>Indicadores e sustentabilidade</h3>
+        <p>Leitura crítica de indicadores de saúde para identificar ineficiências, risco clínico e oportunidades de melhoria com base em dados populacionais e operacionais.</p>
       </article>
     </div>
   </section>
@@ -1010,7 +1208,7 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
       </div>
 
       <div class="diagram rv d1" role="img" aria-label="Fluxo: CEO, estratégia, Head de Operações e PMO, áreas de execução, resultado">
-        <div class="dnode"><div class="t">CEO</div></div>
+        <div class="dnode"><div class="t">CEO ou diretoria</div></div>
         <div class="dconn" aria-hidden="true"></div>
         <div class="dnode"><div class="t">Estratégia</div></div>
         <div class="dconn" aria-hidden="true"></div>
@@ -1023,6 +1221,8 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
           <span class="chip">Criação</span>
           <span class="chip">Tráfego</span>
           <span class="chip">Comercial</span>
+          <span class="chip">Assistencial</span>
+          <span class="chip">Jurídico</span>
         </div>
         <div class="dconn" aria-hidden="true"></div>
         <div class="dnode result"><div class="t">Resultado</div></div>
@@ -1035,7 +1235,7 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
     <div class="sec-head rv">
       <div class="eyebrow">Como eu trabalho</div>
       <h2>Meu método é simples.</h2>
-      <p class="lead">Quatro etapas que se repetem em qualquer operação, do primeiro diagnóstico ao ajuste contínuo.</p>
+      <p class="lead">Quatro etapas que se repetem em qualquer operação, do primeiro diagnóstico ao ajuste contínuo. Cada demanda é tratada com metodologia, não com improviso.</p>
     </div>
 
     <div class="steps">
@@ -1043,25 +1243,25 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
         <div class="dotwrap"><span class="dt"></span></div>
         <div class="n">01</div>
         <h3>Entender</h3>
-        <p>Mapear objetivos, contexto, prioridades e problemas.</p>
+        <p>Mapear objetivos, contexto, prioridades e problemas. Antes de qualquer proposta, entendimento do problema real e das variáveis envolvidas.</p>
       </div>
       <div class="step rv d1">
         <div class="dotwrap"><span class="dt"></span></div>
         <div class="n">02</div>
         <h3>Organizar</h3>
-        <p>Estruturar processos, responsabilidades, projetos e prioridades.</p>
+        <p>Estruturar processos, responsabilidades, projetos e prioridades, com clareza sobre escopo, entregas e critérios. Sem solução genérica para problema específico.</p>
       </div>
       <div class="step rv d2">
         <div class="dotwrap"><span class="dt"></span></div>
         <div class="n">03</div>
         <h3>Executar</h3>
-        <p>Acompanhar a operação e garantir que as entregas avancem.</p>
+        <p>Acompanhar a operação e garantir que as entregas avancem, com registro, rastreabilidade e comunicação contínua com quem decide.</p>
       </div>
       <div class="step is-loop rv d3">
         <div class="dotwrap"><span class="dt"></span></div>
         <div class="n">04</div>
         <h3>Melhorar</h3>
-        <p>Analisar resultados, identificar gargalos e ajustar continuamente.</p>
+        <p>Medir resultados pelos indicadores combinados, identificar gargalos e ajustar. Transparência sobre o que funcionou e o que precisa mudar.</p>
         <span class="loop"><span class="lo-ic" aria-hidden="true">↺</span>Reinicia o ciclo</span>
       </div>
     </div>
@@ -1069,46 +1269,92 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
     <div class="cycle" aria-hidden="true"><span class="cy-label">O método não termina. Ele recomeça.</span></div>
   </section>
 
-  <!-- ======================= EXPERIÊNCIA ======================= -->
-  <section class="sec wrap exp" id="experiencia">
+  <!-- ======================= SAÚDE ======================= -->
+  <section class="sec role" id="saude">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="eyebrow">Expertise em saúde</div>
+        <h2>Onde a inteligência clínica encontra a decisão institucional.</h2>
+        <p class="lead">Atuação na interface entre assistência, gestão e governança, estruturando processos, mitigando riscos e construindo soluções que respondem às demandas reais do sistema de saúde.</p>
+      </div>
+
+      <div class="publico rv d1">
+        <div class="pb">
+          <span class="pn">01</span>
+          <h3>Operadoras de saúde suplementar</h3>
+          <p>Análise de pertinência, governança assistencial e gestão de populações crônicas.</p>
+        </div>
+        <div class="pb">
+          <span class="pn">02</span>
+          <h3>Clínicas e centros de saúde</h3>
+          <p>Estruturação de fluxos, protocolos e indicadores de desempenho assistencial.</p>
+        </div>
+        <div class="pb">
+          <span class="pn">03</span>
+          <h3>Empresas e departamentos jurídicos</h3>
+          <p>Suporte técnico especializado em demandas clínico-regulatórias e perícias.</p>
+        </div>
+        <div class="pb">
+          <span class="pn">04</span>
+          <h3>Gestores e lideranças da saúde</h3>
+          <p>Parceria técnica na tomada de decisões de alta complexidade assistencial.</p>
+        </div>
+        <div class="pb">
+          <span class="pn">05</span>
+          <h3>Instituições e organizações corporativas</h3>
+          <p>Consultoria em estruturação de programas de saúde e gestão de risco assistencial.</p>
+        </div>
+        <div class="pb destaque">
+          <span class="pn">↗</span>
+          <h3>E fora da saúde</h3>
+          <p>O mesmo rigor aplicado a agências, times comerciais e operações de serviço que precisam de método, prioridade e acompanhamento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= FORMAÇÃO ======================= -->
+  <section class="sec wrap" id="formacao">
     <div class="sec-head rv">
-      <div class="eyebrow">Experiência</div>
+      <div class="eyebrow">Formação e trajetória</div>
       <h2>Experiência que conecta gestão e execução</h2>
     </div>
 
-    <div class="exp-list">
-      <div class="exp-row rv">
-        <span class="num">01</span>
-        <h3>Gestão Executiva</h3>
-        <p>Liderança e tomada de decisão.</p>
+    <div class="tri">
+      <div class="tc rv">
+        <div class="tt">Formação acadêmica</div>
+        <ul class="tl">
+          <li><span class="li-t">Graduação em Enfermagem</span></li>
+          <li><span class="li-t">Especialização em Geriatria</span></li>
+          <li><span class="li-t">Pós-graduação em Oncologia</span></li>
+          <li><span class="li-t">MBA em Gestão e Inovações em Saúde</span></li>
+        </ul>
       </div>
-      <div class="exp-row rv">
-        <span class="num">02</span>
-        <h3>Operações</h3>
-        <p>Organização e estruturação operacional.</p>
+      <div class="tc rv d1">
+        <div class="tt">Trajetória relevante</div>
+        <ul class="tl">
+          <li><span class="li-t">Supervisão clínica em agência especializada de cuidados</span></li>
+          <li><span class="li-t">Orientação familiar e gestão de casos de alta complexidade</span></li>
+          <li><span class="li-t">Prática autônoma com pacientes crônicos e geriátricos</span></li>
+          <li><span class="li-t">Interface clínico-institucional com foco em gestão de crônicos</span></li>
+        </ul>
       </div>
-      <div class="exp-row rv">
-        <span class="num">03</span>
-        <h3>Projetos</h3>
-        <p>Planejamento, acompanhamento e execução.</p>
-      </div>
-      <div class="exp-row rv">
-        <span class="num">04</span>
-        <h3>Customer Success</h3>
-        <p>Visão do cliente e acompanhamento das entregas.</p>
-      </div>
-      <div class="exp-row rv">
-        <span class="num">05</span>
-        <h3>Processos</h3>
-        <p>Criação e melhoria de fluxos.</p>
-      </div>
-      <div class="exp-row rv">
-        <span class="num">06</span>
-        <h3>Health &amp; Business</h3>
-        <p>Experiência multidisciplinar em gestão, saúde e negócios.</p>
+      <div class="tc rv d2">
+        <div class="tt">Competências transversais</div>
+        <div class="comp">
+          <span class="chip">Análise de indicadores</span>
+          <span class="chip">Relatórios técnicos</span>
+          <span class="chip">Gestão de risco</span>
+          <span class="chip">Protocolos clínicos</span>
+          <span class="chip">Interface jurídica</span>
+          <span class="chip">Governança em saúde suplementar</span>
+          <span class="chip">Geriatria</span>
+          <span class="chip">Prática baseada em evidências</span>
+          <span class="chip">Gestão de projetos</span>
+          <span class="chip">Customer Success</span>
+        </div>
       </div>
     </div>
-
   </section>
 
   <!-- ======================= DIFERENCIAL ======================= -->
@@ -1124,22 +1370,51 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg>
         </span>
         <h3>Visão do todo</h3>
-        <p>Consigo conectar estratégia, pessoas, projetos e operação.</p>
+        <p>Consigo conectar estratégia, pessoas, projetos e operação, do plano na mesa do CEO até o detalhe que trava a entrega.</p>
       </article>
       <article class="diff rv d1">
         <span class="ico" aria-hidden="true">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V6M4 6h9l-2 3 2 3H4"/><circle cx="19" cy="18" r="2"/><path d="M19 16V9"/></svg>
         </span>
         <h3>Execução</h3>
-        <p>Não fico apenas no planejamento. Acompanho o que precisa acontecer.</p>
+        <p>Não fico apenas no planejamento. Acompanho o que precisa acontecer, com registro e rastreabilidade do que foi decidido.</p>
       </article>
       <article class="diff rv d2">
         <span class="ico" aria-hidden="true">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="4" rx="1"/><rect x="3" y="15" width="7" height="5" rx="1"/><rect x="14" y="11" width="7" height="9" rx="1"/></svg>
         </span>
-        <h3>Organização</h3>
-        <p>Transformo complexidade em processos, prioridades e responsabilidades claras.</p>
+        <h3>Repertório técnico</h3>
+        <p>Venho de um ambiente onde erro de processo tem consequência clínica. Esse rigor viaja bem para qualquer operação.</p>
       </article>
+    </div>
+  </section>
+
+  <!-- ======================= GALERIA =======================
+       Espaço para fotos. Para inserir, tire o comentário da linha
+       <img> dentro de cada .gp e troque o nome do arquivo.
+       Se não for usar, apague a seção inteira.
+  ======================================================== -->
+  <section class="sec wrap" id="galeria" style="padding-top:0">
+    <div class="sec-head rv">
+      <div class="eyebrow">Registros</div>
+      <h2>Em campo</h2>
+    </div>
+    <div class="gal">
+      <figure class="gp rv">
+        <!-- <img src="foto-01.jpg" alt="Descreva a foto"> -->
+        <span class="gtag">Espaço para foto</span>
+        <figcaption>Legenda da primeira foto</figcaption>
+      </figure>
+      <figure class="gp rv d1">
+        <!-- <img src="foto-02.jpg" alt="Descreva a foto"> -->
+        <span class="gtag">Espaço para foto</span>
+        <figcaption>Legenda da segunda foto</figcaption>
+      </figure>
+      <figure class="gp rv d2">
+        <!-- <img src="foto-03.jpg" alt="Descreva a foto"> -->
+        <span class="gtag">Espaço para foto</span>
+        <figcaption>Legenda da terceira foto</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -1160,10 +1435,10 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
       <div class="rv">
         <div class="eyebrow">Contato</div>
         <h2 style="margin-top:20px">Vamos conversar?</h2>
-        <p class="lead">Se você está estruturando uma empresa, crescendo uma operação ou precisa de alguém para transformar estratégia em execução, vamos conversar.</p>
+        <p class="lead">Se você está estruturando uma empresa, crescendo uma operação, ou representa uma instituição com demandas técnicas na área da saúde, vamos conversar.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="mailto:israelfsantiago@gmail.com?subject=Contato%20pelo%20site">Entrar em contato <span class="ar">→</span></a>
-          <span class="body" style="font-size:13.5px">Resposta por e-mail.</span>
+          <span class="body" style="font-size:13.5px">Resposta em até 48 horas úteis.</span>
         </div>
       </div>
 
@@ -1179,11 +1454,14 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
           <a class="v" href="https://www.linkedin.com/in/israelfsantiago/" target="_blank" rel="noopener">linkedin.com/in/israelfsantiago</a>
           <span class="go" aria-hidden="true">↗</span>
         </div>
-        <!-- MODELO PENDENTE: troque este bloco pelo modelo acima quando tiver o perfil -->
- <div class="ch">
+        <div class="ch">
           <span class="k">Instagram</span>
-          <a class="v" href="https://www.instagram.com/israelsantiago.com.br/" target="_blank" rel="noopener">instagram.com/israelsantiago.com.br</a>
+          <a class="v" href="https://www.instagram.com/israelsantiago.com.br/" target="_blank" rel="noopener">@israelsantiago.com.br</a>
           <span class="go" aria-hidden="true">↗</span>
+        </div>
+        <div class="ch">
+          <span class="k">Base</span>
+          <span class="v">Rio de Janeiro, RJ · atuação também remota</span>
         </div>
       </div>
     </div>
@@ -1194,7 +1472,7 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
   <div class="wrap ft-in">
     <div>
       <div class="name">Israel Santiago</div>
-      <div class="role">Head de Operações &amp; PMO</div>
+      <div class="role">Head de Operações &amp; PMO · Enfermeiro executivo de saúde · Rio de Janeiro</div>
     </div>
     <a class="top-link" href="#topo">Voltar ao topo <span aria-hidden="true">↑</span></a>
     <div class="cr">© 2026 Israel Santiago</div>
@@ -1368,6 +1646,68 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
     window.addEventListener('resize', pick, {passive:true});
     if(small.addEventListener) small.addEventListener('change', pick);
     pick();
+  })();
+
+  /* ---- filtro das frentes de atuação ---- */
+  (function(){
+    var botoes = Array.prototype.slice.call(document.querySelectorAll('.fb'));
+    var cards  = Array.prototype.slice.call(document.querySelectorAll('#cards .card'));
+    if(!botoes.length || !cards.length) return;
+    botoes.forEach(function(b){
+      b.addEventListener('click', function(){
+        var f = b.getAttribute('data-f');
+        botoes.forEach(function(o){
+          var on = o === b;
+          o.classList.toggle('active', on);
+          o.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        var i = 0;
+        cards.forEach(function(c){
+          var mostra = (f === 'tudo') || (c.getAttribute('data-a') === f);
+          c.classList.remove('pop');
+          if(mostra){
+            c.hidden = false;
+            if(!reduce){
+              void c.offsetWidth;
+              c.style.animationDelay = (i * 0.04).toFixed(2) + 's';
+              c.classList.add('pop');
+            }
+            i++;
+          } else {
+            c.hidden = true;
+          }
+        });
+      });
+    });
+  })();
+
+  /* ---- contadores do topo ---- */
+  (function(){
+    var nums = Array.prototype.slice.call(document.querySelectorAll('.count'));
+    if(!nums.length) return;
+    function anima(el){
+      var alvo = parseInt(el.getAttribute('data-to'), 10) || 0;
+      if(reduce){ el.textContent = alvo; return; }
+      var ini = null, dur = 1100;
+      function passo(t){
+        if(!ini) ini = t;
+        var p = Math.min((t - ini) / dur, 1);
+        var e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(alvo * e);
+        if(p < 1) window.requestAnimationFrame(passo);
+      }
+      window.requestAnimationFrame(passo);
+    }
+    if('IntersectionObserver' in window){
+      var io2 = new IntersectionObserver(function(ents){
+        ents.forEach(function(en){
+          if(en.isIntersecting){ anima(en.target); io2.unobserve(en.target); }
+        });
+      }, {threshold:.4});
+      nums.forEach(function(n){ io2.observe(n); });
+    } else {
+      nums.forEach(anima);
+    }
   })();
 
   /* ---- copiar e-mail ---- */
