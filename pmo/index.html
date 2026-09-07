@@ -271,7 +271,9 @@ header.nav.stuck{border-bottom-color:var(--line)}
   border:1px solid var(--line-soft);
   display:flex;align-items:flex-end;padding:16px;
 }
-.photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;z-index:2}
+.photo:has(img)::before{display:none}
+.photo:has(img) .photo-tag{display:none}
 .photo::before{
   content:"";position:absolute;inset:0;
   background-image:linear-gradient(var(--line-soft) 1px, transparent 1px),linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
@@ -778,7 +780,11 @@ header.nav.hide{transform:translateY(-101%)}
       </div>
 
       <div class="panel fx f5" aria-label="Da estratégia ao resultado">
-          <span class="foto.jpg">Foto profissional</span>
+        <!-- FOTO: tire o comentário da linha <img> abaixo e deixe foto.jpg
+             na mesma pasta deste arquivo. A etiqueta some sozinha. -->
+        <div class="photo">
+          <!-- <img src="foto.jpg" alt="Israel Santiago, Head de Operações e PMO"> -->
+          <span class="photo-tag">Foto profissional</span>
         </div>
         <div class="chain">
           <div class="chain-title">Fluxo de valor</div>
