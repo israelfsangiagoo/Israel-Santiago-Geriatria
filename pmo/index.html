@@ -580,6 +580,150 @@ footer.ft{border-top:var(--rule);background:var(--bg-2)}
   .ch .k{width:70px}
   .impact-in{min-height:auto}
 }
+/* ============================================================
+   CAMADA DE MOVIMENTO
+   ============================================================ */
+html{scroll-behavior:smooth}
+
+/* revelação por palavra (títulos e frases) */
+.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.16em;margin-bottom:-.16em}
+.w>.ww{display:inline-block;transform:translateY(108%);opacity:0;will-change:transform}
+.js .split.go .w>.ww{animation:wordUp .95s cubic-bezier(.22,.68,.24,1) both}
+@keyframes wordUp{from{transform:translateY(108%);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* entrada do hero */
+.js .fx{animation:riseIn 1s cubic-bezier(.22,.68,.24,1) both}
+.js .fx.f1{animation-delay:.10s}
+.js .fx.f2{animation-delay:.20s}
+.js .fx.f3{animation-delay:.30s}
+.js .fx.f4{animation-delay:.42s}
+.js .fx.f5{animation-delay:.18s}
+@keyframes riseIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* atmosfera do hero */
+.hero{position:relative;isolation:isolate}
+.hero::before{
+  content:"";position:absolute;z-index:-1;inset:-14% 0 18% 0;pointer-events:none;
+  background:
+    radial-gradient(42% 52% at 16% 26%, var(--accent-wash) 0%, transparent 66%),
+    radial-gradient(34% 44% at 82% 8%, var(--gold-wash) 0%, transparent 70%);
+  opacity:.7;filter:blur(30px);
+  animation:drift 30s ease-in-out infinite alternate;
+}
+@keyframes drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-2.5%,2%,0) scale(1.07)}}
+
+/* header que some ao descer e volta ao subir */
+header.nav{transition:transform .5s cubic-bezier(.22,.68,.24,1), border-color .3s ease, background .3s ease}
+header.nav.hide{transform:translateY(-101%)}
+
+/* preenchimento dos botões */
+.btn{position:relative;overflow:hidden;isolation:isolate}
+.btn::after{
+  content:"";position:absolute;inset:0;z-index:-1;transform:translateY(101%);
+  transition:transform .5s cubic-bezier(.22,.68,.24,1);
+}
+.btn-primary::after{background:var(--accent-2)}
+.btn-ghost::after{background:var(--accent-wash)}
+.btn:hover::after{transform:translateY(0)}
+.btn-primary:hover{transform:translateY(-2px)}
+
+/* brilho que segue o ponteiro */
+.card,.diff{overflow:hidden}
+.card::after,.diff::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+  transition:opacity .45s ease;
+  background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),
+    color-mix(in srgb, var(--accent-2) 13%, transparent) 0%, transparent 68%);
+}
+.diff{position:relative}
+.card:hover::after,.diff:hover::after{opacity:1}
+
+/* linhas da experiência */
+.exp-row{position:relative;padding-right:30px}
+.exp-row::after{
+  content:"→";position:absolute;right:2px;top:50%;
+  transform:translate(10px,-50%);opacity:0;color:var(--accent-2);font-size:14px;
+  transition:transform .4s cubic-bezier(.22,.68,.24,1), opacity .3s ease;
+}
+.exp-row:hover::after{opacity:1;transform:translate(0,-50%)}
+
+/* linha do método que se desenha */
+.js .steps::before{transform:scaleX(0);transform-origin:left;transition:transform 1.3s cubic-bezier(.22,.68,.24,1) .05s}
+.js .steps.in::before{transform:scaleX(1)}
+.step .dt{transition:transform .5s cubic-bezier(.34,1.5,.5,1), background .4s ease}
+.js .steps.in .step:nth-child(1) .dt{transition-delay:.25s}
+.js .steps.in .step:nth-child(2) .dt{transition-delay:.5s}
+.js .steps.in .step:nth-child(3) .dt{transition-delay:.75s}
+.js .steps.in .step:nth-child(4) .dt{transition-delay:1s}
+.js .steps .step .dt{transform:scale(0)}
+.js .steps.in .step .dt{transform:scale(1)}
+
+/* diagrama que se monta em sequência */
+.js .diagram>*{opacity:0}
+.js .diagram.seq>*{animation:nodeIn .6s cubic-bezier(.22,.68,.24,1) both}
+.js .diagram.seq>*:nth-child(1){animation-delay:.02s}
+.js .diagram.seq>*:nth-child(2){animation-delay:.12s}
+.js .diagram.seq>*:nth-child(3){animation-delay:.22s}
+.js .diagram.seq>*:nth-child(4){animation-delay:.32s}
+.js .diagram.seq>*:nth-child(5){animation-delay:.42s}
+.js .diagram.seq>*:nth-child(6){animation-delay:.54s}
+.js .diagram.seq>*:nth-child(7){animation-delay:.64s}
+.js .diagram.seq>*:nth-child(8){animation-delay:.78s}
+.js .diagram.seq>*:nth-child(9){animation-delay:.88s}
+@keyframes nodeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.diagram.seq .chip{animation:chipIn .5s cubic-bezier(.22,.68,.24,1) both}
+.diagram.seq .chip:nth-child(1){animation-delay:.70s}
+.diagram.seq .chip:nth-child(2){animation-delay:.75s}
+.diagram.seq .chip:nth-child(3){animation-delay:.80s}
+.diagram.seq .chip:nth-child(4){animation-delay:.85s}
+.diagram.seq .chip:nth-child(5){animation-delay:.90s}
+.diagram.seq .chip:nth-child(6){animation-delay:.95s}
+@keyframes chipIn{from{opacity:0;transform:translateY(6px) scale(.96)}to{opacity:1;transform:none}}
+
+/* pulso permanente do nó central */
+.dnode.primary{position:relative}
+.dnode.primary::after{
+  content:"";position:absolute;inset:-1px;border-radius:3px;border:1px solid var(--accent-2);
+  opacity:0;animation:halo 4.2s ease-out infinite 1.2s;pointer-events:none;
+}
+@keyframes halo{
+  0%{opacity:.7;transform:scale(1)}
+  60%{opacity:0;transform:scale(1.045)}
+  100%{opacity:0;transform:scale(1.045)}
+}
+
+/* revelação das seções, com desfoque de entrada */
+.js .rv{opacity:0;transform:translateY(20px);filter:blur(7px)}
+.js .rv.in{
+  opacity:1;transform:none;filter:blur(0);
+  transition:opacity 1s cubic-bezier(.22,.68,.24,1), transform 1s cubic-bezier(.22,.68,.24,1), filter .8s ease;
+}
+
+/* frase de impacto com leve paralaxe */
+.impact .q,.impact .words{will-change:transform}
+
+/* microdetalhes */
+.chip,.pill{transition:border-color .3s ease,color .3s ease,transform .3s cubic-bezier(.22,.68,.24,1),background .3s ease}
+.pill:hover{border-color:var(--gold);color:var(--ink);transform:translateY(-1px)}
+.node .lb{transition:color .35s ease,transform .35s ease}
+.panel:hover .node.key .lb{transform:translateX(2px)}
+.photo{transition:transform .8s cubic-bezier(.22,.68,.24,1)}
+.panel:hover .photo{transform:scale(1.012)}
+.stat{transition:padding-left .35s cubic-bezier(.22,.68,.24,1)}
+.stat:hover{padding-left:6px}
+.top-link span{display:inline-block;transition:transform .35s cubic-bezier(.22,.68,.24,1)}
+.top-link:hover span{transform:translateY(-3px)}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .hero::before{animation:none}
+  .dnode.primary::after{display:none}
+  .js .diagram>*{opacity:1}
+  .js .steps .step .dt{transform:scale(1)}
+  .js .steps::before{transform:scaleX(1)}
+  .w>.ww{transform:none;opacity:1}
+}
+
 </style>
 
 </head>
@@ -620,20 +764,20 @@ footer.ft{border-top:var(--rule);background:var(--bg-2)}
   <section class="hero wrap">
     <div class="hero-grid">
       <div>
-        <div class="eyebrow">Head de Operações &amp; PMO</div>
-        <h1>Eu transformo estratégia em <span class="em">execução</span>.</h1>
-        <p class="lead">Atuo na interseção entre estratégia, operações e projetos, conectando liderança, equipes e clientes para fazer a empresa funcionar melhor e crescer com estrutura.</p>
-        <div class="hero-ctas">
+        <div class="eyebrow fx">Head de Operações &amp; PMO</div>
+        <h1>Eu transformo estratégia em <span class="em">execução.</span></h1>
+        <p class="lead fx f2">Atuo na interseção entre estratégia, operações e projetos, conectando liderança, equipes e clientes para fazer a empresa funcionar melhor e crescer com estrutura.</p>
+        <div class="hero-ctas fx f3">
           <a class="btn btn-primary" href="#contato">Vamos conversar <span class="ar">→</span></a>
           <a class="btn btn-ghost" href="#sobre">Conheça meu trabalho <span class="ar down">↓</span></a>
         </div>
-        <div class="hero-note">
+        <div class="hero-note fx f4">
           <span class="dot" aria-hidden="true"></span>
           <p>Eu organizo a operação para que o CEO possa focar no crescimento do negócio.</p>
         </div>
       </div>
 
-      <div class="panel rv d1" aria-label="Da estratégia ao resultado">
+      <div class="panel fx f5" aria-label="Da estratégia ao resultado">
         <!-- Espaço reservado para a foto profissional.
              Para inserir: <img src="foto.jpg" alt="Israel Santiago"> dentro de .photo -->
         <div class="photo">
@@ -882,7 +1026,7 @@ footer.ft{border-top:var(--rule);background:var(--bg-2)}
   <!-- ======================= FRASE DE IMPACTO ======================= -->
   <section class="impact">
     <div class="wrap impact-in">
-      <p class="q rv">Meu trabalho é fazer a operação parar de depender do <i>improviso</i>.</p>
+      <p class="q rv">Meu trabalho é fazer a operação parar de depender do <i>improviso.</i></p>
       <hr class="rv d1">
       <div class="words rv d2">
         <span>Processo</span><span>Clareza</span><span>Responsabilidade</span><span>Execução</span>
@@ -980,24 +1124,101 @@ footer.ft{border-top:var(--rule);background:var(--bg-2)}
     targets.forEach(function(t){ if(t) spy.observe(t); });
   }
 
+  /* ---- divisão em palavras para a revelação dos títulos ---- */
+  if(!reduce){
+    var SPLIT = document.querySelectorAll('.hero h1, .band .q, .impact .q, .sec-head h2, .role-copy h2, .contact h2');
+    SPLIT.forEach(function(el){
+      var k = 0;
+      (function walk(node){
+        Array.prototype.slice.call(node.childNodes).forEach(function(ch){
+          if(ch.nodeType === 3){
+            var parts = ch.textContent.split(/(\s+)/), frag = document.createDocumentFragment();
+            parts.forEach(function(t){
+              if(!t) return;
+              if(/^\s+$/.test(t)){ frag.appendChild(document.createTextNode(t)); return; }
+              var out = document.createElement('span'); out.className = 'w';
+              var inn = document.createElement('span'); inn.className = 'ww';
+              inn.textContent = t;
+              inn.style.animationDelay = Math.min(k, 14) * 0.045 + 's';
+              k++;
+              out.appendChild(inn); frag.appendChild(out);
+            });
+            node.replaceChild(frag, ch);
+          } else if(ch.nodeType === 1){ walk(ch); }
+        });
+      })(el);
+      el.classList.add('split');
+    });
+    document.querySelectorAll('.hero .split').forEach(function(el){ el.classList.add('go'); });
+  }
+
   /* ---- entrada suave das seções (visíveis por padrão no primeiro quadro) ---- */
-  var items = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+  var items = Array.prototype.slice.call(document.querySelectorAll('.rv, .diagram, .steps, .split'));
+  var mark = function(el){
+    el.classList.add('in');
+    if(el.classList.contains('diagram')) el.classList.add('seq');
+    if(el.classList.contains('split')) el.classList.add('go');
+  };
   if(reduce || !('IntersectionObserver' in window)){
-    items.forEach(function(el){ el.classList.add('in'); });
+    items.forEach(mark);
   } else {
     var vh = window.innerHeight;
     var pending = [];
     items.forEach(function(el){
-      if(el.getBoundingClientRect().top < vh * 0.92){ el.classList.add('in'); }
+      if(el.getBoundingClientRect().top < vh * 0.92){ mark(el); }
       else { pending.push(el); }
     });
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
-        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+        if(en.isIntersecting){ mark(en.target); io.unobserve(en.target); }
       });
     }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
     pending.forEach(function(el){ io.observe(el); });
-    setTimeout(function(){ pending.forEach(function(el){ el.classList.add('in'); }); }, 2200);
+    setTimeout(function(){ pending.forEach(mark); }, 2400);
+  }
+
+  /* ---- header que recolhe ao descer ---- */
+  var lastY = window.scrollY, navHidden = false;
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY;
+    if(sheet.classList.contains('open')){ lastY = y; return; }
+    if(y > 460 && y > lastY + 6 && !navHidden){ nav.classList.add('hide'); navHidden = true; }
+    else if((y < lastY - 6 || y < 200) && navHidden){ nav.classList.remove('hide'); navHidden = false; }
+    lastY = y;
+  }, {passive:true});
+
+  /* ---- brilho que acompanha o ponteiro nos cards ---- */
+  if(window.matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.card, .diff').forEach(function(c){
+      c.addEventListener('pointermove', function(e){
+        var r = c.getBoundingClientRect();
+        c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+  }
+
+  /* ---- leve paralaxe na frase de impacto ---- */
+  if(!reduce){
+    var impact = document.querySelector('.impact');
+    var impQ = document.querySelector('.impact .q');
+    var impW = document.querySelector('.impact .words');
+    if(impact && impQ){
+      var raf = false;
+      window.addEventListener('scroll', function(){
+        if(raf) return; raf = true;
+        window.requestAnimationFrame(function(){
+          var r = impact.getBoundingClientRect();
+          if(r.bottom > -200 && r.top < window.innerHeight + 200){
+            var prog = (window.innerHeight - r.top) / (window.innerHeight + r.height);
+            var d = (prog - .5) * 46;
+            impQ.style.transform = 'translateY(' + (-d).toFixed(2) + 'px)';
+            if(impW) impW.style.transform = 'translateY(' + (-d * .45).toFixed(2) + 'px)';
+          }
+          raf = false;
+        });
+      }, {passive:true});
+    }
   }
 
   /* ---- copiar e-mail ---- */
