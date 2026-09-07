@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Israel Santiago | Links</title>
+<meta name="description" content="Links de Israel Santiago, Head de Operacoes e PMO.">
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap">
+
+<style>
+/* ============================================================
+   Israel Santiago · página de links
+   Mesma paleta e tipografia do site principal
+   ============================================================ */
+
+:root{
+  --bg:#F4F3EE;
+  --bg-2:#FAF9F5;
+  --surface:#FFFFFF;
+  --ink:#14181A;
+  --ink-2:#39403C;
+  --muted:#767C76;
+  --faint:#9BA09A;
+  --line:#DFDDD3;
+  --line-soft:#EAE8E0;
+  --accent:#123A2D;
+  --accent-2:#1E6349;
+  --accent-wash:#E6EBE5;
+  --gold:#94764B;
+  --gold-wash:#EFE6D6;
+  --btn-bg:#123A2D;
+  --btn-fg:#F7F6F1;
+  --shadow:0 1px 2px rgba(20,24,26,.04), 0 14px 34px -20px rgba(18,58,45,.26);
+  --shadow-lift:0 2px 4px rgba(20,24,26,.05), 0 22px 44px -22px rgba(18,58,45,.34);
+  --focus:#1E6349;
+  --f:"Helvetica Neue","Inter",Helvetica,Arial,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C100E;--bg-2:#111614;--surface:#151A18;--ink:#ECEEE9;--ink-2:#C2C8C2;
+    --muted:#8B928B;--faint:#6C736D;--line:#242A27;--line-soft:#1C211E;
+    --accent:#7FC1A2;--accent-2:#5AA684;--accent-wash:#16211C;--gold:#C6A579;--gold-wash:#241F16;
+    --btn-bg:#4E9878;--btn-fg:#06100B;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 18px 44px -24px rgba(0,0,0,.9);
+    --shadow-lift:0 2px 6px rgba(0,0,0,.5), 0 26px 54px -24px rgba(0,0,0,1);
+    --focus:#7FC1A2;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C100E;--bg-2:#111614;--surface:#151A18;--ink:#ECEEE9;--ink-2:#C2C8C2;
+  --muted:#8B928B;--faint:#6C736D;--line:#242A27;--line-soft:#1C211E;
+  --accent:#7FC1A2;--accent-2:#5AA684;--accent-wash:#16211C;--gold:#C6A579;--gold-wash:#241F16;
+  --btn-bg:#4E9878;--btn-fg:#06100B;
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 18px 44px -24px rgba(0,0,0,.9);
+  --shadow-lift:0 2px 6px rgba(0,0,0,.5), 0 26px 54px -24px rgba(0,0,0,1);
+  --focus:#7FC1A2;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--f);font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  display:flex;flex-direction:column;align-items:center;
+  padding:clamp(28px,6vw,64px) 20px clamp(36px,6vw,56px);
+  min-height:100vh;position:relative;isolation:isolate;
+}
+::selection{background:var(--accent-wash);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:6px}
+
+/* ---------- atmosfera ---------- */
+.amb{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
+.amb::before,.amb::after{content:"";position:absolute;border-radius:50%;filter:blur(70px)}
+.amb::before{
+  width:62vmax;height:62vmax;left:-22vmax;top:-26vmax;
+  background:radial-gradient(circle at 50% 50%, var(--accent-wash) 0%, transparent 66%);
+  opacity:.9;animation:float1 26s ease-in-out infinite alternate;
+}
+.amb::after{
+  width:52vmax;height:52vmax;right:-20vmax;bottom:-24vmax;
+  background:radial-gradient(circle at 50% 50%, var(--gold-wash) 0%, transparent 68%);
+  opacity:.8;animation:float2 32s ease-in-out infinite alternate;
+}
+@keyframes float1{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(6%,5%,0) scale(1.12)}}
+@keyframes float2{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-6%,-4%,0) scale(1.1)}}
+.grid-bg{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(70% 55% at 50% 22%, #000 0%, transparent 78%);
+          mask-image:radial-gradient(70% 55% at 50% 22%, #000 0%, transparent 78%);
+  opacity:.55;
+}
+
+/* ---------- coluna ---------- */
+.col{width:100%;max-width:488px;display:flex;flex-direction:column;gap:clamp(22px,4vw,30px)}
+
+/* ---------- cabeçalho ---------- */
+.head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px}
+.avatar{position:relative;width:112px;height:112px;border-radius:50%;display:grid;place-items:center;flex:none}
+.avatar::before{
+  content:"";position:absolute;inset:-5px;border-radius:50%;
+  background:conic-gradient(from 0deg, var(--accent-2), var(--gold), var(--accent-2));
+  opacity:.75;animation:spin 14s linear infinite;
+}
+.avatar::after{content:"";position:absolute;inset:-1px;border-radius:50%;background:var(--bg)}
+.avatar .inner{
+  position:relative;z-index:2;width:100%;height:100%;border-radius:50%;overflow:hidden;
+  background:linear-gradient(150deg,var(--accent-wash),var(--bg-2) 58%,var(--gold-wash));
+  display:grid;place-items:center;border:1px solid var(--line-soft);
+}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.avatar .ini{font-size:29px;font-weight:500;letter-spacing:-.03em;color:var(--accent)}
+.avatar:has(img) .ini{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.name{font-size:clamp(25px,6vw,31px);font-weight:600;letter-spacing:-.035em;line-height:1.1;margin:0}
+.role{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0}
+.tag{font-size:15px;color:var(--ink-2);max-width:34ch;margin:0;line-height:1.5}
+.status{
+  display:inline-flex;align-items:center;gap:9px;
+  border:1px solid var(--line);border-radius:999px;padding:6px 13px;
+  font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+  background:color-mix(in srgb, var(--surface) 70%, transparent);
+}
+.status .beat{width:6px;height:6px;border-radius:50%;background:var(--accent-2);position:relative;flex:none}
+.status .beat::after{
+  content:"";position:absolute;inset:-3px;border-radius:50%;border:1px solid var(--accent-2);
+  animation:beat 2.6s ease-out infinite;
+}
+@keyframes beat{0%{opacity:.8;transform:scale(.5)}70%{opacity:0;transform:scale(1.6)}100%{opacity:0;transform:scale(1.6)}}
+
+/* ---------- lista de links ---------- */
+.links{display:flex;flex-direction:column;gap:11px}
+.lk{
+  position:relative;isolation:isolate;overflow:hidden;
+  display:grid;grid-template-columns:38px minmax(0,1fr) 20px;align-items:center;gap:14px;
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:15px 17px;box-shadow:var(--shadow);
+  transition:transform .4s cubic-bezier(.22,.68,.24,1), box-shadow .4s ease, border-color .35s ease;
+}
+.lk::before{
+  content:"";position:absolute;inset:0;z-index:-1;background:var(--accent-wash);
+  transform:translateX(-101%);transition:transform .55s cubic-bezier(.22,.68,.24,1);
+}
+.lk:hover,.lk:focus-visible{transform:translateY(-3px);box-shadow:var(--shadow-lift);border-color:var(--accent-2)}
+.lk:hover::before,.lk:focus-visible::before{transform:translateX(0)}
+.lk:active{transform:translateY(-1px) scale(.995)}
+.lk .ic{
+  width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex:none;
+  border:1px solid var(--line);color:var(--accent-2);background:var(--bg-2);
+  transition:border-color .35s ease,background .35s ease,transform .45s cubic-bezier(.22,.68,.24,1);
+}
+.lk:hover .ic{border-color:var(--accent-2);background:var(--surface);transform:scale(1.06)}
+.lk .tx{min-width:0}
+.lk .t{font-size:15.5px;font-weight:500;letter-spacing:-.015em;display:block}
+.lk .s{font-size:12.5px;color:var(--muted);display:block;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lk .ar{color:var(--faint);font-size:15px;justify-self:end;transition:transform .45s cubic-bezier(.22,.68,.24,1),color .35s ease}
+.lk:hover .ar{color:var(--accent-2);transform:translateX(4px)}
+
+.lk.primary{background:var(--btn-bg);border-color:var(--btn-bg)}
+.lk.primary .t,.lk.primary .ar{color:var(--btn-fg)}
+.lk.primary .s{color:color-mix(in srgb, var(--btn-fg) 66%, transparent)}
+.lk.primary .ic{
+  background:color-mix(in srgb, var(--btn-fg) 12%, transparent);
+  border-color:color-mix(in srgb, var(--btn-fg) 26%, transparent);color:var(--btn-fg);
+}
+.lk.primary::before{background:var(--accent-2)}
+.lk.primary:hover{border-color:var(--accent-2)}
+
+/* ---------- redes ---------- */
+.social{display:flex;justify-content:center;gap:10px}
+.sc{
+  width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+  border:1px solid var(--line);color:var(--ink-2);
+  background:color-mix(in srgb, var(--surface) 72%, transparent);cursor:pointer;
+  transition:transform .4s cubic-bezier(.22,.68,.24,1),border-color .3s ease,color .3s ease,background .3s ease;
+}
+.sc:hover{transform:translateY(-3px);border-color:var(--accent-2);color:var(--accent-2);background:var(--surface)}
+
+/* ---------- rodapé ---------- */
+.foot{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding-top:6px}
+.back{
+  display:inline-flex;align-items:center;gap:9px;font-size:13.5px;color:var(--ink-2);
+  border-bottom:1px solid var(--line);padding-bottom:3px;transition:border-color .3s ease,color .3s ease;
+}
+.back:hover{color:var(--ink);border-color:var(--accent-2)}
+.back span{transition:transform .4s cubic-bezier(.22,.68,.24,1);display:inline-block}
+.back:hover span{transform:translateX(3px)}
+.cr{font-size:11px;letter-spacing:.06em;color:var(--faint)}
+
+.copied{
+  position:fixed;left:50%;bottom:26px;transform:translate(-50%,14px);
+  background:var(--btn-bg);color:var(--btn-fg);border-radius:999px;
+  padding:10px 18px;font-size:12.5px;opacity:0;pointer-events:none;
+  transition:opacity .3s ease,transform .4s cubic-bezier(.22,.68,.24,1);
+  box-shadow:var(--shadow-lift);z-index:20;
+}
+.copied.on{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- entrada ---------- */
+.an{animation:up .8s cubic-bezier(.22,.68,.24,1) both}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+}
+@media (max-width:380px){
+  .lk{grid-template-columns:34px minmax(0,1fr) 16px;padding:13px 14px;gap:12px}
+  .lk .ic{width:34px;height:34px}
+}
+</style>
+
+</head>
+<body>
+<div class="amb" aria-hidden="true"></div>
+<div class="grid-bg" aria-hidden="true"></div>
+
+<main class="col">
+
+  <header class="head">
+    <div class="avatar an" style="animation-delay:0s">
+      <div class="inner">
+        <!-- FOTO: tire o comentário da linha abaixo e deixe foto.jpg na mesma pasta -->
+        <!-- <img src="foto.jpg" alt="Israel Santiago"> -->
+        <span class="ini">IS</span>
+      </div>
+    </div>
+
+    <div class="an" style="animation-delay:.06s;display:flex;flex-direction:column;align-items:center;gap:9px">
+      <h1 class="name">Israel Santiago</h1>
+      <p class="role">Head de Operações &amp; PMO</p>
+    </div>
+
+    <p class="tag an" style="animation-delay:.12s">Estratégia, pessoas, processos e execução para transformar crescimento em operação.</p>
+
+    <!-- Para remover esta etiqueta, apague a linha inteira abaixo -->
+    <span class="status an" style="animation-delay:.18s"><span class="beat"></span>Aberto a conversas</span>
+  </header>
+
+  <nav class="links" id="links" aria-label="Meus links"></nav>
+
+  <div class="social" id="social"></div>
+
+  <footer class="foot an" style="animation-delay:.7s">
+    <a class="back" href="https://israelsantiago.com.br">Ver o site completo <span aria-hidden="true">→</span></a>
+    <span class="cr">© 2026 Israel Santiago</span>
+  </footer>
+</main>
+
+<div class="copied" id="toast" role="status">E-mail copiado</div>
+
+<script>
+/* ================================================================
+   AQUI É O ÚNICO LUGAR QUE VOCÊ PRECISA EDITAR
+
+   Regra simples: link sem endereço não aparece na página.
+   Para ativar um link, basta preencher o campo url.
+   Para desativar, apague o que está dentro das aspas do url.
+   A ordem da lista é a ordem que aparece na tela.
+
+   icone: site | sociedades | linkedin | email | whatsapp |
+          instagram | agenda | documento | artigo | link
+   destaque: true deixa o cartão verde sólido. Use em um só.
+   ================================================================ */
+
+const LINKS = [
+
+  { titulo:'Portfólio executivo',
+    sub:'Como eu transformo estratégia em execução',
+    url:'https://israelsantiago.com.br',
+    icone:'site', destaque:true },
+
+  { titulo:'Minhas sociedades',
+    sub:'Os negócios em que sou sócio',
+    url:'sociedades.html',
+    icone:'sociedades' },
+
+  { titulo:'LinkedIn',
+    sub:'linkedin.com/in/israelfsantiago',
+    url:'https://www.linkedin.com/in/israelfsantiago/',
+    icone:'linkedin' },
+
+  { titulo:'E-mail',
+    sub:'israelfsantiago@gmail.com',
+    url:'mailto:israelfsantiago@gmail.com?subject=Contato%20pela%20p%C3%A1gina%20de%20links',
+    icone:'email' },
+
+  /* ---------- espaços livres, ainda ocultos ----------
+     Preencha o url e o link aparece sozinho.
+     No WhatsApp use https://wa.me/ mais o número com país e só dígitos,
+     por exemplo https://wa.me/5511999998888                          */
+
+  { titulo:'WhatsApp',
+    sub:'Conversa direta',
+    url:'',
+    icone:'whatsapp' },
+
+  { titulo:'Instagram',
+    sub:'@seuusuario',
+    url:'',
+    icone:'instagram' },
+
+  { titulo:'Agendar uma conversa',
+    sub:'Escolha um horário na minha agenda',
+    url:'',
+    icone:'agenda' },
+
+  { titulo:'Currículo',
+    sub:'Versão completa em PDF',
+    url:'',
+    icone:'documento' },
+
+  { titulo:'Artigo ou case',
+    sub:'Um material que vale a leitura',
+    url:'',
+    icone:'artigo' },
+
+  { titulo:'Link livre',
+    sub:'Use para o que fizer sentido',
+    url:'',
+    icone:'link' },
+];
+
+/* Ícones ao lado do nome, no rodapé da página.
+   Mesma regra: sem url, não aparece.                                */
+const REDES = [
+  { nome:'LinkedIn',  url:'https://www.linkedin.com/in/israelfsantiago/', icone:'linkedin' },
+  { nome:'Instagram', url:'', icone:'instagram' },
+];
+
+const EMAIL = 'israelfsantiago@gmail.com';
+
+/* ================================================================
+   Daqui para baixo não precisa mexer
+   ================================================================ */
+(function(){
+  const SVG = {
+    site:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 13h7M7 16h4"/>',
+    sociedades:'<path d="M9 21V9a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v12"/><path d="M3 21V13a1 1 0 0 1 1-1h5"/><path d="M15 12h5a1 1 0 0 1 1 1v8"/><path d="M2 21h20"/><path d="M12 3v3"/>',
+    linkedin:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7M7 7v.01M11.5 17v-4a2.5 2.5 0 0 1 5 0v4"/>',
+    email:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/>',
+    whatsapp:'<path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5Z"/>',
+    instagram:'<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17 7v.01"/>',
+    agenda:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M12 14h.01"/>',
+    documento:'<path d="M14 3v5h5"/><path d="M19 8v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7Z"/><path d="M9 13h6M9 17h4"/>',
+    artigo:'<path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/>',
+    link:'<path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/>'
+  };
+  const icon = n => '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">' + (SVG[n] || SVG.link) + '</svg>';
+  const externo = u => /^https?:/i.test(u) && u.indexOf('israelsantiago.com.br') === -1;
+  const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  const ativos = LINKS.filter(l => l && l.url && l.url.trim() && l.titulo && l.titulo.trim());
+  const lista = document.getElementById('links');
+  let atraso = 0.22;
+
+  lista.innerHTML = ativos.map(l => {
+    atraso += 0.06;
+    const alvo = externo(l.url) ? ' target="_blank" rel="noopener"' : '';
+    const seta = externo(l.url) ? '↗' : '→';
+    return '<a class="lk an' + (l.destaque ? ' primary' : '') + '" style="animation-delay:' + atraso.toFixed(2) + 's" href="' + esc(l.url) + '"' + alvo + '>' +
+             '<span class="ic" aria-hidden="true">' + icon(l.icone) + '</span>' +
+             '<span class="tx"><span class="t">' + esc(l.titulo) + '</span>' +
+             (l.sub ? '<span class="s">' + esc(l.sub) + '</span>' : '') + '</span>' +
+             '<span class="ar" aria-hidden="true">' + seta + '</span>' +
+           '</a>';
+  }).join('');
+
+  const redes = REDES.filter(r => r && r.url && r.url.trim());
+  const social = document.getElementById('social');
+  atraso += 0.06;
+  social.style.animationDelay = atraso.toFixed(2) + 's';
+  social.classList.add('an');
+  social.innerHTML = redes.map(r =>
+      '<a class="sc" href="' + esc(r.url) + '" target="_blank" rel="noopener" aria-label="' + esc(r.nome) + '">' + icon(r.icone) + '</a>'
+    ).join('') +
+    '<button class="sc" id="mail" type="button" aria-label="Copiar e-mail">' +
+      '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>' +
+    '</button>';
+
+  const toast = document.getElementById('toast');
+  let t;
+  function show(){
+    toast.classList.add('on');
+    clearTimeout(t);
+    t = setTimeout(() => toast.classList.remove('on'), 2000);
+  }
+  document.getElementById('mail').addEventListener('click', function(){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(EMAIL).then(show).catch(show);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = EMAIL; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); }catch(e){}
+      document.body.removeChild(ta); show();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
