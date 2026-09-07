@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Israel Santiago | Head Executivo</title>
-<meta name="description" content="Links de Israel Santiago, Head de PMO em Saúde.">
+<meta name="description" content="Links de Israel Santiago, Head de PMO em Saude.">
 <style>img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,22 +17,12 @@
    ============================================================ */
 
 :root{
-  --bg:#F4F3EE;
-  --bg-2:#FAF9F5;
-  --surface:#FFFFFF;
-  --ink:#14181A;
-  --ink-2:#39403C;
-  --muted:#767C76;
-  --faint:#9BA09A;
-  --line:#DFDDD3;
-  --line-soft:#EAE8E0;
-  --accent:#123A2D;
-  --accent-2:#1E6349;
-  --accent-wash:#E6EBE5;
-  --gold:#94764B;
-  --gold-wash:#EFE6D6;
-  --btn-bg:#123A2D;
-  --btn-fg:#F7F6F1;
+  --bg:#F4F3EE;--bg-2:#FAF9F5;--surface:#FFFFFF;
+  --ink:#14181A;--ink-2:#39403C;--muted:#767C76;--faint:#9BA09A;
+  --line:#DFDDD3;--line-soft:#EAE8E0;
+  --accent:#123A2D;--accent-2:#1E6349;--accent-wash:#E6EBE5;
+  --gold:#94764B;--gold-wash:#EFE6D6;
+  --btn-bg:#123A2D;--btn-fg:#F7F6F1;
   --shadow:0 1px 2px rgba(20,24,26,.04), 0 14px 34px -20px rgba(18,58,45,.26);
   --shadow-lift:0 2px 4px rgba(20,24,26,.05), 0 22px 44px -22px rgba(18,58,45,.34);
   --focus:#1E6349;
@@ -64,26 +54,25 @@ body{
   margin:0;background:var(--bg);color:var(--ink);
   font-family:var(--f);font-size:16px;line-height:1.55;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
-  display:flex;flex-direction:column;align-items:center;
-  padding:clamp(28px,6vw,64px) 20px clamp(36px,6vw,56px);
+  padding:clamp(24px,4vw,52px) 20px clamp(32px,5vw,56px);
   min-height:100vh;position:relative;isolation:isolate;
 }
 ::selection{background:var(--accent-wash);color:var(--ink)}
 a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:6px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:8px}
 
 /* ---------- atmosfera ---------- */
 .amb{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
-.amb::before,.amb::after{content:"";position:absolute;border-radius:50%;filter:blur(70px)}
+.amb::before,.amb::after{content:"";position:absolute;border-radius:50%;filter:blur(72px)}
 .amb::before{
-  width:62vmax;height:62vmax;left:-22vmax;top:-26vmax;
+  width:66vmax;height:66vmax;left:-24vmax;top:-28vmax;
   background:radial-gradient(circle at 50% 50%, var(--accent-wash) 0%, transparent 66%);
-  opacity:.9;animation:float1 26s ease-in-out infinite alternate;
+  opacity:.95;animation:float1 26s ease-in-out infinite alternate;
 }
 .amb::after{
-  width:52vmax;height:52vmax;right:-20vmax;bottom:-24vmax;
+  width:56vmax;height:56vmax;right:-22vmax;bottom:-26vmax;
   background:radial-gradient(circle at 50% 50%, var(--gold-wash) 0%, transparent 68%);
-  opacity:.8;animation:float2 32s ease-in-out infinite alternate;
+  opacity:.85;animation:float2 32s ease-in-out infinite alternate;
 }
 @keyframes float1{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(6%,5%,0) scale(1.12)}}
 @keyframes float2{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-6%,-4%,0) scale(1.1)}}
@@ -92,41 +81,53 @@ a{color:inherit;text-decoration:none}
   background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),
                    linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
   background-size:56px 56px;
-  -webkit-mask-image:radial-gradient(70% 55% at 50% 22%, #000 0%, transparent 78%);
-          mask-image:radial-gradient(70% 55% at 50% 22%, #000 0%, transparent 78%);
-  opacity:.55;
+  -webkit-mask-image:radial-gradient(78% 62% at 50% 26%, #000 0%, transparent 80%);
+          mask-image:radial-gradient(78% 62% at 50% 26%, #000 0%, transparent 80%);
+  opacity:.6;
 }
 
-/* ---------- coluna ---------- */
-.col{width:100%;max-width:488px;display:flex;flex-direction:column;gap:clamp(22px,4vw,30px)}
+/* ---------- estrutura ---------- */
+.shell{
+  width:100%;max-width:980px;margin:0 auto;
+  display:grid;grid-template-columns:minmax(0,352px) minmax(0,1fr);
+  gap:20px;align-items:start;
+}
+.direita{display:flex;flex-direction:column;gap:20px;min-width:0}
 
-/* ---------- cabeçalho ---------- */
-.head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px}
-.avatar{position:relative;width:112px;height:112px;border-radius:50%;display:grid;place-items:center;flex:none}
+/* ---------- cartão de perfil ---------- */
+.perfil{
+  background:color-mix(in srgb, var(--surface) 84%, transparent);
+  border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
+  padding:clamp(24px,3vw,30px);
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;
+  position:sticky;top:clamp(24px,4vw,52px);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.avatar{position:relative;width:116px;height:116px;border-radius:50%;display:grid;place-items:center;flex:none}
 .avatar::before{
   content:"";position:absolute;inset:-5px;border-radius:50%;
   background:conic-gradient(from 0deg, var(--accent-2), var(--gold), var(--accent-2));
-  opacity:.75;animation:spin 14s linear infinite;
+  opacity:.8;animation:spin 14s linear infinite;
 }
-.avatar::after{content:"";position:absolute;inset:-1px;border-radius:50%;background:var(--bg)}
+.avatar::after{content:"";position:absolute;inset:-1px;border-radius:50%;background:var(--surface)}
 .avatar .inner{
   position:relative;z-index:2;width:100%;height:100%;border-radius:50%;overflow:hidden;
   background:linear-gradient(150deg,var(--accent-wash),var(--bg-2) 58%,var(--gold-wash));
   display:grid;place-items:center;border:1px solid var(--line-soft);
 }
 .avatar img{width:100%;height:100%;object-fit:cover;display:block}
-.avatar .ini{font-size:29px;font-weight:500;letter-spacing:-.03em;color:var(--accent)}
+.avatar .ini{font-size:30px;font-weight:500;letter-spacing:-.03em;color:var(--accent)}
 .avatar:has(img) .ini{display:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-.name{font-size:clamp(25px,6vw,31px);font-weight:600;letter-spacing:-.035em;line-height:1.1;margin:0}
-.role{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0}
-.tag{font-size:15px;color:var(--ink-2);max-width:34ch;margin:0;line-height:1.5}
+.name{font-size:clamp(24px,4vw,29px);font-weight:600;letter-spacing:-.035em;line-height:1.1;margin:0}
+.role{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin:6px 0 0}
+.tag{font-size:14.5px;color:var(--ink-2);margin:0;line-height:1.55}
 .status{
   display:inline-flex;align-items:center;gap:9px;
   border:1px solid var(--line);border-radius:999px;padding:6px 13px;
-  font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
-  background:color-mix(in srgb, var(--surface) 70%, transparent);
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+  background:var(--bg-2);
 }
 .status .beat{width:6px;height:6px;border-radius:50%;background:var(--accent-2);position:relative;flex:none}
 .status .beat::after{
@@ -135,24 +136,56 @@ a{color:inherit;text-decoration:none}
 }
 @keyframes beat{0%{opacity:.8;transform:scale(.5)}70%{opacity:0;transform:scale(1.6)}100%{opacity:0;transform:scale(1.6)}}
 
+.hr{width:100%;height:1px;background:var(--line-soft);border:0;margin:2px 0}
+
+/* números do perfil */
+.nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%}
+.nm{display:flex;flex-direction:column;gap:5px;align-items:center}
+.nm b{
+  font-size:23px;font-weight:500;letter-spacing:-.04em;line-height:1;color:var(--ink);
+  font-variant-numeric:tabular-nums;display:flex;align-items:baseline;
+}
+.nm b i{font-style:normal;color:var(--gold);font-size:.6em;margin-left:1px}
+.nm span{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);line-height:1.35}
+
+.local{
+  display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);
+}
+.local svg{color:var(--accent-2);flex:none}
+
+.social{display:flex;justify-content:center;gap:9px;width:100%}
+.sc{
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+  border:1px solid var(--line);color:var(--ink-2);background:var(--bg-2);cursor:pointer;
+  transition:transform .4s cubic-bezier(.22,.68,.24,1),border-color .3s ease,color .3s ease,background .3s ease;
+}
+.sc:hover{transform:translateY(-3px);border-color:var(--accent-2);color:var(--accent-2);background:var(--surface)}
+
 /* ---------- lista de links ---------- */
 .links{display:flex;flex-direction:column;gap:11px}
 .lk{
   position:relative;isolation:isolate;overflow:hidden;
-  display:grid;grid-template-columns:38px minmax(0,1fr) 20px;align-items:center;gap:14px;
-  background:var(--surface);border:1px solid var(--line);border-radius:14px;
-  padding:15px 17px;box-shadow:var(--shadow);
+  display:grid;grid-template-columns:40px minmax(0,1fr) 20px;align-items:center;gap:15px;
+  background:var(--surface);border:1px solid var(--line);border-radius:15px;
+  padding:16px 18px;box-shadow:var(--shadow);
   transition:transform .4s cubic-bezier(.22,.68,.24,1), box-shadow .4s ease, border-color .35s ease;
 }
 .lk::before{
   content:"";position:absolute;inset:0;z-index:-1;background:var(--accent-wash);
   transform:translateX(-101%);transition:transform .55s cubic-bezier(.22,.68,.24,1);
 }
+.lk::after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),
+    color-mix(in srgb, var(--accent-2) 14%, transparent) 0%, transparent 70%);
+  transition:opacity .45s ease;
+}
 .lk:hover,.lk:focus-visible{transform:translateY(-3px);box-shadow:var(--shadow-lift);border-color:var(--accent-2)}
 .lk:hover::before,.lk:focus-visible::before{transform:translateX(0)}
+.lk:hover::after{opacity:1}
 .lk:active{transform:translateY(-1px) scale(.995)}
 .lk .ic{
-  width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex:none;
+  width:40px;height:40px;border-radius:11px;display:grid;place-items:center;flex:none;
   border:1px solid var(--line);color:var(--accent-2);background:var(--bg-2);
   transition:border-color .35s ease,background .35s ease,transform .45s cubic-bezier(.22,.68,.24,1);
 }
@@ -171,28 +204,66 @@ a{color:inherit;text-decoration:none}
   border-color:color-mix(in srgb, var(--btn-fg) 26%, transparent);color:var(--btn-fg);
 }
 .lk.primary::before{background:var(--accent-2)}
+.lk.primary::after{background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.1) 0%, transparent 70%)}
 .lk.primary:hover{border-color:var(--accent-2)}
 
-/* ---------- redes ---------- */
-.social{display:flex;justify-content:center;gap:10px}
-.sc{
-  width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
-  border:1px solid var(--line);color:var(--ink-2);
-  background:color-mix(in srgb, var(--surface) 72%, transparent);cursor:pointer;
-  transition:transform .4s cubic-bezier(.22,.68,.24,1),border-color .3s ease,color .3s ease,background .3s ease;
+/* ---------- painel de áreas ---------- */
+.painel{
+  background:color-mix(in srgb, var(--surface) 78%, transparent);
+  border:1px solid var(--line);border-radius:16px;padding:22px;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  display:flex;flex-direction:column;gap:14px;
 }
-.sc:hover{transform:translateY(-3px);border-color:var(--accent-2);color:var(--accent-2);background:var(--surface)}
+.pt{
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);
+  display:flex;align-items:center;gap:11px;
+}
+.pt::before{content:"";width:18px;height:1px;background:var(--gold);flex:none}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  font-size:12px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);
+  color:var(--ink-2);background:var(--bg-2);
+  transition:border-color .3s ease,color .3s ease,transform .3s cubic-bezier(.22,.68,.24,1),background .3s ease;
+}
+.chip:hover{border-color:var(--accent-2);color:var(--accent);background:var(--surface);transform:translateY(-2px)}
+
+/* faixa de método, com movimento contínuo */
+.faixa{
+  border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  background:color-mix(in srgb, var(--surface) 78%, transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  padding:16px 0;position:relative;
+}
+.faixa::before,.faixa::after{
+  content:"";position:absolute;top:0;bottom:0;width:52px;z-index:2;pointer-events:none;
+}
+.faixa::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.faixa::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
+.trilho{display:flex;width:max-content;animation:corre 26s linear infinite}
+.faixa:hover .trilho{animation-play-state:paused}
+.grp{display:flex;align-items:center;gap:0;padding-right:0}
+.it{
+  display:inline-flex;align-items:center;gap:11px;padding:0 22px;white-space:nowrap;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+}
+.it b{color:var(--accent-2);font-weight:500;font-variant-numeric:tabular-nums}
+.it::after{content:"";width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.7}
+@keyframes corre{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ---------- rodapé ---------- */
-.foot{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding-top:6px}
+.foot{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;
+  padding:18px 22px;border:1px solid var(--line);border-radius:16px;
+  background:color-mix(in srgb, var(--surface) 60%, transparent);
+}
 .back{
   display:inline-flex;align-items:center;gap:9px;font-size:13.5px;color:var(--ink-2);
-  border-bottom:1px solid var(--line);padding-bottom:3px;transition:border-color .3s ease,color .3s ease;
+  transition:color .3s ease;
 }
-.back:hover{color:var(--ink);border-color:var(--accent-2)}
+.back:hover{color:var(--ink)}
 .back span{transition:transform .4s cubic-bezier(.22,.68,.24,1);display:inline-block}
 .back:hover span{transform:translateX(3px)}
-.cr{font-size:11px;letter-spacing:.06em;color:var(--faint)}
+.cr{font-size:11px;letter-spacing:.05em;color:var(--faint)}
 
 .copied{
   position:fixed;left:50%;bottom:26px;transform:translate(-50%,14px);
@@ -204,14 +275,24 @@ a{color:inherit;text-decoration:none}
 .copied.on{opacity:1;transform:translate(-50%,0)}
 
 /* ---------- entrada ---------- */
-.an{animation:up .8s cubic-bezier(.22,.68,.24,1) both}
-@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.an{animation:up .85s cubic-bezier(.22,.68,.24,1) both}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  .trilho{animation:none}
 }
-@media (max-width:380px){
-  .lk{grid-template-columns:34px minmax(0,1fr) 16px;padding:13px 14px;gap:12px}
-  .lk .ic{width:34px;height:34px}
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr;max-width:520px;gap:16px}
+  .perfil{position:static}
+  .direita{gap:16px}
+}
+@media (max-width:400px){
+  .lk{grid-template-columns:36px minmax(0,1fr) 16px;padding:14px 15px;gap:12px}
+  .lk .ic{width:36px;height:36px}
+  .perfil{padding:22px 18px}
+  .nums{gap:6px}
+  .nm b{font-size:20px}
 }
 </style>
 
@@ -220,37 +301,97 @@ a{color:inherit;text-decoration:none}
 <div class="amb" aria-hidden="true"></div>
 <div class="grid-bg" aria-hidden="true"></div>
 
-<main class="col">
+<div class="shell">
 
-  <header class="head">
-    <div class="avatar an" style="animation-delay:0s">
+  <!-- ===================== PERFIL ===================== -->
+  <aside class="perfil an">
+    <div class="avatar">
       <div class="inner">
-        <!-- FOTO: tire o comentário da linha abaixo e deixe foto.jpg na mesma pasta -->
+        <!-- FOTO: se ainda não tiver o arquivo, comente a linha abaixo -->
         <img src="foto.jpg" alt="Israel Santiago">
         <span class="ini">IS</span>
       </div>
     </div>
 
-    <div class="an" style="animation-delay:.06s;display:flex;flex-direction:column;align-items:center;gap:9px">
+    <div>
       <h1 class="name">Israel Santiago</h1>
       <p class="role">Head de PMO em Saúde</p>
     </div>
 
-    <p class="tag an" style="animation-delay:.12s">Estratégia, pessoas, processos e execução para transformar crescimento em operação.</p>
+    <p class="tag">Estratégia, pessoas, processos e execução para transformar crescimento em operação.</p>
 
-    <!-- Para remover esta etiqueta, apague a linha inteira abaixo -->
-    <span class="status an" style="animation-delay:.18s"><span class="beat"></span>Aberto a conversas</span>
-  </header>
+    <span class="status"><span class="beat"></span>Aberto a conversas</span>
 
-  <nav class="links" id="links" aria-label="Meus links"></nav>
+    <hr class="hr">
 
-  <div class="social" id="social"></div>
+    <div class="nums">
+      <div class="nm"><b><span class="count" data-to="4">0</span><i>+</i></b><span>Anos<br>executivos</span></div>
+      <div class="nm"><b><span class="count" data-to="13">0</span></b><span>Frentes de<br>atuação</span></div>
+      <div class="nm"><b><span class="count" data-to="8">0</span></b><span>Áreas em<br>saúde</span></div>
+    </div>
 
-  <footer class="foot an" style="animation-delay:.7s">
-    <a class="back" href="https://israelsantiago.com.br">Ver o site completo <span aria-hidden="true">→</span></a>
-    <span class="cr">© 2026 Israel Santiago</span>
-  </footer>
-</main>
+    <hr class="hr">
+
+    <div class="local">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      Rio de Janeiro, RJ · também remoto
+    </div>
+
+    <div class="social" id="social"></div>
+  </aside>
+
+  <!-- ===================== DIREITA ===================== -->
+  <div class="direita">
+
+    <nav class="links" id="links" aria-label="Meus links"></nav>
+
+    <div class="painel an" id="painelAreas">
+      <div class="pt">Onde eu atuo</div>
+      <div class="chips">
+        <span class="chip">Operações</span>
+        <span class="chip">Projetos</span>
+        <span class="chip">Processos</span>
+        <span class="chip">Pessoas</span>
+        <span class="chip">Performance</span>
+        <span class="chip">Governança clínica</span>
+        <span class="chip">Linhas de cuidado</span>
+        <span class="chip">Pertinência técnica</span>
+        <span class="chip">Indicadores</span>
+        <span class="chip">Interface jurídica</span>
+      </div>
+    </div>
+
+    <div class="faixa an" id="faixa" aria-hidden="true">
+      <div class="trilho">
+        <div class="grp">
+          <span class="it"><b>01</b> Entender</span>
+          <span class="it"><b>02</b> Organizar</span>
+          <span class="it"><b>03</b> Executar</span>
+          <span class="it"><b>04</b> Melhorar</span>
+          <span class="it">Processo</span>
+          <span class="it">Clareza</span>
+          <span class="it">Responsabilidade</span>
+          <span class="it">Execução</span>
+        </div>
+        <div class="grp">
+          <span class="it"><b>01</b> Entender</span>
+          <span class="it"><b>02</b> Organizar</span>
+          <span class="it"><b>03</b> Executar</span>
+          <span class="it"><b>04</b> Melhorar</span>
+          <span class="it">Processo</span>
+          <span class="it">Clareza</span>
+          <span class="it">Responsabilidade</span>
+          <span class="it">Execução</span>
+        </div>
+      </div>
+    </div>
+
+    <footer class="foot an">
+      <a class="back" href="https://israelsantiago.com.br/corporativo">Ver o portfólio completo <span aria-hidden="true">→</span></a>
+      <span class="cr">© 2026 Israel Santiago</span>
+    </footer>
+  </div>
+</div>
 
 <div class="copied" id="toast" role="status">E-mail copiado</div>
 
@@ -263,18 +404,18 @@ a{color:inherit;text-decoration:none}
    Para desativar, apague o que está dentro das aspas do url.
    A ordem da lista é a ordem que aparece na tela.
 
-   icone: site | sociedades | linkedin | email | whatsapp |
+   icone: site | saude | sociedades | linkedin | email | whatsapp |
           instagram | agenda | documento | artigo | link
-   destaque: true deixa o cartão verde sólido. Use em um só.
+   destaque: true deixa o cartão verde sólido.
    ================================================================ */
 
 const LINKS = [
 
   { titulo:'Site para Atendimento Domiciliar',
-    sub:'Monitoramento Geriátrico',
+    sub:'Monitoramento geriátrico',
     url:'https://israelsantiago.com.br/site',
-    icone:'site', destaque:true },
-   
+    icone:'saude', destaque:true },
+
   { titulo:'Portfólio Executivo Head/PMO',
     sub:'Como eu transformo estratégia em execução',
     url:'https://israelsantiago.com.br/corporativo',
@@ -283,27 +424,30 @@ const LINKS = [
   { titulo:'Guia do Idoso para Famílias',
     sub:'Material criado para famílias com idosos em demência',
     url:'https://www.israelsantiago.com.br/guia/',
-    icone:'Guia' },
-
-  { titulo:'E-mail',
-    sub:'israelfsantiago@gmail.com',
-    url:'mailto:israelfsantiago@gmail.com?subject=Contato%20pela%20p%C3%A1gina%20de%20links',
-    icone:'email' },
-
-  /* ---------- espaços livres, ainda ocultos ----------
-     Preencha o url e o link aparece sozinho.
-     No WhatsApp use https://wa.me/ mais o número com país e só dígitos,
-     por exemplo https://wa.me/5511999998888                          */
+    icone:'guia' },
 
   { titulo:'WhatsApp',
     sub:'Conversa direta',
     url:'https://wa.me/5521975892104',
     icone:'whatsapp' },
 
+  { titulo:'E-mail',
+    sub:'israelfsantiago@gmail.com',
+    url:'mailto:israelfsantiago@gmail.com?subject=Contato%20pela%20p%C3%A1gina%20de%20links',
+    icone:'email' },
+
   { titulo:'Instagram',
     sub:'@israelsantiago.com.br',
     url:'https://www.instagram.com/israelsantiago.com.br/',
     icone:'instagram' },
+
+  /* ---------- espaços livres, ainda ocultos ----------
+     Preencha o url e o link aparece sozinho.                */
+
+  { titulo:'Minhas sociedades',
+    sub:'Os negócios em que sou sócio',
+    url:'',
+    icone:'sociedades' },
 
   { titulo:'Agendar uma conversa',
     sub:'Escolha um horário na minha agenda',
@@ -326,15 +470,22 @@ const LINKS = [
     icone:'link' },
 ];
 
-/* Ícones ao lado do nome, no rodapé da página.
-   Mesma regra: sem url, não aparece.                                */
+/* Ícones no rodapé do cartão de perfil. Mesma regra: sem url, não aparece. */
+const REDES = [
+  { nome:'LinkedIn',  url:'https://www.linkedin.com/in/israelfsantiago/', icone:'linkedin' },
+  { nome:'Instagram', url:'https://www.instagram.com/israelsantiago.com.br/', icone:'instagram' },
+];
+
+const EMAIL = 'israelfsantiago@gmail.com';
 
 /* ================================================================
    Daqui para baixo não precisa mexer
    ================================================================ */
 (function(){
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const SVG = {
     site:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 13h7M7 16h4"/>',
+    saude:'<path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z"/><path d="M8.5 12h2l1-2 1.5 3.5 1-1.5h1.5"/>',
     sociedades:'<path d="M9 21V9a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v12"/><path d="M3 21V13a1 1 0 0 1 1-1h5"/><path d="M15 12h5a1 1 0 0 1 1 1v8"/><path d="M2 21h20"/><path d="M12 3v3"/>',
     linkedin:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7M7 7v.01M11.5 17v-4a2.5 2.5 0 0 1 5 0v4"/>',
     email:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/>',
@@ -343,18 +494,22 @@ const LINKS = [
     agenda:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M12 14h.01"/>',
     documento:'<path d="M14 3v5h5"/><path d="M19 8v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7Z"/><path d="M9 13h6M9 17h4"/>',
     artigo:'<path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/>',
+    guia:'<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5Z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H19v3H6.5A2.5 2.5 0 0 1 4 20.5Z"/><path d="M12.5 8.5c-.8-1-2.5-.6-2.5.7 0 1.2 1.6 2.1 2.5 2.8.9-.7 2.5-1.6 2.5-2.8 0-1.3-1.7-1.7-2.5-.7Z"/>',
     link:'<path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/>'
   };
   const icon = n => '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">' + (SVG[n] || SVG.link) + '</svg>';
-  const externo = u => /^https?:/i.test(u) && u.indexOf('israelsantiago.com.br') === -1;
+  const externo = function(u){
+    if(!/^https?:/i.test(u)) return false;
+    try{ return new URL(u).hostname.replace(/^www\./,'') !== 'israelsantiago.com.br'; }
+    catch(e){ return true; }
+  };
   const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
   const ativos = LINKS.filter(l => l && l.url && l.url.trim() && l.titulo && l.titulo.trim());
-  const lista = document.getElementById('links');
-  let atraso = 0.22;
+  let atraso = 0.1;
 
-  lista.innerHTML = ativos.map(l => {
-    atraso += 0.06;
+  document.getElementById('links').innerHTML = ativos.map(l => {
+    atraso += 0.07;
     const alvo = externo(l.url) ? ' target="_blank" rel="noopener"' : '';
     const seta = externo(l.url) ? '↗' : '→';
     return '<a class="lk an' + (l.destaque ? ' primary' : '') + '" style="animation-delay:' + atraso.toFixed(2) + 's" href="' + esc(l.url) + '"' + alvo + '>' +
@@ -365,18 +520,48 @@ const LINKS = [
            '</a>';
   }).join('');
 
+  const painel = document.getElementById('painelAreas');
+  const faixa  = document.getElementById('faixa');
+  const rodape = document.querySelector('.foot');
+  painel.style.animationDelay = (atraso + 0.07).toFixed(2) + 's';
+  faixa.style.animationDelay  = (atraso + 0.14).toFixed(2) + 's';
+  rodape.style.animationDelay = (atraso + 0.21).toFixed(2) + 's';
+
   const redes = REDES.filter(r => r && r.url && r.url.trim());
-  const social = document.getElementById('social');
-  atraso += 0.06;
-  social.style.animationDelay = atraso.toFixed(2) + 's';
-  social.classList.add('an');
-  social.innerHTML = redes.map(r =>
+  document.getElementById('social').innerHTML = redes.map(r =>
       '<a class="sc" href="' + esc(r.url) + '" target="_blank" rel="noopener" aria-label="' + esc(r.nome) + '">' + icon(r.icone) + '</a>'
     ).join('') +
     '<button class="sc" id="mail" type="button" aria-label="Copiar e-mail">' +
       '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>' +
     '</button>';
 
+  /* contadores */
+  const nums = Array.prototype.slice.call(document.querySelectorAll('.count'));
+  nums.forEach(function(el){
+    const alvo = parseInt(el.getAttribute('data-to'), 10) || 0;
+    if(reduce){ el.textContent = alvo; return; }
+    let ini = null;
+    function passo(t){
+      if(!ini) ini = t;
+      const p = Math.min((t - ini) / 1200, 1);
+      el.textContent = Math.round(alvo * (1 - Math.pow(1 - p, 3)));
+      if(p < 1) requestAnimationFrame(passo);
+    }
+    setTimeout(function(){ requestAnimationFrame(passo); }, 350);
+  });
+
+  /* brilho que segue o ponteiro */
+  if(window.matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.lk').forEach(function(el){
+      el.addEventListener('pointermove', function(e){
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+  }
+
+  /* copiar e-mail */
   const toast = document.getElementById('toast');
   let t;
   function show(){
