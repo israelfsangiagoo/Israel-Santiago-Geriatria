@@ -141,7 +141,7 @@ p{margin:0}
 /* ---------- layout ---------- */
 .wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 section{position:relative}
-.sec{padding:clamp(72px,10vw,132px) 0}
+.sec{padding-top:clamp(72px,10vw,132px);padding-bottom:clamp(72px,10vw,132px)}
 .sec-head{display:flex;flex-direction:column;gap:20px;max-width:70ch}
 .rule{height:1px;background:var(--line-soft);border:0;margin:0}
 
@@ -320,7 +320,7 @@ header.nav.stuck{border-bottom-color:var(--line)}
   background:var(--bg-2);
 }
 .band-in{
-  padding:clamp(52px,7vw,88px) 0;display:grid;grid-template-columns:auto minmax(0,1fr);
+  padding-top:clamp(52px,7vw,88px);padding-bottom:clamp(52px,7vw,88px);display:grid;grid-template-columns:auto minmax(0,1fr);
   gap:clamp(22px,4vw,52px);align-items:start;
 }
 .qmark{
@@ -477,7 +477,7 @@ header.nav.stuck{border-bottom-color:var(--line)}
 }
 .impact-in{
   min-height:clamp(340px,62vh,560px);display:flex;flex-direction:column;justify-content:center;
-  padding:clamp(64px,9vw,110px) 0;gap:34px;
+  padding-top:clamp(64px,9vw,110px);padding-bottom:clamp(64px,9vw,110px);gap:34px;
 }
 .impact .q{
   font-weight:400;font-size:clamp(30px,5.6vw,74px);
@@ -525,7 +525,7 @@ header.nav.stuck{border-bottom-color:var(--line)}
 
 /* ---------- footer ---------- */
 footer.ft{border-top:var(--rule);background:var(--bg-2)}
-.ft-in{padding:44px 0 40px;display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between}
+.ft-in{padding-top:44px;padding-bottom:40px;display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between}
 .ft .name{font-size:19px;font-weight:600;letter-spacing:-.025em}
 .ft .role{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-top:8px}
 .ft .cr{font-size:11px;color:var(--faint);letter-spacing:.04em}
@@ -726,6 +726,40 @@ header.nav.hide{transform:translateY(-101%)}
   .w>.ww{transform:none;opacity:1}
 }
 
+/* ---------- correções de enquadramento no mobile ---------- */
+@media (max-width:900px){
+  .diagram{padding:clamp(18px,4vw,28px)}
+  .dnode{padding:12px 10px}
+  .dnode .t{letter-spacing:.08em;font-size:10px;overflow-wrap:anywhere}
+  .dareas{padding:14px 10px}
+}
+@media (max-width:680px){
+  :root{--pad:20px}
+  .exp-row{padding-right:22px}
+  .exp-row::after{right:0}
+  .exp-row h3{overflow-wrap:anywhere}
+  .hero-note,.lead,.about-copy p,.step p{max-width:none}
+  .impact .q,.band .q{max-width:none}
+  .brand .r{display:none}
+  .nav-in{gap:12px}
+  .ch{gap:12px}
+  .ch .v{font-size:14.5px}
+  .copy{margin-left:0}
+  .ft-in{gap:18px}
+  .ft-in .cr{width:100%}
+  .photo{aspect-ratio:4/3}
+  .hero::before{inset:-8% 0 22% 0}
+}
+@media (max-width:400px){
+  .hero h1{font-size:34px;letter-spacing:-.035em}
+  .band .q{font-size:23px}
+  .impact .q{font-size:29px}
+  h2{font-size:28px}
+  .btn{padding:13px 18px;font-size:14px}
+}
+/* nada pode furar a lateral */
+img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
+
 </style>
 
 </head>
@@ -783,7 +817,7 @@ header.nav.hide{transform:translateY(-101%)}
         <!-- FOTO: tire o comentário da linha <img> abaixo e deixe foto.jpg
              na mesma pasta deste arquivo. A etiqueta some sozinha. -->
         <div class="photo">
-          <img src="foto.jpg" alt="Israel Santiago, Head de Operações e PMO">
+          <!-- <img src="foto.jpg" alt="Israel Santiago, Head de Operações e PMO"> -->
           <span class="photo-tag">Foto profissional</span>
         </div>
         <div class="chain">
