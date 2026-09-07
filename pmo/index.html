@@ -760,6 +760,96 @@ header.nav.hide{transform:translateY(-101%)}
 /* nada pode furar a lateral */
 img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
 
+/* ============================================================
+   MÉTODO: destaque por etapa e ciclo contínuo
+   ============================================================ */
+.step{
+  position:relative;isolation:isolate;
+  transition:transform .45s cubic-bezier(.22,.68,.24,1);
+}
+/* trilho que se pinta na etapa em foco */
+.step::before{
+  content:"";position:absolute;top:11px;left:0;right:0;height:1px;
+  background:var(--accent-2);transform:scaleX(0);transform-origin:left;
+  transition:transform .55s cubic-bezier(.22,.68,.24,1);
+}
+/* superfície suave que aparece no foco */
+.step::after{
+  content:"";position:absolute;inset:-6px -14px -16px -14px;z-index:-1;
+  border-radius:5px;background:var(--surface);box-shadow:var(--shadow);
+  opacity:0;transition:opacity .45s ease;
+}
+.step:first-child::after{left:-16px}
+
+.step .n,.step h3,.step p{transition:color .35s ease, transform .45s cubic-bezier(.22,.68,.24,1)}
+
+/* ---- ESTADO EM FOCO (mouse no desktop, rolagem no mobile) ---- */
+.step.on,.step:hover{transform:translateY(-4px)}
+.step.on::before,.step:hover::before{transform:scaleX(1)}
+.step.on::after,.step:hover::after{opacity:1}
+.step.on .dt,.step:hover .dt{
+  background:var(--accent-2);border-color:var(--accent-2);
+  transform:scale(1.35);box-shadow:0 0 0 5px var(--accent-wash);
+}
+.step.on .n,.step:hover .n{color:var(--accent-2)}
+.step.on h3,.step:hover h3{color:var(--ink)}
+.step.on p,.step:hover p{color:var(--ink-2)}
+
+/* ---- ETAPA 04: fecha o ciclo ---- */
+.step.is-loop .dt{background:var(--accent-2);border-color:var(--accent-2)}
+.step.is-loop .dotwrap::after{
+  content:"";position:absolute;left:-3px;width:15px;height:15px;border-radius:50%;
+  border:1px solid var(--accent-2);opacity:0;
+  animation:loopPulse 3.6s ease-out infinite 1s;pointer-events:none;
+}
+@keyframes loopPulse{
+  0%{opacity:.65;transform:scale(.6)}
+  70%{opacity:0;transform:scale(1.35)}
+  100%{opacity:0;transform:scale(1.35)}
+}
+.loop{
+  display:inline-flex;align-items:center;gap:7px;margin-top:16px;align-self:flex-start;
+  font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);
+  border:1px solid var(--gold);border-radius:999px;padding:5px 11px;width:max-content;
+  transition:background .35s ease,color .35s ease,border-color .35s ease;
+}
+.step.is-loop{display:flex;flex-direction:column;align-items:flex-start}
+.loop .lo-ic{font-size:12px;line-height:1}
+.step.is-loop.on .loop,.step.is-loop:hover .loop{background:var(--gold-wash);color:var(--gold);border-color:var(--gold)}
+.step.is-loop:hover .lo-ic,.step.is-loop.on .lo-ic{animation:spinBack .9s cubic-bezier(.22,.68,.24,1)}
+@keyframes spinBack{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
+
+/* ---- laço visual: 04 volta para 01 ---- */
+.cycle{position:relative;margin-top:46px;height:52px}
+.cycle::before{
+  content:"";position:absolute;left:6px;right:6px;top:0;height:30px;
+  border:1px solid var(--line);border-top:0;border-radius:0 0 4px 4px;
+}
+.cycle::after{
+  content:"";position:absolute;left:2px;top:-1px;width:8px;height:8px;
+  border-left:1px solid var(--line);border-top:1px solid var(--line);
+  transform:rotate(45deg);
+}
+.cy-label{
+  position:absolute;left:50%;top:20px;transform:translateX(-50%);
+  background:var(--bg);padding:0 14px;
+  font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);
+  white-space:nowrap;
+}
+
+@media (max-width:900px){
+  .cycle{display:none}
+  .step::after{inset:-8px -10px -12px -8px}
+  .step.on,.step:hover{transform:translateY(0) translateX(3px)}
+  .step.on::before,.step:hover::before{display:none}
+  .step{border-left-color:var(--line)}
+  .step.on{border-left-color:var(--accent-2)}
+  .loop{margin-top:14px}
+}
+@media (prefers-reduced-motion: reduce){
+  .step.is-loop .dotwrap::after{display:none}
+}
+
 </style>
 
 </head>
@@ -967,13 +1057,16 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
         <h3>Executar</h3>
         <p>Acompanhar a operação e garantir que as entregas avancem.</p>
       </div>
-      <div class="step rv d3">
+      <div class="step is-loop rv d3">
         <div class="dotwrap"><span class="dt"></span></div>
         <div class="n">04</div>
         <h3>Melhorar</h3>
         <p>Analisar resultados, identificar gargalos e ajustar continuamente.</p>
+        <span class="loop"><span class="lo-ic" aria-hidden="true">↺</span>Reinicia o ciclo</span>
       </div>
     </div>
+
+    <div class="cycle" aria-hidden="true"><span class="cy-label">O método não termina. Ele recomeça.</span></div>
   </section>
 
   <!-- ======================= EXPERIÊNCIA ======================= -->
@@ -1259,6 +1352,33 @@ img,svg,.diagram,.panel,.card,.diff,.slot{max-width:100%}
       }, {passive:true});
     }
   }
+
+  /* ---- método: etapa em foco durante a rolagem no mobile ---- */
+  (function(){
+    var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
+    if(!steps.length) return;
+    var small = window.matchMedia('(max-width:900px), (hover:none)');
+    var tick = false;
+    function clear(){ steps.forEach(function(s){ s.classList.remove('on'); }); }
+    function pick(){
+      if(!small.matches){ clear(); return; }
+      var mid = window.innerHeight * 0.46, best = null, bd = 1e9;
+      steps.forEach(function(s){
+        var r = s.getBoundingClientRect();
+        if(r.bottom < 40 || r.top > window.innerHeight - 40) return;
+        var d = Math.abs(r.top + r.height / 2 - mid);
+        if(d < bd){ bd = d; best = s; }
+      });
+      steps.forEach(function(s){ s.classList.toggle('on', s === best); });
+    }
+    window.addEventListener('scroll', function(){
+      if(tick) return; tick = true;
+      window.requestAnimationFrame(function(){ pick(); tick = false; });
+    }, {passive:true});
+    window.addEventListener('resize', pick, {passive:true});
+    if(small.addEventListener) small.addEventListener('change', pick);
+    pick();
+  })();
 
   /* ---- copiar e-mail ---- */
   var btn = document.getElementById('copyMail');
