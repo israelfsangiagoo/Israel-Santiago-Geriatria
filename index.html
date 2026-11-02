@@ -180,7 +180,13 @@ a{color:inherit;text-decoration:none}
 .avatar .ini{font-weight:700;font-size:18px;color:var(--laranja)}
 .avatar:has(img) .ini{display:none}
 .ident .quem{display:flex;flex-direction:column;gap:3px}
-.ident .handle{font-size:15px;font-weight:500;color:var(--creme);letter-spacing:-.01em}
+.ident .handle{
+  font-size:15px;font-weight:500;color:var(--creme);letter-spacing:-.01em;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.selo{width:15px;height:15px;flex:none;color:var(--laranja)}
+.selo .marca{fill:currentColor}
+.selo .tique{fill:none;stroke:var(--sobre-laranja);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 .ident .cargo{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cinza-rotulo)}
 
 /* a medida 4.95cqw mantém a frase inteira em uma linha só,
@@ -412,6 +418,8 @@ a{color:inherit;text-decoration:none}
 }
 @media (max-width:560px){
   .frentes{grid-template-columns:1fr}
+  /* o cargo cabe em uma linha só ao lado do avatar */
+  .ident .cargo{font-size:9.5px;letter-spacing:.1em}
   /* no celular a frase quebra em duas linhas equilibradas,
      porque em uma linha só ela ficaria menor que o texto de apoio */
   .hero h1{white-space:normal;font-size:clamp(31px,8.6vw,46px);line-height:1.02;text-wrap:balance}
@@ -512,7 +520,7 @@ a{color:inherit;text-decoration:none}
           </div>
         </div>
         <div class="quem">
-          <span class="handle">@israelfsantiagoo</span>
+          <span class="handle">@israelsantiago.com.br<svg class="selo" viewBox="0 0 24 24" role="img" aria-label="Perfil verificado"><circle class="marca" cx="12" cy="12" r="10"/><path class="tique" d="m7.7 12.3 2.9 2.9 5.7-6"/></svg></span>
           <span class="cargo">Head Operacional · Saúde e MKT</span>
         </div>
     </div>
