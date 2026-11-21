@@ -154,7 +154,7 @@ body:hover .holofote{opacity:1}
 .links{display:flex;flex-direction:column;gap:10px}
 .lk{
   position:relative;isolation:isolate;overflow:hidden;
-  display:grid;grid-template-columns:40px minmax(0,1fr) 16px;align-items:center;gap:14px;
+  display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:14px;
   background:var(--cartao);border:1px solid var(--linha);border-radius:16px;
   padding:16px 18px;
   transition:transform .4s var(--mola),border-color .35s ease;
@@ -173,7 +173,6 @@ body:hover .holofote{opacity:1}
 .lk .tx{min-width:0}
 .lk .t{display:block;font-size:15px;font-weight:500;letter-spacing:-.028em}
 .lk .s{display:block;margin-top:2px;font-size:12px;color:var(--rotulo);font-weight:300;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.lk .ar{color:var(--rotulo);font-size:14px;justify-self:end;transition:transform .45s var(--mola),color .35s ease}
 
 @media (hover:hover){
   .saiba:hover{transform:translateY(-3px)}
@@ -184,7 +183,6 @@ body:hover .holofote{opacity:1}
   .lk:hover::before{transform:translateY(0)}
   .lk:hover::after{opacity:1}
   .lk:hover .ic{transform:scale(1.06)}
-  .lk:hover .ar{color:var(--creme);transform:translateX(4px)}
 }
 
 /* ---------- tarja ---------- */
@@ -220,7 +218,7 @@ body:hover .holofote{opacity:1}
   *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
 }
 @media (max-width:400px){
-  .lk{grid-template-columns:36px minmax(0,1fr) 14px;padding:14px 15px;gap:12px}
+  .lk{grid-template-columns:36px minmax(0,1fr);padding:14px 15px;gap:12px}
   .lk .ic{width:36px;height:36px}
   .saiba{padding:16px 17px}
 }
@@ -369,7 +367,6 @@ const EMAIL = 'israelfsantiago@gmail.com';
                '<span class="ic" aria-hidden="true">'+icon(l.icone)+'</span>'+
                '<span class="tx"><span class="t">'+esc(l.titulo)+'</span>'+
                (l.sub?'<span class="s">'+esc(l.sub)+'</span>':'')+'</span>'+
-               '<span class="ar" aria-hidden="true">'+(fora?'↗':'→')+'</span>'+
              '</a>';
     }).join('');
 
